@@ -8,11 +8,10 @@ async function printMessage(text) {
     const texteMessage = document.querySelector(".message-body");
 
     eventMessage.style.display = "flex";
-    texteMessage.innerText = text;
+    texteMessage.innerHTML = text;
 
     // Fermer le message au bout de 3sec
-    await wait(3000);
-    closeMessage()
+    setTimeout(closeMessage, 3000);
 }
 
 /* -------------------------------------------- */

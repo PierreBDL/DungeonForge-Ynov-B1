@@ -25,7 +25,44 @@ function moveOnMap (x, y) {
 
         // Afficher une notif si c'est un coffre via l'orverlay message
         if (map[y][x] === CELL_TYPES.CHEST) {
-            printMessage("Vous êtes tombé sur un coffre !")
+            let items = {gold: 10, xp:20, potion_vie:1} // Gagnés dans le coffre
+
+            let message = "Vous êtes tombé sur un coffre ! Vous obtenez : <br>";
+
+            // Création de la liste des items + cocaténation dans le message + balises HTML
+            let keys_items = Object.entries(items);
+
+            for (let i = 0; i < keys_items.length; i++) {
+                switch (keys_items[i][0]) {
+                    case "gold":
+                        Player.gold += keys_items[i][1];
+                        message += (keys_items[i][1] + " Pièces d'or");
+                        break;
+                    case "xp":
+                        Player.stats.xp += keys_items[i][1];
+                        message += (keys_items[i][1] + " points d'expérience");
+                        break;
+                    case "potion_vie":
+                        // Ajouter autant de potion que ce qu'il y a dans l'inventaire
+                        for (let j = 0; j < keys_items[i][1]; j++) {
+                            // Tant qu'on a de la place dans l'inventaire
+                            if (Player.inventory.length <= 10) {
+                                Player.inventory.push("potion_vie")
+                            } else {
+                                break;
+                            }
+                        }
+                        message += (keys_items[i][1] + " potion(s) de soin");
+                        break
+                }
+
+                // Ajout d'un saut de ligne
+                if (i < keys_items.length) {
+                    message += "<br>"
+                }
+            }
+
+            printMessage(message)
         }
 
         // Si on était sur un coffre => remettre le coffre
