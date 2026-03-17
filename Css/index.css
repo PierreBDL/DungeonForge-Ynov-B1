@@ -1,3 +1,94 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=IM+Fell+English:ital@0;1&display=swap');
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* -------------------------------------------- */
+/*                  Messages                    */
+/* -------------------------------------------- */
+
+#message {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.75);
+    z-index: 9999;
+}
+
+.message-close {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+}
+
+.message-close button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.message-close button img {
+    width: 20px;
+    height: 20px;
+    display: block;
+}
+
+.message-card {
+    position: relative;
+    border: 1px solid #5c4a1e;
+    border-radius: 4px;
+    padding: 2.5rem 2.2rem 2.5rem 2.2rem;
+    max-width: 380px;
+    width: 100%;
+}
+
+.message-header {
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    color: #8a6c2a;
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 1.2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #2e2310;
+}
+
+.message-body {
+    font-family: 'IM Fell English', serif;
+    font-size: 15px;
+    line-height: 1.85;
+    color: #c8a96e;
+    text-align: center;
+    font-style: italic;
+}
+
+.message-footer {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: #4a380e;
+    text-align: center;
+    margin-top: 1.2rem;
+    text-transform: uppercase;
+    border-top: 1px solid #2e2310;
+    padding-top: 1rem;
+}
+
+/* -------------------------------------------- */
+/*                    Carte                     */
+/* -------------------------------------------- */
+
 #map {
     display: grid;
     border: 4px solid #333;
