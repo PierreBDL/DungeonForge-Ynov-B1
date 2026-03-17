@@ -1,0 +1,37 @@
+document.addEventListener('keyup', (e) => {
+    let moveX = Player.x;
+    let moveY = Player.y;
+
+    if (e.key === "w" || e.key === "ArrowUp") {
+        moveY -= 1;
+    } else if (e.key === "s" || e.key === "ArrowDown") {
+        moveY += 1;
+    } else if (e.key === "a" || e.key === "ArrowLeft") {
+        moveX -= 1;
+    } else if (e.key === "d" || e.key === "ArrowRight") {
+        moveX += 1;
+    }
+
+    moveOnMap(moveX, moveY);
+});
+
+/* -------------------------------------------- */
+/*            Bouger sur la carte               */
+/* -------------------------------------------- */
+
+function moveOnMap (x, y) {
+    if (y >= 0 && y < map.length && x >= 0 && x < map[y].length && map[y][x] !== CELL_TYPES.WALL) {
+        // MAJ carte
+        map[Player.y][Player.x] = CELL_TYPES.FLOOR;
+
+        // Dépacer joueur
+        map[y][x] = CELL_TYPES.PLAYER;
+
+        // MAJ position du joueur
+        Player.x = x;
+        Player.y = y;
+
+        // Afficher la carte mise à jour
+        loadMap();
+    }
+}

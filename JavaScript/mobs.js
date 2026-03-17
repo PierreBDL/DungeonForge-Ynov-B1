@@ -1,8 +1,8 @@
 /* JOUEUR */
 
-const player = {
+let Player = {
     name: 'Héros',
-    x: 0, y: 0, // Position sur la grille
+    x: 2, y: 2, // Position sur la grille
     stats: {
         hp: 100, 
         maxHp: 100,
@@ -27,7 +27,7 @@ const player = {
 
 /* ENNEMI */
 
-const ennemy = {
+let ennemy = {
     name: 'Ennemy',
     x: 0, y: 0, // Position sur la grille
     stats: {
