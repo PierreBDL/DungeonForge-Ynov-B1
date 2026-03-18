@@ -27,6 +27,7 @@ document.addEventListener('keyup', (e) => {
 /* -------------------------------------------- */
 
 let originTile = CELL_TYPES.FLOOR;
+let isInFight = false;
 
 function moveOnMap(x, y) {
 
@@ -37,9 +38,24 @@ function moveOnMap(x, y) {
 
     /* -------------------------------------------- */
 
+    // Ne pas bouger si on a un message
+    if (document.getElementById("message").style.display === "flex") {
+        return;
+    }
+
+    /* -------------------------------------------- */
+
+    // Si on est en combat -> ne pas bouger
+    if (isInFight === true) {
+        return;
+    }
+
+    /* -------------------------------------------- */
+
     // Afficher une notif si c'est un ennemi via l'orverlay message
     if (map[y][x] === CELL_TYPES.ENNEMY) {
-        printMessage("Vous êtes tombé sur un ennemi");
+        //printMessage("Vous êtes tombé sur un ennemi");
+        fight(); // Lancer le combat
         return; // Ne pas bouger
     }
 

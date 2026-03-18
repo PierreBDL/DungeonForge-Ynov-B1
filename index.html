@@ -6,6 +6,7 @@
     <title>DungeonForge</title>
     <link rel="stylesheet" href="./Css/headerFooter.css">
     <link rel="stylesheet" href="./Css/index.css">
+    <link rel="stylesheet" href="./Css/fight.css">
 </head>
 <body>
     <header></header>
@@ -20,6 +21,38 @@
             </div>
         </span>
         <div id="map"></div>
+
+        <span id="fight">
+            <div id="fight-window">
+                <div id="fight-header">Combat</div>
+                <div id="fight-fighters">
+
+                    <!-- Joueur -->
+                    <div class="fight-entities">
+                        <div class="fight-entity-name" id="name-player">Héros</div>
+                        <div class="fight-health-bg">
+                            <div class="fight-health" id="player-health" style="width: 100%"></div>
+                        </div>
+                        <div class="fight-health-text" id="player-health-text">100 / 100</div>
+                    </div>
+
+                    <div class="fight-vs">VS</div>
+
+                    <!-- Ennemie -->
+                    <div class="fight-entities">
+                        <div class="fight-entity-name" id="name-ennemy">Ennemi</div>
+                        <div class="fight-health-bg">
+                            <div class="fight-health" id="ennemy-health" style="width: 100%"></div>
+                        </div>
+                        <div class="fight-health-text" id="ennemy-health-text">30 / 30</div>
+                    </div>
+                </div>
+
+                <div id="fight-text">Combat en cours</div>
+
+                <div id="fight-footer">DungeonForge</div>
+            </div>
+        </span>
     </main>
 
     <footer>
@@ -30,7 +63,8 @@
     <script src="./JavaScript/mobs.js" defer></script>
     <script src="./JavaScript/map.js" defer></script>
     <script src="./JavaScript/message.js" defer></script>
-    <script src="./JavaScript/chests.js"></script>
+    <script src="./JavaScript/chests.js" defer></script>
+    <script src="./JavaScript/fight.js" defer></script>
     <script src="./JavaScript/playerMovement.js" defer></script>
 </body>
 </html>
