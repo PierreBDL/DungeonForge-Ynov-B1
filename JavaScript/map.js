@@ -32,10 +32,43 @@ let map = [
 
 
 /* -------------------------------------------- */
-/*              Afficher carte                  */
+/*             Chercher le joueur               */
+/* -------------------------------------------- */
+
+function initPlayer() {
+    for (let i = 0; i < map.length; i++) {
+        for (let j = 0; j < map[i].length; j++) {
+            if (map[i][j] === CELL_TYPES.PLAYER) {
+                Player.x = j;
+                Player.y = i;
+                return;
+            }
+        }
+    }
+}
+
+
+/* -------------------------------------------- */
+/*            Chercher les ennemies             */
 /* -------------------------------------------- */
 
 let ennemies = {};
+
+function initEnnemies() {
+    ennemies = {};
+    for (let i = 0; i < map.length; i++) {
+        for (let j = 0; j < map[i].length; j++) {
+            if (map[i][j] === CELL_TYPES.ENNEMY) {
+                let key = "ennemy_" + i + "_" + j;
+                ennemies[key] = { x: j, y: i, stats: { hp: 30, attack: 10, defense: 3 } };
+            }
+        }
+    }
+}
+
+/* -------------------------------------------- */
+/*              Afficher carte                  */
+/* -------------------------------------------- */
 
 function loadMap () {
     // Supprimer la carte actuelle (éviter d'afficher plusieurs cartes)
@@ -72,18 +105,9 @@ function loadMap () {
                     break;
                 case CELL_TYPES.PLAYER:
                     cellElement.classList.add('player');
-                    // Mettre les coodonnées du joueur à jour
-                    Player.x = j;
-                    Player.y = i;
                     break;
                 case CELL_TYPES.ENNEMY:
                     cellElement.classList.add('ennemy');
-                    let key = "ennemy_" + i + "_" + j; // clé unique par position
-                    ennemies[key] = {
-                        x: j,
-                        y: i,
-                        stats: { hp: 30, attack: 10, defense: 3 }
-                    };
                     break;
             }
             document.getElementById('map').appendChild(cellElement);
@@ -91,4 +115,6 @@ function loadMap () {
     }
 }
 
+initPlayer(); // Chercher le joueur au premier chargement de la carte
+initEnnemies(); // Chercher les ennemies au chargement de la carte
 loadMap(); // Charger la carte au début

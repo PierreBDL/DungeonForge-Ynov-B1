@@ -19,64 +19,30 @@ document.addEventListener('keyup', (e) => {
 /*            Bouger sur la carte               */
 /* -------------------------------------------- */
 
+let originTile = CELL_TYPES.FLOOR;;
+
 function moveOnMap (x, y) {
-    if (y >= 0 && y < map.length && x >= 0 && x < map[y].length && map[y][x] !== CELL_TYPES.WALL) {
-        let originTile = CELL_TYPES.FLOOR;
+    if (y >= 0 && y < map.length && x >= 0 && x < map[y].length && map[y][x] !== CELL_TYPES.WALL && map[y][x] !== CELL_TYPES.ENNEMY) {
+        
+        // Sauvegarde de la tuile de destination
+        let nextTile = map[y][x];
+
+        // Remettre la tuile d'origine
+        map[Player.y][Player.x] = originTile;
+
+        // Enregistrer prochaine destination
+        originTile = nextTile;
 
         // Afficher une notif si c'est un coffre via l'orverlay message
         if (map[y][x] === CELL_TYPES.CHEST) {
-            let items = {gold: 10, xp:20, potion_vie:1} // Gagnés dans le coffre
-
-            let message = "Vous êtes tombé sur un coffre ! Vous obtenez : <br>";
-
-            // Création de la liste des items + cocaténation dans le message + balises HTML
-            let keys_items = Object.entries(items);
-
-            for (let i = 0; i < keys_items.length; i++) {
-                switch (keys_items[i][0]) {
-                    case "gold":
-                        Player.gold += keys_items[i][1];
-                        message += (keys_items[i][1] + " Pièces d'or");
-                        break;
-                    case "xp":
-                        Player.stats.xp += keys_items[i][1];
-                        message += (keys_items[i][1] + " points d'expérience");
-                        break;
-                    case "potion_vie":
-                        // Ajouter autant de potion que ce qu'il y a dans l'inventaire
-                        for (let j = 0; j < keys_items[i][1]; j++) {
-                            // Tant qu'on a de la place dans l'inventaire
-                            if (Player.inventory.length <= 10) {
-                                Player.inventory.push("potion_vie")
-                            } else {
-                                break;
-                            }
-                        }
-                        message += (keys_items[i][1] + " potion(s) de soin");
-                        break
-                }
-
-                // Ajout d'un saut de ligne
-                if (i < keys_items.length) {
-                    message += "<br>"
-                }
-            }
-
-            printMessage(message)
-        }
-
-        // Si on était sur un coffre => remettre le coffre
-        if (map[Player.y][Player.x] === CELL_TYPES.CHEST) {
-            originTile = CELL_TYPES.CHEST;
+            // Gagnés dans le coffre
+            giveItems({gold: 10, xp:20, potion_vie:1});
         }
 
         // Afficher une notif si c'est un coffre via l'orverlay message
         if (map[y][x] === CELL_TYPES.ENNEMY) {
-            printMessage("Vous êtes tombé sur un ennemie")
+            printMessage("Vous êtes tombé sur un ennemi")
         }
-
-        // MAJ carte en fonction de la tuile
-        map[Player.y][Player.x] = originTile;
 
         // Dépacer joueur
         map[y][x] = CELL_TYPES.PLAYER;
