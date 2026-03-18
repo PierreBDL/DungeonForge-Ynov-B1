@@ -65,6 +65,34 @@
     font-size: 13px;
 }
 
+#fight-actions {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: row;
+    gap: 0.6rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+#fight-actions button {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    padding: 0.6rem 1.2rem 0.6rem 1.2rem;
+    border: 1px solid #5c4a1e;
+    border-radius: 3px;
+    background: none;
+    color: #8a6c2a;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+}
+
+#fight-actions button:hover {
+    background-color: #5c4a1e;
+    color: #f0d090;
+}
+
 #fight-text {
     font-family: 'Cinzel', serif;
     border-top: #5c4a1e 1px solid;

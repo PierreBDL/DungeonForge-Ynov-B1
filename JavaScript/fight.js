@@ -1,4 +1,4 @@
-function fight () {
+function fight() {
     const fightWindow = document.getElementById("fight");
     fightWindow.style.display = "flex";
 
@@ -39,4 +39,27 @@ function fight () {
     const EnnemyHpBar = document.getElementById("ennemy-health");
     let widthEnnemyHpBar = ((Ennemy.stats.hp / Ennemy.stats.maxHp) * 100);
     EnnemyHpBar.style.width = widthEnnemyHpBar + "px";
+}
+
+/* -------------------------------------------- */
+/*                  Actions                     */
+/* -------------------------------------------- */
+
+// Fuir
+
+const btnGiveUp = document.getElementById("giveUp");
+
+btnGiveUp.addEventListener("click", () => {
+    isInFight = false;
+    closeFight();
+});
+
+
+/* -------------------------------------------- */
+/*             Fermeture combat                 */
+/* -------------------------------------------- */
+
+function closeFight () {
+    const fightWindow = document.getElementById("fight");
+    fightWindow.style.display = "none";
 }
