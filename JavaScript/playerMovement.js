@@ -70,6 +70,11 @@ function moveOnMap (x, y) {
             originTile = CELL_TYPES.CHEST;
         }
 
+        // Afficher une notif si c'est un coffre via l'orverlay message
+        if (map[y][x] === CELL_TYPES.ENNEMY) {
+            printMessage("Vous êtes tombé sur un ennemie")
+        }
+
         // MAJ carte en fonction de la tuile
         map[Player.y][Player.x] = originTile;
 

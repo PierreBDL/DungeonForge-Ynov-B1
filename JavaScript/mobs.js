@@ -27,7 +27,7 @@ let Player = {
 
 /* ENNEMI */
 
-let ennemy = {
+let Ennemy = {
     name: 'Ennemy',
     x: 0, y: 0, // Position sur la grille
     stats: {
