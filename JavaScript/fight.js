@@ -39,7 +39,7 @@ const btnGiveUp = document.getElementById("giveUp");
 
 btnGiveUp.addEventListener("click", () => {
     // Enlever de la vie quand on fuit
-    Player.stats.health = Player.stats.health * 0.8;
+    Player.stats.hp = Math.floor(Player.stats.hp * 0.8);
 
     // Arrêter le combat
     isInFight = false;
@@ -64,19 +64,87 @@ function closeFight () {
 /*                 Attaquer                     */
 /* -------------------------------------------- */
 
+let turnFight = 0;
+
 const btnAttack = document.getElementById("attack");
 
 btnAttack.addEventListener("click", () => {
-    dammageAmount = (Player.stats.attack - Ennemy.stats.defense);
-    Ennemy.stats.hp -= dammageAmount;
+    // Tour de combat
+    turnFight ++;
 
-    // MAJ vie
-    printHealth(Ennemy, "ennemy")
+    // Joueur attaque l'ennemi
+    attackPhase(Player, Ennemy);
+
+    // Voir si l'ennemi n'a plus de PV
+    if (Ennemy.stats.hp <= 0) {
+        // Donner le butin
+        giveItems("Vous avez vaincu un ennemi ! Vous obtenez : <br>", {gold: 10, xp: 20});
+
+        // Rendre la moitié de sa vie au joueur
+        Player.stats.hp = Player.stats.maxHp * 0.5;
+
+        // Arrêter le combat
+        isInFight = false;
+        closeFight(); 
+    } else {
+        // Ennemi attaque le joueur
+        attackPhase(Ennemy, Player);
+
+        // Si le joueur n'a plus de PV
+        if (Player.stats.hp <= 0) {
+            isInFight = false;
+            closeFight();
+        }
+    }
+});
+
+
+/* -------------------------------------------- */
+/*              Attaque ennemi                  */
+/* -------------------------------------------- */
+
+function attackPhase (attacker, target) {
+
+    let dammageAmount = 0;
+
+    // Si l'ennemi attaque le joueur
+    if (attacker === Ennemy) {
+        // Récupérer les noms des attaques
+        let TypesAttack = Object.keys(Ennemy.attackTypes);
+
+        // Choisir une attaque aléatoire
+        let attackEnnemyChooseIndex = Math.floor(Math.random() * TypesAttack.length);
+        let attackEnnemyChoose = TypesAttack[attackEnnemyChooseIndex];
+
+        // Calculer + infliger les dégats
+        dammageAmount = (Ennemy.attackTypes[attackEnnemyChoose] - Player.stats.defense);
+        Player.stats.hp -= dammageAmount;
+
+        // MAJ vie de la vie du joueur
+        printHealth(Player, "player");
+    } else {
+        // Si le joueur attaque l'ennemi
+
+        // Calculer + infliger les dégats
+        dammageAmount = (Player.stats.attack - Ennemy.stats.defense);
+        Ennemy.stats.hp -= dammageAmount;
+
+        // MAJ vie de la vie de l'ennemie
+        printHealth(Ennemy, "ennemy")
+    }
+
+    // Si l'attaque est négative à cause de la défence -> attaqye de 1
+    if (dammageAmount <= 0) {
+        dammageAmount = 1;
+    }
 
     // Texte
     const fightText = document.getElementById("fight-text");
-    fightText.innerHTML = fightText.textContent + "<br>" + Player.name + " inflige " + dammageAmount + " dégats à " + Ennemy.name + "<br>";
-});
+    fightText.innerHTML = turnFight + ": " + fightText.innerHTML + "<br>" + attacker.name + " inflige " + dammageAmount + " dégats à " + target.name;
+
+    // Scroller vers le bas
+    fightText.scrollTop = fightText.scrollHeight;
+}
 
 /* -------------------------------------------- */
 /*              Afficher la vie                 */

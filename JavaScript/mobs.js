@@ -42,4 +42,9 @@ let Ennemy = {
         armor: null,
         accessory: null
     },
+    attackTypes: {
+        "Coup de poing": 10,
+        "Coup de pied": 15,
+        "Griffe": 20
+    }
 };

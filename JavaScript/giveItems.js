@@ -1,5 +1,5 @@
-function giveItems(contentChest) {
-    let message = "Vous êtes tombé sur un coffre ! Vous obtenez : <br>";
+function giveItems(messageToPrint, contentChest) {
+    let message = messageToPrint;
 
     // Création de la liste des items + cocaténation dans le message + balises HTML
     let keys_items = Object.entries(contentChest);
