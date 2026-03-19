@@ -14,13 +14,7 @@ function fight() {
     playerName.innerText = Player.name;
 
     // Initialiser la vie
-    const playerHp = document.getElementById("player-health-text");
-    playerHp.innerText = (Player.stats.hp + " / " + Player.stats.maxHp);
-
-    // Gestion de la bare de vie
-    const playerHpBar = document.getElementById("player-health");
-    let widthPlayerHpBar = ((Player.stats.hp / Player.stats.maxHp) * 100);
-    playerHpBar.style.width = widthPlayerHpBar + "px";
+    printHealth(Player, "player");
 
 
     /* -------------------------------------------- */
@@ -32,13 +26,7 @@ function fight() {
     EnnemyName.innerText = Ennemy.name;
 
     // Initialiser la vie
-    const EnnemyHp = document.getElementById("ennemy-health-text");
-    EnnemyHp.innerText = (Ennemy.stats.hp + " / " + Ennemy.stats.maxHp);
-
-    // Gestion de la bare de vie
-    const EnnemyHpBar = document.getElementById("ennemy-health");
-    let widthEnnemyHpBar = ((Ennemy.stats.hp / Ennemy.stats.maxHp) * 100);
-    EnnemyHpBar.style.width = widthEnnemyHpBar + "px";
+    printHealth(Ennemy, "ennemy");
 }
 
 /* -------------------------------------------- */
@@ -50,6 +38,10 @@ function fight() {
 const btnGiveUp = document.getElementById("giveUp");
 
 btnGiveUp.addEventListener("click", () => {
+    // Enlever de la vie quand on fuit
+    Player.stats.health = Player.stats.health * 0.8;
+
+    // Arrêter le combat
     isInFight = false;
     closeFight();
 });
@@ -62,4 +54,41 @@ btnGiveUp.addEventListener("click", () => {
 function closeFight () {
     const fightWindow = document.getElementById("fight");
     fightWindow.style.display = "none";
+
+    // Remettre le texte par défaut
+    const fightText = document.getElementById("fight-text");
+    fightText.innerHTML = "Combat en cours" ;
+}
+
+/* -------------------------------------------- */
+/*                 Attaquer                     */
+/* -------------------------------------------- */
+
+const btnAttack = document.getElementById("attack");
+
+btnAttack.addEventListener("click", () => {
+    dammageAmount = (Player.stats.attack - Ennemy.stats.defense);
+    Ennemy.stats.hp -= dammageAmount;
+
+    // MAJ vie
+    printHealth(Ennemy, "ennemy")
+
+    // Texte
+    const fightText = document.getElementById("fight-text");
+    fightText.innerHTML = fightText.textContent + "<br>" + Player.name + " inflige " + dammageAmount + " dégats à " + Ennemy.name + "<br>";
+});
+
+/* -------------------------------------------- */
+/*              Afficher la vie                 */
+/* -------------------------------------------- */
+
+function printHealth(targetObject, target) {
+    // Texte vie
+    const Hp = document.getElementById(target + "-health-text");
+    Hp.innerText = (targetObject.stats.hp + " / " + targetObject.stats.maxHp);
+
+    // Gestion de la bare de vie
+    const HpBar = document.getElementById(target + "-health");
+    let widthEnnemyHpBar = ((targetObject.stats.hp / targetObject.stats.maxHp) * 100);
+    HpBar.style.width = widthEnnemyHpBar + "px";
 }
