@@ -1,4 +1,4 @@
-function fight() {
+function fight(ennemy) {
     const fightWindow = document.getElementById("fight");
     fightWindow.style.display = "flex";
 
@@ -23,14 +23,14 @@ function fight() {
 
     // Initialiser le nom
     const EnnemyName = document.getElementById("name-ennemy");
-    EnnemyName.innerText = Ennemy.name;
+    EnnemyName.innerText = ennemy.name || "Ennemy"; // Si ennemi.name est vide -> mettre "Ennemy"
 
     // Initialiser la vie
-    printHealth(Ennemy, "ennemy");
+    printHealth(ennemy, "ennemy");
 }
 
 /* -------------------------------------------- */
-/*                  Actions                     */
+/*                     Fuir                     */
 /* -------------------------------------------- */
 
 // Fuir
@@ -73,22 +73,29 @@ btnAttack.addEventListener("click", () => {
     turnFight ++;
 
     // Joueur attaque l'ennemi
-    attackPhase(Player, Ennemy);
+    attackPhase(Player, currentEnnemy);
 
     // Voir si l'ennemi n'a plus de PV
-    if (Ennemy.stats.hp <= 0) {
+    if (currentEnnemy.stats.hp <= 0) {
         // Donner le butin
         giveItems("Vous avez vaincu un ennemi ! Vous obtenez : <br>", {gold: 10, xp: 20});
 
         // Rendre la moitié de sa vie au joueur
         Player.stats.hp = Player.stats.maxHp * 0.5;
 
+        // Supprimer ennemie de la carte
+        map[currentEnnemy.y][currentEnnemy.x] = CELL_TYPES.FLOOR;
+        let keyCurrentEnnemy = "ennemy_" + currentEnnemy.y + "_" + currentEnnemy.x;
+        delete ennemies[keyCurrentEnnemy];
+
+        currentEnnemy = null;
+
         // Arrêter le combat
         isInFight = false;
         closeFight(); 
     } else {
         // Ennemi attaque le joueur
-        attackPhase(Ennemy, Player);
+        attackPhase(currentEnnemy, Player);
 
         // Si le joueur n'a plus de PV
         if (Player.stats.hp <= 0) {
@@ -108,16 +115,16 @@ function attackPhase (attacker, target) {
     let dammageAmount = 0;
 
     // Si l'ennemi attaque le joueur
-    if (attacker === Ennemy) {
+    if (attacker === currentEnnemy) {
         // Récupérer les noms des attaques
-        let TypesAttack = Object.keys(Ennemy.attackTypes);
+        let TypesAttack = Object.keys(currentEnnemy.attackTypes);
 
         // Choisir une attaque aléatoire
         let attackEnnemyChooseIndex = Math.floor(Math.random() * TypesAttack.length);
         let attackEnnemyChoose = TypesAttack[attackEnnemyChooseIndex];
 
         // Calculer + infliger les dégats
-        dammageAmount = (Ennemy.attackTypes[attackEnnemyChoose] - Player.stats.defense);
+        dammageAmount = (currentEnnemy.attackTypes[attackEnnemyChoose] - Player.stats.defense);
         Player.stats.hp -= dammageAmount;
 
         // MAJ vie de la vie du joueur
@@ -126,11 +133,11 @@ function attackPhase (attacker, target) {
         // Si le joueur attaque l'ennemi
 
         // Calculer + infliger les dégats
-        dammageAmount = (Player.stats.attack - Ennemy.stats.defense);
-        Ennemy.stats.hp -= dammageAmount;
+        dammageAmount = (Player.stats.attack - currentEnnemy.stats.defense);
+        currentEnnemy.stats.hp -= dammageAmount;
 
         // MAJ vie de la vie de l'ennemie
-        printHealth(Ennemy, "ennemy")
+        printHealth(currentEnnemy, "ennemy")
     }
 
     // Si l'attaque est négative à cause de la défence -> attaqye de 1

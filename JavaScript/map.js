@@ -61,7 +61,12 @@ function initEnnemies() {
         for (let j = 0; j < map[i].length; j++) {
             if (map[i][j] === CELL_TYPES.ENNEMY) {
                 let key = "ennemy_" + i + "_" + j;
-                ennemies[key] = { x: j, y: i, stats: { hp: 30, attack: 10, defense: 3 } };
+                ennemies[key] = {
+                    x: j, y: i,
+                    name: "Ennemi",
+                    stats: { hp: Ennemy.stats.hp, maxHp: Ennemy.stats.maxHp, attack: Ennemy.stats.attack, defense: Ennemy.stats.defense },
+                    attackTypes: Ennemy.attackTypes,
+                };
             }
         }
     }

@@ -26,8 +26,9 @@ document.addEventListener('keyup', (e) => {
 /*            Bouger sur la carte               */
 /* -------------------------------------------- */
 
-let originTile = CELL_TYPES.FLOOR;
-let isInFight = false;
+let originTile = CELL_TYPES.FLOOR; // Type de tuile qu'il y avait avant sous le joueur
+let isInFight = false; // Le combat est démarré ou non
+let currentEnnemy = null; // Ennemi du combat
 
 function moveOnMap(x, y) {
 
@@ -54,8 +55,10 @@ function moveOnMap(x, y) {
 
     // Afficher une notif si c'est un ennemi via l'orverlay message
     if (map[y][x] === CELL_TYPES.ENNEMY) {
-        //printMessage("Vous êtes tombé sur un ennemi");
-        fight(); // Lancer le combat
+        // printMessage("Vous êtes tombé sur un ennemi");
+        let keyEnnemy = "ennemy_" + y + "_" + x; // Sélectionner l'ennemi devant le joueur
+        currentEnnemy = ennemies[keyEnnemy]; // Créer un objet ennemi
+        fight(currentEnnemy); // Lancer le combat
         return; // Ne pas bouger
     }
 
