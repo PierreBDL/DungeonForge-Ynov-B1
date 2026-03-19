@@ -132,6 +132,12 @@ main {
     background-color: #ff0;
 }
 
+.chest-open {
+    width: 99%;
+    height: 99%;
+    background-color: rgb(255, 200, 0);
+}
+
 .player {
     width: 99%;
     height: 99%;

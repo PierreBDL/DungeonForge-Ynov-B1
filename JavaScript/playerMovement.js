@@ -84,6 +84,8 @@ function moveOnMap(x, y) {
     if (nextTile === CELL_TYPES.CHEST) {
         // Gagnés dans le coffre
         giveItems({ gold: 10, xp: 20, potion_vie: 1 });
+        // Indiquer que le coffre a déjà été récupéré
+        originTile = CELL_TYPES.CHEST_OPEN;
     }
 
     /* -------------------------------------------- */

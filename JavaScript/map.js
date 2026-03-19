@@ -5,7 +5,8 @@ const CELL_TYPES = {
     STAIRS_DOWN: 3,
     CHEST: 4,
     PLAYER: 5,
-    ENNEMY:6
+    ENNEMY: 6,
+    CHEST_OPEN: 7
 };
 
 /* -------------------------------------------- */
@@ -108,6 +109,9 @@ function loadMap () {
                     break;
                 case CELL_TYPES.ENNEMY:
                     cellElement.classList.add('ennemy');
+                    break;
+                case CELL_TYPES.CHEST_OPEN:
+                    cellElement.classList.add('chest-open');
                     break;
             }
             document.getElementById('map').appendChild(cellElement);
