@@ -33,7 +33,7 @@ let currentEnnemy = null; // Ennemi du combat
 function moveOnMap(x, y) {
 
     // Vérifier si on sort des limites
-    if (y < 0 || y >= map.length || x < 0 || x >= map[y].length) {
+    if (y < 0 || y >= actualMap.length || x < 0 || x >= actualMap[y].length) {
         return;
     }
 
@@ -54,7 +54,7 @@ function moveOnMap(x, y) {
     /* -------------------------------------------- */
 
     // Afficher une notif si c'est un ennemi via l'orverlay message
-    if (map[y][x] === CELL_TYPES.ENNEMY) {
+    if (actualMap[y][x] === CELL_TYPES.ENNEMY) {
         // printMessage("Vous êtes tombé sur un ennemi");
         let keyEnnemy = "ennemy_" + y + "_" + x; // Sélectionner l'ennemi devant le joueur
         currentEnnemy = ennemies[keyEnnemy]; // Créer un objet ennemi
@@ -66,17 +66,24 @@ function moveOnMap(x, y) {
 
 
     // S'arrêter si c'est un mur
-    if (map[y][x] === CELL_TYPES.WALL) {
+    if (actualMap[y][x] === CELL_TYPES.WALL) {
         return;
     }
 
     /* -------------------------------------------- */
 
+    // Changer de carte si on est au niveau d'un escalier
+    if (actualMap[y][x] === CELL_TYPES.STAIRS_DOWN) {
+        changeLevel(); // On change de carte
+    }
+
+    /* -------------------------------------------- */
+
     // Sauvegarde de la tuile de destination
-    let nextTile = map[y][x];
+    let nextTile = actualMap[y][x];
 
     // Remettre la tuile d'origine
-    map[Player.y][Player.x] = originTile;
+    actualMap[Player.y][Player.x] = originTile;
 
     // Enregistrer prochaine destination
     originTile = nextTile;
@@ -94,7 +101,7 @@ function moveOnMap(x, y) {
     /* -------------------------------------------- */
 
     // Dépacer joueur
-    map[y][x] = CELL_TYPES.PLAYER;
+    actualMap[y][x] = CELL_TYPES.PLAYER;
 
     // MAJ position du joueur
     Player.x = x;

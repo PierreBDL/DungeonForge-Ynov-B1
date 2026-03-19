@@ -10,7 +10,7 @@ const CELL_TYPES = {
 };
 
 /* -------------------------------------------- */
-/*                    Carte                     */
+/*                   Cartes                     */
 /* -------------------------------------------- */
 
 let map = [
@@ -31,15 +31,39 @@ let map = [
 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 ];
 
+let map2 = [
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+[0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0],
+[0, 1, 6, 1, 6, 1, 0, 0, 0, 0, 0, 1, 6, 1, 1, 1, 1, 4, 1, 0],
+[0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 6, 1, 1, 1, 0],
+[0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0],
+[0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0],
+[0, 0, 0, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0],
+[0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+[0, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0],
+[0, 1, 4, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 6, 1, 1, 1, 0, 0, 0],
+[0, 1, 1, 6, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 4, 1, 0, 0, 0],
+[0, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0],
+[0, 0, 2, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0],
+[0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0],
+[0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0],
+[0, 1, 6, 1, 1, 6, 1, 1, 1, 0, 0, 0, 0, 0, 1, 6, 1, 6, 1, 0],
+[0, 1, 1, 1, 4, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 3, 1, 1, 0],
+[0, 1, 1, 1, 1, 1, 5, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0],
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+];
+
+actualMap = map; // Carte actuelle
 
 /* -------------------------------------------- */
 /*             Chercher le joueur               */
 /* -------------------------------------------- */
 
 function initPlayer() {
-    for (let i = 0; i < map.length; i++) {
-        for (let j = 0; j < map[i].length; j++) {
-            if (map[i][j] === CELL_TYPES.PLAYER) {
+    for (let i = 0; i < actualMap.length; i++) {
+        for (let j = 0; j < actualMap[i].length; j++) {
+            if (actualMap[i][j] === CELL_TYPES.PLAYER) {
                 Player.x = j;
                 Player.y = i;
                 return;
@@ -57,9 +81,9 @@ let ennemies = {};
 
 function initEnnemies() {
     ennemies = {};
-    for (let i = 0; i < map.length; i++) {
-        for (let j = 0; j < map[i].length; j++) {
-            if (map[i][j] === CELL_TYPES.ENNEMY) {
+    for (let i = 0; i < actualMap.length; i++) {
+        for (let j = 0; j < actualMap[i].length; j++) {
+            if (actualMap[i][j] === CELL_TYPES.ENNEMY) {
                 let key = "ennemy_" + i + "_" + j;
                 ennemies[key] = {
                     x: j, y: i,
@@ -82,13 +106,13 @@ function loadMap () {
     carte.innerHTML = "";
 
     // Changer la taille de grid dans css
-    carte.style.gridTemplateColumns = 'repeat(' + map[0].length + ', 50px)';
-    carte.style.gridTemplateRows = 'repeat(' + map.length + ', 50px)';
+    carte.style.gridTemplateColumns = 'repeat(' + actualMap[0].length + ', 50px)';
+    carte.style.gridTemplateRows = 'repeat(' + actualMap.length + ', 50px)';
 
     // Parcours de toute la matrice
-    for (let i = 0; i < map.length; i++) {
-        for (let j = 0; j < map[i].length; j++) {
-            let cellType = map[i][j];
+    for (let i = 0; i < actualMap.length; i++) {
+        for (let j = 0; j < actualMap[i].length; j++) {
+            let cellType = actualMap[i][j];
             // Création d'une div pour chaque tuile
             let cellElement = document.createElement('div');
             cellElement.classList.add('cell');
