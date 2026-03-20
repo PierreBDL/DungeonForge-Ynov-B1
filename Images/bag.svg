@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" width="50" height="50">
+  <!-- Sangle du haut -->
+  <path d="M18 14 Q18 6 25 6 Q32 6 32 14" fill="none" stroke="#5a3a10" stroke-width="3" stroke-linecap="round"/>
+  <!-- Boucle sangle -->
+  <rect x="21" y="11" width="8" height="5" rx="2" fill="none" stroke="#c8902a" stroke-width="1.5"/>
+  <!-- Corps du sac -->
+  <path d="M10 18 Q10 14 14 14 L36 14 Q40 14 40 18 L42 38 Q42 44 36 44 L14 44 Q8 44 8 38 Z" fill="#8b5e1a"/>
+  <!-- Coutures côtés -->
+  <path d="M14 16 L12 42" fill="none" stroke="#6b4010" stroke-width="1" stroke-dasharray="3,2"/>
+  <path d="M36 16 L38 42" fill="none" stroke="#6b4010" stroke-width="1" stroke-dasharray="3,2"/>
+  <!-- Rabat -->
+  <path d="M10 18 L8 30 Q8 34 13 34 L37 34 Q42 34 42 30 L40 18 Z" fill="#a06820"/>
+  <!-- Couture rabat -->
+  <path d="M11 20 L9 30 Q9 32 13 32 L37 32 Q41 32 41 30 L39 20" fill="none" stroke="#8a5810" stroke-width="0.8" stroke-dasharray="3,2"/>
+  <!-- Fermoir -->
+  <rect x="20" y="30" width="10" height="7" rx="2" fill="#c8902a"/>
+  <rect x="22" y="32" width="6" height="3" rx="1" fill="#8b6010"/>
+  <circle cx="25" cy="33.5" r="1.2" fill="#c8902a"/>
+  <!-- Rivets décoratifs -->
+  <circle cx="14" cy="20" r="1.5" fill="#c8902a"/>
+  <circle cx="36" cy="20" r="1.5" fill="#c8902a"/>
+  <!-- Relief bas du sac -->
+  <path d="M10 38 Q10 44 14 44 L36 44 Q40 44 40 38" fill="#6b4010" opacity="0.5"/>
+</svg>

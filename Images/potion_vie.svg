@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" width="50" height="50">
+  <!-- Ombre -->
+  <ellipse cx="25" cy="45" rx="10" ry="3" fill="#00000044"/>
+  <!-- Corps de la fiole -->
+  <path d="M19 22 Q13 28 13 35 Q13 44 25 44 Q37 44 37 35 Q37 28 31 22 Z" fill="#c0183a"/>
+  <!-- Reflet sur la fiole -->
+  <path d="M17 28 Q15 33 15 37 Q15 40 18 42" fill="none" stroke="#ff6080" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
+  <!-- Liquide intérieur plus clair -->
+  <path d="M20 26 Q15 32 15 37 Q15 43 25 43 Q35 43 35 37 Q35 32 30 26 Z" fill="#e0204a" opacity="0.7"/>
+  <!-- Croix blanche -->
+  <rect x="22" y="31" width="6" height="2" rx="1" fill="white" opacity="0.9"/>
+  <rect x="24" y="29" width="2" height="6" rx="1" fill="white" opacity="0.9"/>
+  <!-- Col de la fiole -->
+  <rect x="20" y="16" width="10" height="7" rx="2" fill="#8b5e1a"/>
+  <!-- Bouchon en liège -->
+  <rect x="21" y="12" width="8" height="5" rx="2" fill="#a06820"/>
+  <rect x="22" y="11" width="6" height="2" rx="1" fill="#c8902a"/>
+  <!-- Ficelle autour du col -->
+  <line x1="20" y1="19" x2="30" y2="19" stroke="#6b4010" stroke-width="1.5"/>
+  <line x1="20" y1="21" x2="30" y2="21" stroke="#6b4010" stroke-width="1"/>
+</svg>
