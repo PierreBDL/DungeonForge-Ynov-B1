@@ -35,4 +35,7 @@ function giveItems(messageToPrint, contentChest) {
     }
 
     printMessage(message);
+
+    // Regarder si on passe un niveau avec l'expérience
+    nextLevel();
 }

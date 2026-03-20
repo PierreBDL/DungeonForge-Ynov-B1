@@ -97,6 +97,10 @@ btnAttack.addEventListener("click", () => {
         isInFight = false;
         loadMap(); // Recharger la carte pour supprimer l'ennemi
         closeFight();
+
+        // Regarder si on passe un niveau avec l'expérience
+        nextLevel();
+
     } else {
         // Ennemi attaque le joueur
         attackPhase(currentEnnemy, Player);
