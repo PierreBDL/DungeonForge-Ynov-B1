@@ -51,13 +51,13 @@ btnGiveUp.addEventListener("click", () => {
 /*             Fermeture combat                 */
 /* -------------------------------------------- */
 
-function closeFight () {
+function closeFight() {
     const fightWindow = document.getElementById("fight");
     fightWindow.style.display = "none";
 
     // Remettre le texte par défaut
     const fightText = document.getElementById("fight-text");
-    fightText.innerHTML = "Combat en cours" ;
+    fightText.innerHTML = "Combat en cours";
 }
 
 /* -------------------------------------------- */
@@ -70,7 +70,7 @@ const btnAttack = document.getElementById("attack");
 
 btnAttack.addEventListener("click", () => {
     // Tour de combat
-    turnFight ++;
+    turnFight++;
 
     // Joueur attaque l'ennemi
     attackPhase(Player, currentEnnemy);
@@ -78,7 +78,7 @@ btnAttack.addEventListener("click", () => {
     // Voir si l'ennemi n'a plus de PV
     if (currentEnnemy.stats.hp <= 0) {
         // Donner le butin
-        giveItems("Vous avez vaincu un ennemi ! Vous obtenez : <br>", {gold: 10, xp: 20});
+        giveItems("Vous avez vaincu un ennemi ! Vous obtenez : <br>", { gold: 10, xp: 20 });
 
         // Rendre la moitié de sa vie au joueur
         Player.stats.hp = Player.stats.maxHp * 0.5;
@@ -90,15 +90,28 @@ btnAttack.addEventListener("click", () => {
 
         currentEnnemy = null;
 
+        // Mettre le tour de combat à zéro
+        turnFight = 0;
+
         // Arrêter le combat
         isInFight = false;
-        closeFight(); 
+        loadMap(); // Recharger la carte pour supprimer l'ennemi
+        closeFight();
     } else {
         // Ennemi attaque le joueur
         attackPhase(currentEnnemy, Player);
 
         // Si le joueur n'a plus de PV
         if (Player.stats.hp <= 0) {
+            // Réinitialiser la vie de l'ennemi
+            currentEnnemy.stats.hp = currentEnnemy.stats.maxHp;
+
+            // Redonner la moitier de ses PVs au joueur
+            Player.stats.hp = Player.stats.maxHp * 0.5;
+
+            // Mettre le tour de combat à zéro
+            turnFight = 0;
+
             isInFight = false;
             closeFight();
         }
@@ -110,7 +123,7 @@ btnAttack.addEventListener("click", () => {
 /*              Attaque ennemi                  */
 /* -------------------------------------------- */
 
-function attackPhase (attacker, target) {
+function attackPhase(attacker, target) {
 
     let dammageAmount = 0;
 
@@ -147,7 +160,7 @@ function attackPhase (attacker, target) {
 
     // Texte
     const fightText = document.getElementById("fight-text");
-    fightText.innerHTML = turnFight + ": " + fightText.innerHTML + "<br>" + attacker.name + " inflige " + dammageAmount + " dégats à " + target.name;
+    fightText.innerHTML = fightText.innerHTML + "<br> " + turnFight + ": " + attacker.name + " inflige " + dammageAmount + " dégats à " + target.name;
 
     // Scroller vers le bas
     fightText.scrollTop = fightText.scrollHeight;
