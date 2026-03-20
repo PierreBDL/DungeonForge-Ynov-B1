@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" width="50" height="50">
+  <!-- Base coffre -->
+  <rect x="7" y="28" width="36" height="16" rx="3" fill="#6b4010"/>
+  <!-- Couvercle ouvert -->
+  <rect x="7" y="12" width="36" height="8" rx="3" fill="#7a5018" transform="skewX(-5)"/>
+  <!-- Intérieur -->
+  <rect x="9" y="28" width="32" height="14" rx="2" fill="#1a0a00"/>
+  <!-- Or -->
+  <circle cx="18" cy="35" r="4" fill="#ffe066"/>
+  <circle cx="25" cy="33" r="3" fill="#ffd040"/>
+  <circle cx="32" cy="36" r="3.5" fill="#ffe066"/>
+  <circle cx="22" cy="38" r="2.5" fill="#ffc020"/>
+  <rect x="7" y="19" width="36" height="3" fill="#5a3008"/>
+  <circle cx="11" cy="32" r="2" fill="#8a6020"/>
+  <circle cx="39" cy="32" r="2" fill="#8a6020"/>
+  <circle cx="15" cy="16" r="2" fill="#ffe066" opacity="0.8"/>
+  <circle cx="35" cy="14" r="1.5" fill="#ffe066" opacity="0.6"/>
+</svg>

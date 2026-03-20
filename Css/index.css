@@ -117,30 +117,49 @@ main {
 .ennemy {
     width: 99%;
     height: 99%;
-    background-color: #f00;
+    background-color: #3e3e42;
+    border: 1px solid #2d2d30;
+    background-image: url('../Images/ennemy.svg');
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 .stairs-down {
     width: 99%;
     height: 99%;
-    background-color: #0f0;
+    background-color: #3e3e42;
+    border: 1px solid #2d2d30;
+    background-image: url('../Images/stairs.svg');
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 .chest {
     width: 99%;
     height: 99%;
-    background-color: #ff0;
+    background-color: #3e3e42;
+    border: 1px solid #2d2d30;
+    background-image: url('../Images/chest.svg');
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 .chest-open {
     width: 99%;
     height: 99%;
-    background-color: rgb(255, 200, 0);
+    background-color: #3e3e42;
+    border: 1px solid #2d2d30;
+    background-image: url('../Images/chest_open.svg');
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 .player {
     width: 99%;
     height: 99%;
-    background-color: #00f;
-    border-radius: 50%;
+    background-color: #3e3e42;
+    border: 1px solid #2d2d30;
+    background-image: url('../Images/player.svg');
+    background-size: cover;
+    background-repeat: no-repeat;
 }
