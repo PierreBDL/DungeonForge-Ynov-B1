@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="./Css/headerFooter.css">
     <link rel="stylesheet" href="./Css/index.css">
     <link rel="stylesheet" href="./Css/fight.css">
+    <link rel="stylesheet" href="./Css/profileInventoryHUD.css">
 </head>
 <body>
     <header>
@@ -29,11 +30,14 @@
             </div>
         </span>
 
-        <!-- Inventaire -->
+        <!-- Boutons de profil et d'inventaire -->
 
-        <div id="inventoryBtn">
+        <div id="HUDBtns">
             <button id="openCloseInventoryBtn"> <img src="./Images/bag.svg" alt="Inventaire"></button>
+            <button id="openCloseProfileBtn"> <img src="./Images/profile.svg" alt="Profil"></button>
         </div>
+
+        <!-- Inventaire -->
 
         <div id="inventory">
             <div class="inventory-card">
@@ -52,6 +56,19 @@
                         <div class="inventoryCase"></div>
                         <div class="inventoryCase"></div>
                     </div>
+                </div>
+                <div class="inventory-footer">DungeonForge</div>
+            </div>
+        </div>
+
+        <!-- Profile -->
+
+        <div id="profile">
+            <div class="profile-card">
+                <div class="profile-close"><button id="closeProfileyBtn"><img src="./Images/crux.png" alt="Fermer"></button></div>
+                <div class="profile-header">Profil</div>
+                <div class="profile-body">
+                    <p>profile</p>
                 </div>
                 <div class="inventory-footer">DungeonForge</div>
             </div>
@@ -115,6 +132,7 @@
     <script src="./JavaScript/hud.js" defer></script>
     <script src="./JavaScript/xp.js" defer></script>
     <script src="./JavaScript/inventory.js" defer></script>
+    <script src="./JavaScript/profile.js" defer></script>
     <script src="./JavaScript/playerMovement.js" defer></script>
 </body>
 </html>

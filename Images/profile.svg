@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" width="50" height="50">
+  <!-- Parchemin ombre -->
+  <rect x="8" y="6" width="38" height="42" rx="3" fill="#8b6010" opacity="0.3"/>
+  <!-- Parchemin principal -->
+  <rect x="6" y="4" width="38" height="42" rx="3" fill="#e8d4a0"/>
+  <!-- Bords recourbés haut -->
+  <path d="M6 4 Q6 10 10 10 Q6 10 6 4" fill="#c8a96e"/>
+  <path d="M44 4 Q44 10 40 10 Q44 10 44 4" fill="#c8a96e"/>
+  <!-- Tête -->
+  <circle cx="25" cy="17" r="7" fill="#e8c49a"/>
+  <!-- Casque simple -->
+  <path d="M18 15 Q18 8 25 8 Q32 8 32 15" fill="#888" stroke="#666" stroke-width="0.8"/>
+  <rect x="18" y="14" width="14" height="3" rx="1" fill="#aaa" stroke="#888" stroke-width="0.5"/>
+  <!-- Yeux -->
+  <circle cx="22.5" cy="17" r="1.5" fill="#3a2a10"/>
+  <circle cx="27.5" cy="17" r="1.5" fill="#3a2a10"/>
+  <!-- Lignes de stats -->
+  <line x1="10" y1="29" x2="40" y2="29" stroke="#c8a96e" stroke-width="0.5"/>
+  <line x1="10" y1="35" x2="40" y2="35" stroke="#c8a96e" stroke-width="0.5"/>
+  <line x1="10" y1="41" x2="40" y2="41" stroke="#c8a96e" stroke-width="0.5"/>
+  <!-- Icônes stats -->
+  <!-- Cœur HP -->
+  <path d="M10 26 Q10 24 12 24 Q13.5 24 14 26 Q14.5 24 16 24 Q18 24 18 26 Q18 28 14 31 Q10 28 10 26Z" fill="#e05050" transform="scale(0.55) translate(5, 17)"/>
+  <!-- Épée ATK -->
+  <line x1="11" y1="37" x2="15" y2="33" stroke="#aaa" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="10.5" y1="35" x2="12.5" y2="35" stroke="#888" stroke-width="1" stroke-linecap="round"/>
+  <!-- Bouclier DEF -->
+  <path d="M11 41 L15 41 L15 44 Q13 46 11 44 Z" fill="#3a6fd8" stroke="#2a55b0" stroke-width="0.5"/>
+  <!-- Texte stats (tirets) -->
+  <rect x="20" y="26" width="18" height="2" rx="1" fill="#8b6010" opacity="0.4"/>
+  <rect x="20" y="32" width="14" height="2" rx="1" fill="#8b6010" opacity="0.4"/>
+  <rect x="20" y="38" width="16" height="2" rx="1" fill="#8b6010" opacity="0.4"/>
+</svg>

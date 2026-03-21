@@ -3,21 +3,14 @@
 /* -------------------------------------------- */
 
 const openCloseInventoryBtn = document.getElementById("openCloseInventoryBtn");
-let inventoryIsOpen = false;
 
 openCloseInventoryBtn.addEventListener("click", () => {
     const inventoryOverlay = document.getElementById("inventory");
 
-    if (inventoryIsOpen === false) {
-        inventoryOverlay.style.display = "flex";
-        inventoryIsOpen = true;
+    inventoryOverlay.style.display = "flex";
 
-        // Remplir l'inventaire
-        inventory();
-    } else {
-        closeInventory(); // Fermer l'inventaire
-    }
-    
+    // Remplir l'inventaire
+    inventory();
 });
 
 /* -------------------------------------------- */
@@ -31,7 +24,6 @@ closeInventoryBtn.addEventListener("click", closeInventory);
 function closeInventory() {
     const inventoryOverlay = document.getElementById("inventory");
     inventoryOverlay.style.display = "none";
-    inventoryIsOpen = false;
 }
 
 /* -------------------------------------------- */
