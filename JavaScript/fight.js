@@ -84,7 +84,7 @@ btnAttack.addEventListener("click", () => {
         Player.stats.hp = Player.stats.maxHp * 0.5;
 
         // Supprimer ennemie de la carte
-        map[currentEnnemy.y][currentEnnemy.x] = CELL_TYPES.FLOOR;
+        actualMap[currentEnnemy.y][currentEnnemy.x] = CELL_TYPES.FLOOR;
         let keyCurrentEnnemy = "ennemy_" + currentEnnemy.y + "_" + currentEnnemy.x;
         delete ennemies[keyCurrentEnnemy];
 
