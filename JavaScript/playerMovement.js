@@ -53,8 +53,8 @@ function moveOnMap(x, y) {
 
     /* -------------------------------------------- */
 
-    // Si l'inventaire est ouvert -> ne pas bouger
-    if (inventoryIsOpen === true) {
+    // Si l'inventaire ou le profil est ouvert -> ne pas bouger
+    if (inventoryIsOpen === true || profileIsOpen === true) {
         return;
     }
 

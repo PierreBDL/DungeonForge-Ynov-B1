@@ -13,7 +13,7 @@ let Player = {
         speed: 1,
         level: 1,
         xp: 0,
-        xpToNext: 100
+        xpToNext: 10
     },
     inventory: [],
     equipment: {

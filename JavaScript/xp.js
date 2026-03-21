@@ -20,13 +20,58 @@ function nextLevel() {
 
 
 /* -------------------------------------------- */
-/*             Augmentation stats               */
+/*             Augmentation niveau              */
 /* -------------------------------------------- */
 
+let pointsUpdate = 0; // Points pour améliorer les compétences
+
 function UpdateStatsNextLevel() {
-    Player.stats.maxHp += 20;
-    Player.stats.attack += 3;
-    Player.stats.defense += 2;
+    pointsUpdate += 5;
+
+    UpdatePointsUiProfile(); // MAJ de l'UI des points dans le profil
 
     Player.stats.xpToNext = Math.floor(Player.stats.xpToNext * 1.2); // Augmenter de 20% l'expérience nécessaire pour augmenter de niveau
 }
+
+function UpdatePointsUiProfile() {
+    const points = document.getElementById("pointsLevel");
+    if (points) {
+        points.innerText = "Points disponibles : " + pointsUpdate;
+    }
+}
+
+
+/* -------------------------------------------- */
+/*             Augmentation stats               */
+/* -------------------------------------------- */
+
+function updateStats (stat) {
+    // Si on n'a pas de points -> partir
+    if (pointsUpdate <= 0) {
+        return;
+    }
+
+    // En fonction de la stat :
+    switch (stat) {
+        case "hp" :
+            Player.stats.maxHp += 5;
+            pointsUpdate -= 1;
+            break;
+        case "attack" :
+            Player.stats.attack += 2;
+            pointsUpdate -= 1;
+            break;
+        case "defense" :
+            Player.stats.defense += 2;
+            pointsUpdate -= 1;
+            break;
+    }
+
+    completProfile(); // MAJ du profil
+}
+
+/*
+    Player.stats.maxHp += 20,
+    Player.stats.attack += 3,
+    Player.stats.defense += 2
+*/

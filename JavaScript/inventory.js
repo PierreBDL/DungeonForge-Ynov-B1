@@ -3,9 +3,11 @@
 /* -------------------------------------------- */
 
 const openCloseInventoryBtn = document.getElementById("openCloseInventoryBtn");
+inventoryIsOpen = false;
 
 openCloseInventoryBtn.addEventListener("click", () => {
     const inventoryOverlay = document.getElementById("inventory");
+    inventoryIsOpen = true;
 
     inventoryOverlay.style.display = "flex";
 
@@ -24,6 +26,7 @@ closeInventoryBtn.addEventListener("click", closeInventory);
 function closeInventory() {
     const inventoryOverlay = document.getElementById("inventory");
     inventoryOverlay.style.display = "none";
+    inventoryIsOpen = false;
 }
 
 /* -------------------------------------------- */

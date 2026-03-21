@@ -3,11 +3,14 @@
 /* -------------------------------------------- */
 
 const openCloseProfileBtn = document.getElementById("openCloseProfileBtn");
+profileIsOpen = false;
 
 openCloseProfileBtn.addEventListener("click", () => {
     const profileOverlay = document.getElementById("profile");
 
     profileOverlay.style.display = "flex";
+
+    profileIsOpen = true;
 
     // Remplir le profil
     completProfile();
@@ -24,6 +27,7 @@ closeProfileyBtn.addEventListener("click", closeProfile);
 function closeProfile() {
     const profileOverlay = document.getElementById("profile");
     profileOverlay.style.display = "none";
+    profileIsOpen = false;
 }
 
 /* -------------------------------------------- */
@@ -45,7 +49,7 @@ function completProfile() {
             <img src='./Images/hero_portrait.svg' id='profile-image' alt='Héros'>
             <div class="profile-name">` + Player.name + `</div>
             <div class="profile-level">Niveau ` + level + `</div>
-            <div id="pointsLevel"> Points disponibles : 0 </div>
+            <div id="pointsLevel"> Points disponibles : ` + pointsUpdate + ` </div>
         </div>
     `;
 
@@ -94,7 +98,30 @@ function completProfile() {
 
     // Mettre le contenu dans le profil
     profileBody.innerHTML = content;
+
+    /* -------------------------------------------- */
+    /*         Clique Amélioration Stats            */
+    /* -------------------------------------------- */
+
+    // Vie
+
+    const hpUpdateBtn = document.getElementById("update-hp");
+
+    hpUpdateBtn.addEventListener("click", () => updateStats("hp"));
+
+    // Attaque
+
+    const attackUpdateBtn = document.getElementById("update-attack");
+
+    attackUpdateBtn.addEventListener("click", () => updateStats("attack"));
+
+    // Défence
+
+    const defenseUpdateBtn = document.getElementById("update-defense");
+
+    defenseUpdateBtn.addEventListener("click", () => updateStats("defense"));
 }
 
 // Initialisation du profil au début du jeu
 completProfile();
+
