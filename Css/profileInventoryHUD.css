@@ -4,11 +4,22 @@
 
 #HUDBtns {
     position: absolute;
-    left: 10px;
-    bottom: 10px;
+    left: 0;
+    bottom: 0;
+    margin-left: 10px;
+    margin-bottom: 10px;
 }
 
 #HUDBtns button {
+    max-width: 50px;
+    max-height: 50px;
+    background-color: #c8a96e;
+    border: #5c4a1e solid 1px;
+}
+
+#HUDBtns button img {
+    max-width: 100%;
+    aspect-ratio: 1/1;
     background-color: #c8a96e;
     border: #5c4a1e solid 1px;
 }
