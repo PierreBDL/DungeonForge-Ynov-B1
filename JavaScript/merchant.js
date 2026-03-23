@@ -96,11 +96,6 @@ function buyItem (name, price) {
         Player.gold -= price;
     }
 
-    // Alerte avec le message
-    alert(messageMerchant);
+    // Notification avec le message
+    printMessage(messageMerchant);
 }
-
-/* -------------------------------------------- */
-/*               Porte marchand                 */
-/* -------------------------------------------- */
-

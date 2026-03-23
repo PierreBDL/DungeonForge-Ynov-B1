@@ -82,6 +82,7 @@ function moveOnMap(x, y) {
     // Marchand
     if (actualMap[y][x] === CELL_TYPES.MERCHANT) {
         merchant();
+        return; // Eviter de marcher sur le marchand
     }
 
     // Porte du marchand
