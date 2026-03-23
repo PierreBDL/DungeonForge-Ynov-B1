@@ -2,7 +2,7 @@ function fight(ennemy) {
     const fightWindow = document.getElementById("fight");
     fightWindow.style.display = "flex";
 
-    // Bloquer les mouvement
+    // Bloquer les mouvements
     isInFight = true;
 
     /* -------------------------------------------- */
@@ -18,7 +18,7 @@ function fight(ennemy) {
 
 
     /* -------------------------------------------- */
-    /*                   Ennemie                    */
+    /*                    Ennemi                    */
     /* -------------------------------------------- */
 
     // Initialiser le nom
@@ -142,6 +142,15 @@ function attackPhase(attacker, target) {
 
         // Calculer + infliger les dégats
         dammageAmount = (currentEnnemy.attackTypes[attackEnnemyChoose] - Player.stats.defense);
+        
+        // Si trop de défence, on fait 1 dégat
+        if (dammageAmount <= 0) {
+            dammageAmount = 1;
+        }
+
+        // Arrondir les dégats
+        dammageAmount = Math.floor(dammageAmount);
+
         Player.stats.hp -= dammageAmount;
 
         // MAJ vie de la vie du joueur
@@ -152,6 +161,9 @@ function attackPhase(attacker, target) {
         // Calculer + infliger les dégats
         dammageAmount = (Player.stats.attack - currentEnnemy.stats.defense);
         currentEnnemy.stats.hp -= dammageAmount;
+
+        // Arrondir les dégats
+        dammageAmount = Math.floor(dammageAmount);
 
         // MAJ vie de la vie de l'ennemie
         printHealth(currentEnnemy, "ennemy")
