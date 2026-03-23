@@ -12,7 +12,8 @@ let scriptsFiles = [
     "inventory.js",
     "profile.js",
     "playerMovement.js",
-    "saveMenu.js"
+    "saveMenu.js",
+    "merchant.js"
 ];
 
 function loadScript(index) {

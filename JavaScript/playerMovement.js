@@ -79,6 +79,13 @@ function moveOnMap(x, y) {
 
     /* -------------------------------------------- */
 
+    // Marchand
+    if (actualMap[y][x] === CELL_TYPES.MERCHANT) {
+        merchant();
+    }
+
+    /* -------------------------------------------- */
+
     // Changer de carte si on est au niveau d'un escalier
     if (actualMap[y][x] === CELL_TYPES.STAIRS_DOWN) {
         changeLevel(); // On change de carte
