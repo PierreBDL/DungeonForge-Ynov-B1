@@ -184,3 +184,13 @@ main {
     background-size: cover;
     background-repeat: no-repeat;
 }
+
+.merchant-door {
+    width: 99%;
+    height: 99%;
+    background-color: #5a5a60;
+    border: 1px solid #2d2d30;
+    background-image: url('../Images/merchant_door.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+}

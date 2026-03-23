@@ -99,3 +99,8 @@ function buyItem (name, price) {
     // Alerte avec le message
     alert(messageMerchant);
 }
+
+/* -------------------------------------------- */
+/*               Porte marchand                 */
+/* -------------------------------------------- */
+
