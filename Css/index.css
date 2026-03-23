@@ -115,6 +115,16 @@ main {
     border: 1px solid #2d2d30;
 }
 
+.door {
+    width: 99%;
+    height: 99%;
+    background-color: #5a5a60;
+    border: 1px solid #2d2d30;
+    background-image: url('../Images/door.svg');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
 .ennemy {
     width: 99%;
     height: 99%;
