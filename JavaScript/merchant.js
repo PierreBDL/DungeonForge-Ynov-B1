@@ -56,9 +56,46 @@ function addObjectMerchant (product) {
     `<div class="merchantProduct"> 
         <div class="productName">` + product.name + `</div>
         <div class="productPrice">` + product.price + `G</div>
-        <button type="button" value="` + product.name + `"> Acheter </button>
+        <button type="button" onclick="buyItem('` + product.name + "'," + product.price + `)"> Acheter </button>
     </div>
     `;
 
     return productContent;
+}
+
+/* -------------------------------------------- */
+/*              Acheter marchand                */
+/* -------------------------------------------- */
+
+const btnBuy = document.querySelectorAll(".merchantProduct button");
+
+function buyItem (name, price) {
+    let messageMerchant = "";
+
+    // Vérification si le joueur a assez d'or
+    if (Player.gold < Number(price)) {
+        messageMerchant = "Pas assez d'or";
+    } else if (Player.inventory.length >= 10) { // Regarder si on a assez d'espace
+        messageMerchant = "Pas assez d'espace dans l'inventaire";
+    } else {
+        // Donner l'article en fonction de la valeur (nom du produit)
+        switch(name) {
+            case "Potion de vie":
+                Player.inventory.push("potion_vie");
+                break;
+            case "Epée":
+                Player.equipment.weapon = "epee";
+                Player.stats.attack += 10; // Augmenter l'attaque
+                break;
+        }
+
+        // Objet acheté
+        messageMerchant = "Acheté : " + name;
+
+        // On déduit le prix
+        Player.gold -= price;
+    }
+
+    // Alerte avec le message
+    alert(messageMerchant);
 }
