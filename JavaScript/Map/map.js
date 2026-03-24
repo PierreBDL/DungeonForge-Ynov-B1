@@ -15,6 +15,19 @@ const CELL_TYPES = {
 /*                   Cartes                     */
 /* -------------------------------------------- */
 
+maps = [
+    generateBSPMap(25, 18, 3), // Générer la carte
+    generateBSPMap(25, 18, 3), // Générer la carte
+    generateBSPMap(25, 18, 3), // Générer la carte
+    generateBSPMap(25, 18, 3), // Générer la carte
+    generateBSPMap(25, 18, 3), // Générer la carte
+    generateBSPMap(25, 18, 3), // Générer la carte
+    generateBSPMap(25, 18, 3), // Générer la carte
+    generateBSPMap(25, 18, 3), // Générer la carte
+    generateBSPMap(25, 18, 3), // Générer la carte
+    generateBSPMap(25, 18, 3), // Générer la carte
+]
+
 let merchantMap = [
     // Marchand
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -34,7 +47,7 @@ let merchantMap = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 ]
 
-actualMap = generateBSPMap(25, 18, 3); // Générer la carte
+actualMap = maps[0]; // Carte actuelle
 
 /* -------------------------------------------- */
 /*             Chercher le joueur               */

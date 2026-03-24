@@ -8,14 +8,11 @@ function changeLevel () {
 
     // Si on était pas danns un niveau spécial -> on peut incrémenter
     if (inSpecialLevel === false) {
-        // Changement de carte
         currentLevel++;
-        if (currentLevel >= maps.length) {
-            currentLevel = 0; // Retourner au début
-        }
+        actualMap = generateBSPMap(25, 18, 3); // Générer nouvelle carte
+    } else {
+        actualMap = maps[currentLevel];
     }
-    
-    actualMap = maps[currentLevel];
 
     originTile = CELL_TYPES.FLOOR; // Remettre la tuile à sol
     initPlayer(); // Repositionner joueur

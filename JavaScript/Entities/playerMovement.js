@@ -39,6 +39,18 @@ function moveOnMap(x, y) {
 
     /* -------------------------------------------- */
 
+    // Changer de carte si on est au niveau d'un escalier
+    if (actualMap[y][x] === CELL_TYPES.STAIRS_DOWN) {
+        if (inSpecialLevel) {
+            returnFromSpecialLevel(); // On change de carte pour revenir à celle avant la spéciale
+        } else {
+            changeLevel(); // On change de carte normale
+        }
+        return;
+    }
+
+    /* -------------------------------------------- */
+
     // Ne pas bouger si on a un message
     if (document.getElementById("message").style.display === "flex") {
         return;
@@ -95,18 +107,6 @@ function moveOnMap(x, y) {
     // Porte du marchand
     if (actualMap[y][x] === CELL_TYPES.MERCHANT_DOOR) {
         changeSpecialLevel(merchantMap);
-        return;
-    }
-
-    /* -------------------------------------------- */
-
-    // Changer de carte si on est au niveau d'un escalier
-    if (actualMap[y][x] === CELL_TYPES.STAIRS_DOWN) {
-        if (inSpecialLevel) {
-            returnFromSpecialLevel(); // On change de carte pour revenir à celle avant la spéciale
-        } else {
-            changeLevel(); // On change de carte normale
-        }
         return;
     }
 
