@@ -504,7 +504,7 @@ main {
     justify-content: center;
     align-items: center;
     background-color: rgba(0, 0, 0, 0.75);
-    z-index: 9999;
+    z-index: 5000;
 }
 
 .inventory-close {
@@ -834,10 +834,6 @@ main {
     font-size: 12px;
     transform: translateY(-40%);
 }
-
-/* -------------------------------------------- */
-/*                  Paramètres                  */
-/* -------------------------------------------- */
 
 /* -------------------------------------------- */
 /*                 Paramètres                   */
