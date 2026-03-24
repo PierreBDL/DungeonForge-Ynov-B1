@@ -38,10 +38,14 @@ class BSPNode {
         const rx = this.x + Math.floor(1 + Math.random() * (this.w - rw - 1));
         const ry = this.y + Math.floor(1 + Math.random() * (this.h - rh - 1));
         this.room = { x: rx, y: ry, w: rw, h: rh };
-        for (let y = ry; y < ry + rh; y++)
-            for (let x = rx; x < rx + rw; x++)
-                if (y > 0 && y < H - 1 && x > 0 && x < W - 1)
+
+        for (let y = ry; y < ry + rh; y++) {
+            for (let x = rx; x < rx + rw; x++) {
+                if (y > 0 && y < H - 1 && x > 0 && x < W - 1) {
                     grid[y][x] = CELL_TYPES.FLOOR;
+                }
+            }
+        }
     }
 
     getCenter() {
@@ -53,25 +57,118 @@ class BSPNode {
         if (!this.left || !this.right) return;
         this.left.connectChildren(grid, W, H);
         this.right.connectChildren(grid, W, H);
+
         const a = this.left.getCenter();
         const b = this.right.getCenter();
         digCorridor(a, b, grid, W, H);
     }
 }
 
+/* -------------------------------------------- */
+/*               Couloir                        */
+/* -------------------------------------------- */
+
 function digCorridor(a, b, grid, W, H) {
     let cx = a.x, cy = a.y;
+
     while (cx !== b.x) {
-        if (cy > 0 && cy < H - 1 && cx > 0 && cx < W - 1)
-            if (grid[cy][cx] === CELL_TYPES.WALL) grid[cy][cx] = CELL_TYPES.FLOOR;
+        if (grid[cy][cx] === CELL_TYPES.WALL)
+            grid[cy][cx] = CELL_TYPES.FLOOR;
         cx += cx < b.x ? 1 : -1;
     }
+
     while (cy !== b.y) {
-        if (cy > 0 && cy < H - 1 && cx > 0 && cx < W - 1)
-            if (grid[cy][cx] === CELL_TYPES.WALL) grid[cy][cx] = CELL_TYPES.FLOOR;
+        if (grid[cy][cx] === CELL_TYPES.WALL)
+            grid[cy][cx] = CELL_TYPES.FLOOR;
         cy += cy < b.y ? 1 : -1;
     }
 }
+
+/* -------------------------------------------- */
+/*          CONNECTIVITÉ GARANTIE               */
+/* -------------------------------------------- */
+
+function floodFill(start, grid, W, H) {
+    const visited = Array.from({ length: H }, () => Array(W).fill(false));
+    const queue = [start];
+    visited[start.y][start.x] = true;
+
+    while (queue.length > 0) {
+        const { x, y } = queue.shift();
+
+        const dirs = [
+            { x: 1, y: 0 }, { x: -1, y: 0 },
+            { x: 0, y: 1 }, { x: 0, y: -1 }
+        ];
+
+        for (const d of dirs) {
+            const nx = x + d.x;
+            const ny = y + d.y;
+
+            if (
+                nx >= 0 && nx < W &&
+                ny >= 0 && ny < H &&
+                !visited[ny][nx] &&
+                grid[ny][nx] !== CELL_TYPES.WALL
+            ) {
+                visited[ny][nx] = true;
+                queue.push({ x: nx, y: ny });
+            }
+        }
+    }
+
+    return visited;
+}
+
+function ensureConnectivity(grid, W, H) {
+    let playerPos = null;
+
+    for (let y = 0; y < H; y++) {
+        for (let x = 0; x < W; x++) {
+            if (grid[y][x] === CELL_TYPES.PLAYER) {
+                playerPos = { x, y };
+            }
+        }
+    }
+
+    if (!playerPos) return;
+
+    let visited = floodFill(playerPos, grid, W, H);
+
+    for (let y = 1; y < H - 1; y++) {
+        for (let x = 1; x < W - 1; x++) {
+
+            if (grid[y][x] !== CELL_TYPES.WALL && !visited[y][x]) {
+
+                let found = false;
+
+                for (let r = 1; r < 10 && !found; r++) {
+                    for (let dy = -r; dy <= r && !found; dy++) {
+                        for (let dx = -r; dx <= r && !found; dx++) {
+
+                            let nx = x + dx;
+                            let ny = y + dy;
+
+                            if (
+                                nx >= 0 && nx < W &&
+                                ny >= 0 && ny < H &&
+                                visited[ny][nx]
+                            ) {
+                                digCorridor({ x, y }, { x: nx, y: ny }, grid, W, H);
+                                visited = floodFill(playerPos, grid, W, H);
+                                found = true;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+/* -------------------------------------------- */
+/*               Génération map                 */
+/* -------------------------------------------- */
 
 function generateBSPMap(W = 25, H = 18, depth = 3) {
     const grid = Array.from({ length: H }, () => Array(W).fill(CELL_TYPES.WALL));
@@ -84,56 +181,51 @@ function generateBSPMap(W = 25, H = 18, depth = 3) {
     leaves.forEach(l => l.createRoom(grid, W, H));
     root.connectChildren(grid, W, H);
 
-    // Placement des entités
     const rooms = leaves.filter(l => l.room).map(l => l.room);
     const shuffled = rooms.sort(() => Math.random() - 0.5);
 
-    // Trouver une case sol sûre dans une salle donnée
     function getSafeSpot(room) {
         const spots = [];
         for (let y = room.y; y < room.y + room.h; y++)
             for (let x = room.x; x < room.x + room.w; x++)
                 if (grid[y][x] === CELL_TYPES.FLOOR) spots.push({ x, y });
+
         if (spots.length === 0) return null;
         return spots[Math.floor(Math.random() * spots.length)];
     }
 
-    // Joueur dans la première salle (1 seul, toujours sur sol)
     const first = shuffled[0];
     const playerSpot = getSafeSpot(first);
     if (playerSpot) grid[playerSpot.y][playerSpot.x] = CELL_TYPES.PLAYER;
 
-    // Escalier dans la dernière salle (1 seul, toujours sur sol)
     const last = shuffled[shuffled.length - 1];
     const stairsSpot = getSafeSpot(last);
     if (stairsSpot) grid[stairsSpot.y][stairsSpot.x] = CELL_TYPES.STAIRS_DOWN;
 
-    // Salles intermédiaires — ennemis, coffres et portes en quantité variable
     shuffled.slice(1, -1).forEach((room) => {
-        // Récupérer toutes les cases sol disponibles dans la salle
         const positions = [];
+
         for (let y = room.y; y < room.y + room.h; y++)
             for (let x = room.x; x < room.x + room.w; x++)
                 if (grid[y][x] === CELL_TYPES.FLOOR) positions.push({ x, y });
 
-        // Mélanger les positions disponibles
         positions.sort(() => Math.random() - 0.5);
         let idx = 0;
 
-        // 1 à 3 ennemis par salle
         const nbEnnemies = 1 + Math.floor(Math.random() * 3);
         for (let e = 0; e < nbEnnemies && idx < positions.length; e++, idx++)
             grid[positions[idx].y][positions[idx].x] = CELL_TYPES.ENNEMY;
 
-        // 0 à 2 coffres par salle
         const nbChests = Math.floor(Math.random() * 3);
         for (let c = 0; c < nbChests && idx < positions.length; c++, idx++)
             grid[positions[idx].y][positions[idx].x] = CELL_TYPES.CHEST;
 
-        // 0 à 1 porte par salle (40% de chance)
         if (Math.random() < 0.4 && idx < positions.length)
             grid[positions[idx].y][positions[idx].x] = CELL_TYPES.DOOR;
     });
+
+    // 🔥 LA CORRECTION IMPORTANTE
+    ensureConnectivity(grid, W, H);
 
     return grid;
 }
@@ -160,7 +252,6 @@ function initPlayer() {
     }
 }
 
-
 /* -------------------------------------------- */
 /*            Chercher les ennemis              */
 /* -------------------------------------------- */
@@ -176,7 +267,12 @@ function initEnnemies() {
                 ennemies[key] = {
                     x: j, y: i,
                     name: "Ennemi",
-                    stats: { hp: Ennemy.stats.hp, maxHp: Ennemy.stats.maxHp, attack: Ennemy.stats.attack, defense: Ennemy.stats.defense },
+                    stats: {
+                        hp: Ennemy.stats.hp,
+                        maxHp: Ennemy.stats.maxHp,
+                        attack: Ennemy.stats.attack,
+                        defense: Ennemy.stats.defense
+                    },
                     attackTypes: Ennemy.attackTypes,
                 };
             }
@@ -198,6 +294,7 @@ function loadMap() {
         for (let j = 0; j < actualMap[i].length; j++) {
             let cellElement = document.createElement('div');
             cellElement.classList.add('cell');
+
             switch (actualMap[i][j]) {
                 case CELL_TYPES.WALL:        cellElement.classList.add('wall'); break;
                 case CELL_TYPES.FLOOR:       cellElement.classList.add('floor'); break;
@@ -208,6 +305,7 @@ function loadMap() {
                 case CELL_TYPES.ENNEMY:      cellElement.classList.add('ennemy'); break;
                 case CELL_TYPES.CHEST_OPEN:  cellElement.classList.add('chest-open'); break;
             }
+
             carte.appendChild(cellElement);
         }
     }

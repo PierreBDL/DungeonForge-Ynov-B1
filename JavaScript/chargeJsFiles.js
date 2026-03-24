@@ -19,8 +19,17 @@ function loadScript(index) {
         return;
     }
 
+    const path = './JavaScript/' + scriptsFiles[index];
+
+    // Empêche le double chargement
+    if (document.querySelector(`script[src="${path}"]`)) {
+        console.warn("Script déjà chargé :", path);
+        loadScript(index + 1);
+        return;
+    }
+
     const script = document.createElement('script');
-    script.src = './JavaScript/' + scriptsFiles[index];
+    script.src = path;
     script.onload = () => loadScript(index + 1);
     document.body.appendChild(script);
 }
