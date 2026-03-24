@@ -60,6 +60,13 @@ function moveOnMap(x, y) {
 
     /* -------------------------------------------- */
 
+    // Si les paramètres sont ouverts -> ne pas bouger
+    if (isSettingsOpen === true) {
+        return;
+    }
+
+    /* -------------------------------------------- */
+
     // Afficher une notif si c'est un ennemi via l'orverlay message
     if (actualMap[y][x] === CELL_TYPES.ENNEMY) {
         // printMessage("Vous êtes tombé sur un ennemi");
