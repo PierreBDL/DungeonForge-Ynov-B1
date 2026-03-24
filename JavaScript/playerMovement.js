@@ -7,11 +7,11 @@ document.addEventListener('keyup', (e) => {
     let moveX = Player.x;
     let moveY = Player.y;
 
-    if (e.key === "w" || e.key === "ArrowUp") {
+    if (e.key === "z" || e.key === "ArrowUp") {
         moveY -= 1;
     } else if (e.key === "s" || e.key === "ArrowDown") {
         moveY += 1;
-    } else if (e.key === "a" || e.key === "ArrowLeft") {
+    } else if (e.key === "q" || e.key === "ArrowLeft") {
         moveX -= 1;
     } else if (e.key === "d" || e.key === "ArrowRight") {
         moveX += 1;

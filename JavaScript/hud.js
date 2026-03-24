@@ -17,4 +17,4 @@ function UpdateHUD() {
 /*              Initiallisation                 */
 /* -------------------------------------------- */
 
-UpdateHUD ();
+UpdateHUD();
