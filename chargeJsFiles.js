@@ -2,6 +2,7 @@
 
 let scriptsFiles = [
     "mobs.js",
+    "mapProcedural/generateMap.js",
     "map.js",
     "message.js",
     "giveItems.js",
