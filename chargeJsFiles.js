@@ -1,22 +1,22 @@
 // Permet de charger les scripts JS sans avoir à le faire manuellement dans le HTML
 
 let scriptsFiles = [
-    "mobs.js",
-    "mapProcedural/generateMap.js",
-    "map.js",
-    "message.js",
+    "Entities/mobs.js",
+    "Map/generateMap.js",
+    "Map/map.js",
+    "Ui/message.js",
     "giveItems.js",
     "fight.js",
-    "changeLevel.js",
-    "hud.js",
-    "xp.js",
-    "inventory.js",
-    "profile.js",
-    "playerMovement.js",
-    "saveMenu.js",
-    "merchant.js",
+    "Map/changeLevel.js",
+    "Ui/hud.js",
+    "Ui/xp.js",
+    "Ui/inventory.js",
+    "Ui/profile.js",
+    "Entities/playerMovement.js",
+    "Ui/saveMenu.js",
+    "Entities/merchant.js",
     "audio.js",
-    "settings.js",
+    "Ui/settings.js",
     "useItems.js"
 ];
 
