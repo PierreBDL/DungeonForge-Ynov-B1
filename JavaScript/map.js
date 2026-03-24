@@ -73,8 +73,7 @@ function digCorridor(a, b, grid, W, H) {
     }
 }
 
-function generateBSPMap(W = 20, H = 15, depth = 3) {
-    // Grille remplie de murs
+function generateBSPMap(W = 25, H = 18, depth = 3) {
     const grid = Array.from({ length: H }, () => Array(W).fill(CELL_TYPES.WALL));
 
     const root = new BSPNode(1, 1, W - 2, H - 2);
@@ -89,30 +88,66 @@ function generateBSPMap(W = 20, H = 15, depth = 3) {
     const rooms = leaves.filter(l => l.room).map(l => l.room);
     const shuffled = rooms.sort(() => Math.random() - 0.5);
 
-    // Joueur dans la première salle
+    // Trouver une case sol sûre dans une salle donnée
+    function getSafeSpot(room) {
+        const spots = [];
+        for (let y = room.y; y < room.y + room.h; y++)
+            for (let x = room.x; x < room.x + room.w; x++)
+                if (grid[y][x] === CELL_TYPES.FLOOR) spots.push({ x, y });
+        if (spots.length === 0) return null;
+        return spots[Math.floor(Math.random() * spots.length)];
+    }
+
+    // Joueur dans la première salle (1 seul, toujours sur sol)
     const first = shuffled[0];
-    grid[Math.floor(first.y + first.h / 2)][Math.floor(first.x + first.w / 2)] = CELL_TYPES.PLAYER;
+    const playerSpot = getSafeSpot(first);
+    if (playerSpot) grid[playerSpot.y][playerSpot.x] = CELL_TYPES.PLAYER;
 
-    // Escalier dans la dernière salle
+    // Escalier dans la dernière salle (1 seul, toujours sur sol)
     const last = shuffled[shuffled.length - 1];
-    grid[Math.floor(last.y + last.h / 2)][Math.floor(last.x + last.w / 2)] = CELL_TYPES.STAIRS_DOWN;
+    const stairsSpot = getSafeSpot(last);
+    if (stairsSpot) grid[stairsSpot.y][stairsSpot.x] = CELL_TYPES.STAIRS_DOWN;
 
-    // Coffres et ennemis dans les salles intermédiaires
-    shuffled.slice(1, -1).forEach((room, i) => {
-        const cx = Math.floor(room.x + room.w / 2);
-        const cy = Math.floor(room.y + room.h / 2);
-        if (i % 3 === 0) grid[cy][cx] = CELL_TYPES.CHEST;
-        else if (i % 2 === 0) grid[cy][cx] = CELL_TYPES.ENNEMY;
-        else grid[cy][cx] = CELL_TYPES.ENNEMY;
+    // Salles intermédiaires — ennemis, coffres et portes en quantité variable
+    shuffled.slice(1, -1).forEach((room) => {
+        // Récupérer toutes les cases sol disponibles dans la salle
+        const positions = [];
+        for (let y = room.y; y < room.y + room.h; y++)
+            for (let x = room.x; x < room.x + room.w; x++)
+                if (grid[y][x] === CELL_TYPES.FLOOR) positions.push({ x, y });
+
+        // Mélanger les positions disponibles
+        positions.sort(() => Math.random() - 0.5);
+        let idx = 0;
+
+        // 1 à 3 ennemis par salle
+        const nbEnnemies = 1 + Math.floor(Math.random() * 3);
+        for (let e = 0; e < nbEnnemies && idx < positions.length; e++, idx++)
+            grid[positions[idx].y][positions[idx].x] = CELL_TYPES.ENNEMY;
+
+        // 0 à 2 coffres par salle
+        const nbChests = Math.floor(Math.random() * 3);
+        for (let c = 0; c < nbChests && idx < positions.length; c++, idx++)
+            grid[positions[idx].y][positions[idx].x] = CELL_TYPES.CHEST;
+
+        // 0 à 1 porte par salle (40% de chance)
+        if (Math.random() < 0.4 && idx < positions.length)
+            grid[positions[idx].y][positions[idx].x] = CELL_TYPES.DOOR;
     });
 
     return grid;
 }
 
-// Carte actuelle (générée par BSP)
+/* -------------------------------------------- */
+/*                 Carte actuelle               */
+/* -------------------------------------------- */
+
 let actualMap = generateBSPMap(25, 18, 3);
 
-// Chercher le joueur
+/* -------------------------------------------- */
+/*             Chercher le joueur               */
+/* -------------------------------------------- */
+
 function initPlayer() {
     for (let i = 0; i < actualMap.length; i++) {
         for (let j = 0; j < actualMap[i].length; j++) {
@@ -125,7 +160,10 @@ function initPlayer() {
     }
 }
 
-// Chercher les ennemis
+/* -------------------------------------------- */
+/*            Chercher les ennemis              */
+/* -------------------------------------------- */
+
 let ennemies = {};
 
 function initEnnemies() {
@@ -145,7 +183,10 @@ function initEnnemies() {
     }
 }
 
-// Afficher la carte
+/* -------------------------------------------- */
+/*              Afficher la carte               */
+/* -------------------------------------------- */
+
 function loadMap() {
     const carte = document.getElementById('map');
     carte.innerHTML = "";
@@ -157,21 +198,24 @@ function loadMap() {
             let cellElement = document.createElement('div');
             cellElement.classList.add('cell');
             switch (actualMap[i][j]) {
-                case CELL_TYPES.WALL:       cellElement.classList.add('wall'); break;
-                case CELL_TYPES.FLOOR:      cellElement.classList.add('floor'); break;
-                case CELL_TYPES.DOOR:       cellElement.classList.add('door'); break;
-                case CELL_TYPES.STAIRS_DOWN:cellElement.classList.add('stairs-down'); break;
-                case CELL_TYPES.CHEST:      cellElement.classList.add('chest'); break;
-                case CELL_TYPES.PLAYER:     cellElement.classList.add('player'); break;
-                case CELL_TYPES.ENNEMY:     cellElement.classList.add('ennemy'); break;
-                case CELL_TYPES.CHEST_OPEN: cellElement.classList.add('chest-open'); break;
+                case CELL_TYPES.WALL:        cellElement.classList.add('wall'); break;
+                case CELL_TYPES.FLOOR:       cellElement.classList.add('floor'); break;
+                case CELL_TYPES.DOOR:        cellElement.classList.add('door'); break;
+                case CELL_TYPES.STAIRS_DOWN: cellElement.classList.add('stairs-down'); break;
+                case CELL_TYPES.CHEST:       cellElement.classList.add('chest'); break;
+                case CELL_TYPES.PLAYER:      cellElement.classList.add('player'); break;
+                case CELL_TYPES.ENNEMY:      cellElement.classList.add('ennemy'); break;
+                case CELL_TYPES.CHEST_OPEN:  cellElement.classList.add('chest-open'); break;
             }
             carte.appendChild(cellElement);
         }
     }
 }
 
-// Initialisation
+/* -------------------------------------------- */
+/*               Initialisation                 */
+/* -------------------------------------------- */
+
 initPlayer();
 initEnnemies();
 loadMap();

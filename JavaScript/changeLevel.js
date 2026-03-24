@@ -1,17 +1,10 @@
 let currentLevel = 0;
 
-function changeLevel () {
-
-    // Changement de carte
+function changeLevel() {
     currentLevel++;
-    if (currentLevel >= maps.length) {
-        currentLevel = 0; // Retourner au début
-    }
-    
-    actualMap = maps[currentLevel];
-
-    originTile = CELL_TYPES.FLOOR; // Remettre la tuile à sol
-    initPlayer(); // Repositionner joueur
-    initEnnemies(); // Recharger ennemis
-    loadMap(); // Recharger la carte
+    actualMap = generateBSPMap(25, 18, 3); // nouvelle map aléatoire à chaque niveau
+    originTile = CELL_TYPES.FLOOR;
+    initPlayer();
+    initEnnemies();
+    loadMap();
 }
