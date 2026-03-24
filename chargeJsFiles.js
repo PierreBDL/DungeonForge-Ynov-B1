@@ -15,7 +15,8 @@ let scriptsFiles = [
     "saveMenu.js",
     "merchant.js",
     "audio.js",
-    "settings.js"
+    "settings.js",
+    "useItems.js"
 ];
 
 function loadScript(index) {
