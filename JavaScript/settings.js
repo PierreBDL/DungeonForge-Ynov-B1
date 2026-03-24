@@ -26,7 +26,12 @@ function closeSettings () {
 
 document.addEventListener('keyup', (e) => {
     if (e.key === 'Escape' && isSettingsOpen === false) {
+        // On ouvre les paramètres
         openSettings();
+    } else if (inventoryIsOpen === true || profileIsOpen === true || merchantIsOpen === true) {
+            closeInventory();
+            closeProfile();
+            closeMerchant();
     } else if (e.key === 'Escape' && isSettingsOpen === true) {
         closeSettings();
     }

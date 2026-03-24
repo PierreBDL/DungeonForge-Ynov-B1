@@ -30,6 +30,12 @@ function closeProfile() {
     profileIsOpen = false;
 }
 
+document.addEventListener('keyup', (e) => {
+    if (e.key === 'Escape' && profileIsOpen === true) {
+        closeProfile();
+    }
+});
+
 /* -------------------------------------------- */
 /*               Remplir Profil                 */
 /* -------------------------------------------- */

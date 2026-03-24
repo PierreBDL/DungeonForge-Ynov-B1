@@ -29,6 +29,12 @@ function closeInventory() {
     inventoryIsOpen = false;
 }
 
+document.addEventListener('keyup', (e) => {
+    if (e.key === 'Escape' && inventoryIsOpen === true) {
+        closeInventory();
+    }
+});
+
 /* -------------------------------------------- */
 /*             Contenu inventaire               */
 /* -------------------------------------------- */
