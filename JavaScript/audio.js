@@ -23,4 +23,31 @@ function readOst () {
 window.addEventListener('click', readOst);
 window.addEventListener('keydown', readOst);
 
+/* -------------------------------------------- */
+/*  Pause ou Reprendre la musique  (paramètres) */
+/* -------------------------------------------- */
+
+function settingsAudio (isMute) {
+    // Si on était en muet -> reprendre
+    if (isMute === true) {
+        audio.pause();
+        audio.currentTime = 0; // On redémarre la musique
+    } else if (isMute === false) {
+        // Sinon on remet la musique
+        audio.play();
+    }
+}
+
+/* -------------------------------------------- */
+/*      Muet ou non la musique  (paramètres)    */
+/* -------------------------------------------- */
+
+function volumeAudio (audioLevel) {
+    audio.volume = (audioLevel / 100);
+
+    // On enlève le muet
+    audio.muted = false; 
+}
+
+
 // <audio src="./Audio/Tzar Burden of The Crown Soundtrack (CD-Rip) - Track 1.mp3" controls></audio>

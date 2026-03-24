@@ -6,9 +6,6 @@
     <title>DungeonForge</title>
     <link rel="stylesheet" href="./Css/headerFooter.css">
     <link rel="stylesheet" href="./Css/index.css">
-    <link rel="stylesheet" href="./Css/fight.css">
-    <link rel="stylesheet" href="./Css/profileInventoryHUD.css">
-    <link rel="stylesheet" href="./Css/merchant.css">
 </head>
 <body>
     <header>
@@ -30,6 +27,30 @@
                 <div class="message-header">Message</div>
                 <p class="message-body">Txt</p>
                 <div class="message-footer">DungeonForge</div>
+            </div>
+        </span>
+
+        <!-- Paramètres -->
+
+        <span id="settings">
+            <div class="settings-card">
+                <div class="settings-close"><button id="closeSettingsBtn"><img src="./Images/crux.png" alt="Fermer"></button></div>
+                <div class="settings-header">Paramètres</div>
+                <div class="settings-body">
+                    <div class="settings-row">
+                        <div class="settings-label">Volume de la musique</div>
+                        <div class="settings-control">
+                            <input type="range" id="settings-volume" min="0" max="100" value="50">
+                        </div>
+                    </div>
+                    <div class="settings-row">
+                        <div class="settings-label">Muet</div>
+                        <div class="settings-control">
+                            <input type="checkbox" id="settings-mute">
+                        </div>
+                    </div>
+                </div>
+                <div class="settings-footer">DungeonForge</div>
             </div>
         </span>
 
