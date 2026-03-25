@@ -53,6 +53,8 @@ function inventory () {
             inventoryDom.innerHTML += "<div class='inventoryCase'></div>";
         }
     }
+
+    useItems();
 }
 
 // Initialisation de l'inventaire au début du jeu
