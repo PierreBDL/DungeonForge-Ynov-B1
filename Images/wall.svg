@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" width="50" height="50">
+  <!-- Fond pierre sombre -->
+  <rect width="50" height="50" fill="#2a2a30"/>
+
+  <!-- Rangée 1 de briques -->
+  <rect x="0" y="0" width="32" height="14" fill="#3a3a42" stroke="#1a1a20" stroke-width="1"/>
+  <rect x="33" y="0" width="17" height="14" fill="#383840" stroke="#1a1a20" stroke-width="1"/>
+
+  <!-- Rangée 2 (décalée) -->
+  <rect x="0" y="15" width="16" height="14" fill="#353540" stroke="#1a1a20" stroke-width="1"/>
+  <rect x="17" y="15" width="33" height="14" fill="#3a3a44" stroke="#1a1a20" stroke-width="1"/>
+
+  <!-- Rangée 3 -->
+  <rect x="0" y="30" width="28" height="14" fill="#383842" stroke="#1a1a20" stroke-width="1"/>
+  <rect x="29" y="30" width="21" height="14" fill="#363640" stroke="#1a1a20" stroke-width="1"/>
+
+  <!-- Rangée 4 (décalée) -->
+  <rect x="0" y="45" width="12" height="5" fill="#3a3a42" stroke="#1a1a20" stroke-width="1"/>
+  <rect x="13" y="45" width="25" height="5" fill="#383840" stroke="#1a1a20" stroke-width="1"/>
+  <rect x="39" y="45" width="11" height="5" fill="#363640" stroke="#1a1a20" stroke-width="1"/>
+
+  <!-- Fissures et texture rangée 1 -->
+  <line x1="8" y1="2" x2="10" y2="8" stroke="#1a1a20" stroke-width="0.5" opacity="0.6"/>
+  <line x1="20" y1="3" x2="19" y2="10" stroke="#1a1a20" stroke-width="0.5" opacity="0.4"/>
+  <line x1="40" y1="2" x2="41" y2="9" stroke="#1a1a20" stroke-width="0.5" opacity="0.5"/>
+
+  <!-- Fissures rangée 2 -->
+  <line x1="5" y1="17" x2="7" y2="24" stroke="#1a1a20" stroke-width="0.5" opacity="0.5"/>
+  <line x1="28" y1="16" x2="27" y2="22" stroke="#1a1a20" stroke-width="0.5" opacity="0.4"/>
+  <line x1="42" y1="17" x2="44" y2="23" stroke="#1a1a20" stroke-width="0.5" opacity="0.6"/>
+
+  <!-- Fissures rangée 3 -->
+  <line x1="12" y1="32" x2="11" y2="40" stroke="#1a1a20" stroke-width="0.5" opacity="0.5"/>
+  <line x1="35" y1="31" x2="36" y2="38" stroke="#1a1a20" stroke-width="0.5" opacity="0.4"/>
+
+  <!-- Reflets légers sur les briques (bord haut plus clair) -->
+  <line x1="1" y1="1" x2="31" y2="1" stroke="#4a4a54" stroke-width="0.8" opacity="0.5"/>
+  <line x1="1" y1="16" x2="15" y2="16" stroke="#4a4a54" stroke-width="0.8" opacity="0.4"/>
+  <line x1="18" y1="16" x2="49" y2="16" stroke="#4a4a54" stroke-width="0.8" opacity="0.4"/>
+  <line x1="1" y1="31" x2="27" y2="31" stroke="#4a4a54" stroke-width="0.8" opacity="0.4"/>
+  <line x1="30" y1="31" x2="49" y2="31" stroke="#4a4a54" stroke-width="0.8" opacity="0.4"/>
+
+  <!-- Ombre en bas de chaque brique -->
+  <line x1="0" y1="14" x2="32" y2="14" stroke="#111118" stroke-width="0.8" opacity="0.7"/>
+  <line x1="33" y1="14" x2="50" y2="14" stroke="#111118" stroke-width="0.8" opacity="0.7"/>
+  <line x1="0" y1="29" x2="16" y2="29" stroke="#111118" stroke-width="0.8" opacity="0.7"/>
+  <line x1="17" y1="29" x2="50" y2="29" stroke="#111118" stroke-width="0.8" opacity="0.7"/>
+  <line x1="0" y1="44" x2="28" y2="44" stroke="#111118" stroke-width="0.8" opacity="0.7"/>
+  <line x1="29" y1="44" x2="50" y2="44" stroke="#111118" stroke-width="0.8" opacity="0.7"/>
+</svg>

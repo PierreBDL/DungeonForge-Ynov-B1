@@ -92,10 +92,12 @@ main {
 
 #map {
     display: grid;
-    border: 4px solid #333;
     width: fit-content;
     margin: 20px auto;
     background-color: #000;
+    max-width: 100vw; 
+    overflow: auto; 
+    -webkit-overflow-scrolling: touch; 
 }
 
 .cell {
@@ -105,9 +107,8 @@ main {
 }
 
 .wall {
-    background-image: url('../Images/wall.png');
+    background-image: url('../Images/wall.svg');
     background-size: cover;
-    box-shadow: inset 0 0 10px #000;
 }
 
 .floor {
@@ -936,4 +937,65 @@ main {
     text-transform: uppercase;
     border-top: 1px solid #2e2310;
     padding-top: 1rem;
+}
+
+
+
+
+
+
+/* -------------------------------------------- */
+/*                  RESPONSIVE                  */
+/* -------------------------------------------- */
+
+@media screen and (max-width: 768px) {
+    .cell {
+        width: 30px;
+        height: 30px;
+    }
+
+    .wall, .floor, .ennemy, .player, .stairs-down, .chest, .door {
+        width: 100%;
+        height: 100%;
+    }
+
+    .message-card, .merchant-card, .inventory-card, .profile-card, .settings-card {
+        max-width: 90%;
+        padding: 1.5rem 1rem;
+    }
+
+    #fight-window {
+        max-width: 95%;
+        padding: 1.5rem 1rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .inventory-card, .profile-card, .message-card, .settings-card {
+        width: 95%;
+        max-width: none;
+        border-width: 2px;
+    }
+
+    #fight-actions {
+        flex-direction: column;
+    }
+    
+    #fight-actions button {
+        width: 100%;
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-height: 500px) and (orientation: landscape) {
+    .message-card, .inventory-card, .profile-card {
+        padding: 1rem;
+        overflow-y: auto;
+        max-height: 90vh;
+    }
+
+    .message-header, .inventory-header {
+        margin-bottom: 0.5rem;
+        padding-bottom: 0.5rem;
+    }
 }
