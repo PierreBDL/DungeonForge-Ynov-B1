@@ -1,24 +1,60 @@
 /* -------------------------------------------- */
+/*       Regarder s'il y a une sauvegarde       */
+/* -------------------------------------------- */
+
+
+function areThereASave () {
+    const exists = localStorage.getItem("saveExists");
+
+    if (exists === "true") {
+        isSaveExist = true;
+    } else {
+        isSaveExist = false;
+    }
+}
+
+
+
+/* -------------------------------------------- */
 /*            Système de sauvegarde             */
 /* -------------------------------------------- */
 
-function save () {
-    localStorage.setItem("hp", Player.stats.hp); // Vie
-    localStorage.setItem("maxHp", Player.stats.maxHp); // Or
-    localStorage.setItem("attack", Player.stats.attack); // Attaque
-    localStorage.setItem("defense", Player.stats.defense); // Défence
-    localStorage.setItem("gold", Player.gold); // Or
-    localStorage.setItem("xp", Player.stats.xp); // Expérience
-    localStorage.setItem("level", level); // Niveau
+let isSaveExist = false;
 
-    // Carte
-    let matriceMap = JSON.stringify(maps[currentLevel])
-    localStorage.setItem("mapActual", currentLevel);
-    localStorage.setItem("mapData", matriceMap);
+function save() {
 
-    // Joueur
+    /* Stats Joueur */
+    localStorage.setItem("hp", Player.stats.hp);
+    localStorage.setItem("maxHp", Player.stats.maxHp);
+    localStorage.setItem("attack", Player.stats.attack);
+    localStorage.setItem("defense", Player.stats.defense);
+    localStorage.setItem("speed", Player.stats.speed);
+    localStorage.setItem("xp", Player.stats.xp);
+    localStorage.setItem("xpToNext", Player.stats.xpToNext);
+
+    /* Niveaux et or */
+    localStorage.setItem("gold", Player.gold);
+    localStorage.setItem("level", level);
+    localStorage.setItem("pointsUpdate", pointsUpdate);
+
+    /* Inventaire */
+    localStorage.setItem("inventory", JSON.stringify(Player.inventory));
+
+    /* Equipement */
+    localStorage.setItem("equipment", JSON.stringify(Player.equipment));
+
+    /* Position du joueur */
     localStorage.setItem("playerX", Player.x);
     localStorage.setItem("playerY", Player.y);
+
+    /* Carte */
+    localStorage.setItem("mapActual", currentLevel);
+    localStorage.setItem("mapData", JSON.stringify(actualMap));
+    localStorage.setItem("ennemies", JSON.stringify(ennemies));
+
+    // Indiquer qu'il y a une sauvegarde
+    localStorage.setItem("saveExists", "true");
+    areThereASave();
 }
 
 /* -------------------------------------------- */
@@ -31,36 +67,64 @@ btnSave.addEventListener("click", save);
 
 
 /* -------------------------------------------- */
-/*            Système de sauvegarde             */
+/*           Système de restauration            */
 /* -------------------------------------------- */
 
-function restore () {
-    Player.stats.hp = Number(localStorage.getItem("hp")); // Vie
-    Player.stats.maxHp = Number(localStorage.getItem("maxHp")); // Or
-    Player.stats.attack = Number(localStorage.getItem("attack")); // Attaque
-    Player.stats.defense = Number(localStorage.getItem("defense")); // Défence
-    Player.gold = Number(localStorage.getItem("gold")); // Or
-    Player.stats.xp = Number(localStorage.getItem("xp")); // Expérience
-    level = Number(localStorage.getItem("level")); // Niveau
+function restore() {
 
-    // Carte
+    // Si il n'y a pas de sauvegarde, ne pas restaurer
+    if (isSaveExist === false) {
+        return;
+    }
+
+    /* Stats Joueur */
+    Player.stats.hp = Number(localStorage.getItem("hp"));
+    Player.stats.maxHp = Number(localStorage.getItem("maxHp"));
+    Player.stats.attack = Number(localStorage.getItem("attack"));
+    Player.stats.defense = Number(localStorage.getItem("defense"));
+    Player.stats.speed = Number(localStorage.getItem("speed"));
+    Player.stats.xp = Number(localStorage.getItem("xp"));
+    Player.stats.xpToNext = Number(localStorage.getItem("xpToNext"));
+
+    /* Niveau et Or */
+    Player.gold = Number(localStorage.getItem("gold"));
+    level = Number(localStorage.getItem("level"));
+    pointsUpdate = Number(localStorage.getItem("pointsUpdate"));
+
+    /* Inventaire */
+    Player.inventory = JSON.parse(localStorage.getItem("inventory")) || [];
+
+    /* Equipement */
+    Player.equipment = JSON.parse(localStorage.getItem("equipment")) || {
+        weapon: null, armor: null, accessory: null
+    };
+
+    /* Carte */
     currentLevel = Number(localStorage.getItem("mapActual"));
-    let matriceMap = localStorage.getItem("mapData");
-    maps[currentLevel] = JSON.parse(matriceMap);
-    actualMap = maps[currentLevel];
+    actualMap = JSON.parse(localStorage.getItem("mapData"));
+    ennemies = JSON.parse(localStorage.getItem("ennemies")) || {};
 
-    // Joueur
+    /* Position Joueur */
     Player.x = Number(localStorage.getItem("playerX"));
     Player.y = Number(localStorage.getItem("playerY"));
 
-    loadMap(); // Recharger la carte
-    UpdateHUD(); // MAJ HUD
+    /* Remettre le joueur sur la carte */
+    actualMap[Player.y][Player.x] = CELL_TYPES.PLAYER;
+
+    /* Recharger l’UI et la carte */
+    loadMap();
+    UpdateHUD();
+    completProfile();
+    inventory();
+
 }
 
 /* -------------------------------------------- */
-/*             Bouton de sauvegarde             */
+/*            Bouton de restauration            */
 /* -------------------------------------------- */
 
 const restoreBtn = document.getElementById("restoreBtn");
 
 restoreBtn.addEventListener("click", restore);
+
+areThereASave()
