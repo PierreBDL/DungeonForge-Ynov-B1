@@ -75,3 +75,17 @@ function updateStats (stat) {
     Player.stats.attack += 3,
     Player.stats.defense += 2
 */
+
+/* -------------------------------------------- */
+/*     Regarder si niveau suivant (ennemi)      */
+/* -------------------------------------------- */
+
+function nextLevelEnnemy() {
+    Ennemy.stats.level++;
+    Ennemy.stats.maxHp += 20;
+    Ennemy.stats.defense += 2;
+
+    // Augmenter une attaque aléatoire
+    let attackEnnemyChooseIndex = Math.floor(Math.random() * attackTypes.length);
+    TypesAttack[attackEnnemyChooseIndex] += 2;
+}

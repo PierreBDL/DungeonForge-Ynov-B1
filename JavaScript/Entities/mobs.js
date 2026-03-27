@@ -35,6 +35,7 @@ let Ennemy = {
         maxHp: 100,
         attack: 15,
         defense: 5,
+        level: 1
     },
     inventory: [],
     equipment: {
