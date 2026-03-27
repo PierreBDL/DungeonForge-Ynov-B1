@@ -6,18 +6,39 @@ let currentLevel = 0;
 
 function changeLevel () {
 
-    // Si on était pas danns un niveau spécial -> on peut incrémenter
-    if (inSpecialLevel === false) {
+    // Effacer le joueur
+    for (let y = 0; y < actualMap.length; y++) {
+        for (let x = 0; x < actualMap[y].length; x++) {
+            if (actualMap[y][x] === CELL_TYPES.PLAYER) {
+                actualMap[y][x] = CELL_TYPES.FLOOR;
+            }
+        }
+    }
+
+    // Vérifier si on est dans un niveau spécial
+    if (!inSpecialLevel) {
         currentLevel++;
-        actualMap = generateBSPMap(25, 18, 3); // Générer nouvelle carte
+        numberOfRooms++; // Incréémenttation du nombre de salles visité
+        actualMap = generateBSPMap(25, 18, 3);
     } else {
         actualMap = maps[currentLevel];
     }
 
-    originTile = CELL_TYPES.FLOOR; // Remettre la tuile à sol
-    initPlayer(); // Repositionner joueur
-    initEnnemies(); // Recharger ennemis
-    loadMap(); // Recharger la carte
+    // Réinitialisation du sol et des ennemis
+    originTile = CELL_TYPES.FLOOR;
+    ennemies = {};
+
+    // Replacer le joueur et les ennemis
+    initPlayer();
+    initEnnemies();
+
+    // Afficher la carte
+    loadMap();
+
+    // Augmenter le niveau des ennemis
+    if (!inSpecialLevel) {
+        nextLevelEnnemy()
+    };
 }
 
 /* -------------------------------------------- */

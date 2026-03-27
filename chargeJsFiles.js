@@ -17,7 +17,8 @@ let scriptsFiles = [
     "Entities/merchant.js",
     "audio.js",
     "Ui/settings.js",
-    "useItems.js"
+    "useItems.js",
+    "gameOver.js"
 ];
 
 function loadScript(index) {

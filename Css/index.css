@@ -939,7 +939,120 @@ main {
     padding-top: 1rem;
 }
 
+/* -------------------------------------------- */
+/*                  Game Over                   */
+/* -------------------------------------------- */
 
+#gameOverOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.88);
+    z-index: 99999;
+}
+
+#gameOverCard {
+    background-color: #1a1208;
+    border: 1px solid #5c4a1e;
+    border-radius: 4px;
+    padding: 2.5rem 2.2rem;
+    max-width: 480px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+#gameOverTitle {
+    font-family: 'Cinzel', serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: #e05050;
+    text-align: center;
+    letter-spacing: 0.2em;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #2e2310;
+}
+
+#gameOverSubtitle {
+    font-family: 'IM Fell English', serif;
+    font-size: 13px;
+    color: #8a6c2a;
+    text-align: center;
+    font-style: italic;
+    margin-bottom: 0.5rem;
+}
+
+/* -------------------------------------------- */
+/*                    Score                     */
+/* -------------------------------------------- */
+
+.score-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 10px;
+    border: 1px solid #2e2310;
+    border-radius: 3px;
+    background-color: #0d0a07;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.score-row-latest {
+    border-color: #c8a96e;
+    background-color: #1e1408;
+}
+
+.score-partie {
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    font-weight: 600;
+    color: #c8a96e;
+    text-transform: capitalize;
+    flex-shrink: 0;
+}
+
+.score-stat {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    color: #8a6c2a;
+}
+
+.score-empty {
+    font-family: 'IM Fell English', serif;
+    font-size: 13px;
+    color: #4a380e;
+    text-align: center;
+    font-style: italic;
+}
+
+#gameOverRestartBtn {
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0.7rem 1.5rem;
+    border: 1px solid #5c4a1e;
+    border-radius: 3px;
+    background: none;
+    color: #c8a96e;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-top: 0.5rem;
+    align-self: center;
+}
+
+#gameOverRestartBtn:hover {
+    background-color: #5c4a1e;
+    color: #f0d090;
+}
 
 
 
@@ -999,3 +1112,4 @@ main {
         padding-bottom: 0.5rem;
     }
 }
+

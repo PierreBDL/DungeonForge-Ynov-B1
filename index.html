@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +9,7 @@
     <link rel="stylesheet" href="./Css/index.css">
     <link rel="icon" href="./Images/Icone/icone.png">
 </head>
+
 <body>
     <header>
         <div id="experience-bar">
@@ -20,11 +22,24 @@
 
     <main>
 
+        <!-- Game Over -->
+
+        <div id="gameOverOverlay">
+            <div id="gameOverCard">
+                <div id="gameOverTitle"> Game Over </div>
+                <div id="gameOverSubtitle">Vous êtes mort...</div>
+                <!-- Scores -->
+                <div id="scoresContainer"></div>
+                <button id="gameOverRestartBtn" onclick="hideGameOver()">Recommencer</button>
+            </div>
+        </div>
+
         <!-- Message -->
 
         <span id="message">
             <div class="message-card">
-                <div class="message-close"><button id="closeMessageBtn"><img src="./Images/crux.png" alt="Fermer"></button></div>
+                <div class="message-close"><button id="closeMessageBtn"><img src="./Images/crux.png"
+                            alt="Fermer"></button></div>
                 <div class="message-header">Message</div>
                 <p class="message-body">Txt</p>
                 <div class="message-footer">DungeonForge</div>
@@ -35,7 +50,8 @@
 
         <span id="settings">
             <div class="settings-card">
-                <div class="settings-close"><button id="closeSettingsBtn"><img src="./Images/crux.png" alt="Fermer"></button></div>
+                <div class="settings-close"><button id="closeSettingsBtn"><img src="./Images/crux.png"
+                            alt="Fermer"></button></div>
                 <div class="settings-header">Paramètres</div>
                 <div class="settings-body">
                     <div class="settings-row">
@@ -59,7 +75,8 @@
 
         <span id="merchant">
             <div class="merchant-card">
-                <div class="merchant-close"><button id="closeMerchantBtn"><img src="./Images/crux.png" alt="Fermer"></button></div>
+                <div class="merchant-close"><button id="closeMerchantBtn"><img src="./Images/crux.png"
+                            alt="Fermer"></button></div>
                 <div class="merchant-header">Marchand</div>
                 <p class="merchant-body">Txt</p>
                 <div class="merchant-footer">DungeonForge</div>
@@ -79,7 +96,8 @@
 
         <div id="inventory">
             <div class="inventory-card">
-                <div class="inventory-close"><button id="closeInventoryBtn"><img src="./Images/crux.png" alt="Fermer"></button></div>
+                <div class="inventory-close"><button id="closeInventoryBtn"><img src="./Images/crux.png"
+                            alt="Fermer"></button></div>
                 <div class="inventory-header">Inventaire</div>
                 <div class="inventory-body">
                     <div id="inventoryLine">
@@ -103,7 +121,8 @@
 
         <div id="profile">
             <div class="profile-card">
-                <div class="profile-close"><button id="closeProfileyBtn"><img src="./Images/crux.png" alt="Fermer"></button></div>
+                <div class="profile-close"><button id="closeProfileyBtn"><img src="./Images/crux.png"
+                            alt="Fermer"></button></div>
                 <div class="profile-header">Profil</div>
                 <div class="profile-body">
                     <p>profile</p>
@@ -164,4 +183,5 @@
 
     <script src="./chargeJsFiles.js"></script>
 </body>
+
 </html>

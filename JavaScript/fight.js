@@ -65,18 +65,34 @@ function closeFight() {
 /* -------------------------------------------- */
 
 let turnFight = 0;
+let isPlayerDead = false;
 
 const btnAttack = document.getElementById("attack");
 
 btnAttack.addEventListener("click", () => {
+
+    // Si on a plus de vie -> game over
+    if (Player.stats.hp <= 0) {
+        Player.stats.hp = 0;
+        printHealth(Player, "player");
+        gameOver();
+        return;
+    }
+
     // Tour de combat
     turnFight++;
 
     // Joueur attaque l'ennemi
     attackPhase(Player, currentEnnemy);
 
+    // Si l'ennemi n'existe plus ou si le joueur est mort -> ne pas continuer le combat
+    if (!currentEnnemy || Player.stats.hp <= 0) {
+        return;
+    };
+
     // Voir si l'ennemi n'a plus de PV
     if (currentEnnemy.stats.hp <= 0) {
+
         // Donner le butin
         giveItems("Vous avez vaincu un ennemi ! Vous obtenez : <br>", { gold: 10, xp: 20 });
 
@@ -87,37 +103,37 @@ btnAttack.addEventListener("click", () => {
         actualMap[currentEnnemy.y][currentEnnemy.x] = CELL_TYPES.FLOOR;
         let keyCurrentEnnemy = "ennemy_" + currentEnnemy.y + "_" + currentEnnemy.x;
         delete ennemies[keyCurrentEnnemy];
-
         currentEnnemy = null;
+
+        // Compter la mort
+        numberOfKills++;
 
         // Mettre le tour de combat à zéro
         turnFight = 0;
 
         // Arrêter le combat
         isInFight = false;
-        loadMap(); // Recharger la carte pour supprimer l'ennemi
         closeFight();
+
+        loadMap(); // Recharger la carte pour supprimer l'ennemi
 
         // Regarder si on passe un niveau avec l'expérience
         nextLevel();
 
-    } else {
-        // Ennemi attaque le joueur
-        attackPhase(currentEnnemy, Player);
+    }
 
-        // Si le joueur n'a plus de PV
+    // Ennemi attaque le joueur
+    attackPhase(currentEnnemy, Player);
+
+    // Si le joueur n'a plus de PV
+    if (Player.stats.hp <= 0) {
+
+        // Game Over
         if (Player.stats.hp <= 0) {
-            // Réinitialiser la vie de l'ennemi
-            currentEnnemy.stats.hp = currentEnnemy.stats.maxHp;
-
-            // Redonner la moitier de ses PVs au joueur
-            Player.stats.hp = Player.stats.maxHp * 0.5;
-
+            Player.stats.hp = 0;
             // Mettre le tour de combat à zéro
             turnFight = 0;
-
             isInFight = false;
-            closeFight();
         }
     }
 });
@@ -142,7 +158,7 @@ function attackPhase(attacker, target) {
 
         // Calculer + infliger les dégats
         dammageAmount = (currentEnnemy.attackTypes[attackEnnemyChoose] - Player.stats.defense);
-        
+
         // Si trop de défence, on fait 1 dégat
         if (dammageAmount <= 0) {
             dammageAmount = 1;
