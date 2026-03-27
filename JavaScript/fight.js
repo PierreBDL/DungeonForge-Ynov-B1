@@ -96,9 +96,6 @@ btnAttack.addEventListener("click", () => {
         // Donner le butin
         giveItems("Vous avez vaincu un ennemi ! Vous obtenez : <br>", { gold: 10, xp: 20 });
 
-        // Rendre la moitié de sa vie au joueur
-        Player.stats.hp = Player.stats.maxHp * 0.5;
-
         // Supprimer ennemie de la carte
         actualMap[currentEnnemy.y][currentEnnemy.x] = CELL_TYPES.FLOOR;
         let keyCurrentEnnemy = "ennemy_" + currentEnnemy.y + "_" + currentEnnemy.x;

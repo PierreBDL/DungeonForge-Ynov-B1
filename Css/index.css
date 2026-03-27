@@ -952,109 +952,150 @@ main {
     display: none;
     justify-content: center;
     align-items: center;
-    background-color: rgba(0, 0, 0, 0.88);
+    background: radial-gradient(circle, rgba(26,18,8,0.98) 0%, rgba(0,0,0,1) 100%);
     z-index: 99999;
+    backdrop-filter: blur(3px);
 }
 
 #gameOverCard {
-    background-color: #1a1208;
-    border: 1px solid #5c4a1e;
+    background-color: #0d0a07;
+    border: 2px solid #5c4a1e;
     border-radius: 4px;
-    padding: 2.5rem 2.2rem;
-    max-width: 480px;
-    width: 100%;
+    padding: 3rem 2.5rem;
+    max-width: 600px;
+    width: 90%;
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 1.5rem;
+    box-shadow: 0 0 50px rgba(224, 80, 80, 0.15);
 }
 
 #gameOverTitle {
     font-family: 'Cinzel', serif;
-    font-size: 20px;
+    font-size: 32px;
     font-weight: 600;
     color: #e05050;
     text-align: center;
-    letter-spacing: 0.2em;
-    padding-bottom: 1rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    text-shadow: 0 0 10px rgba(224, 80, 80, 0.7);
+    padding-bottom: 1.5rem;
     border-bottom: 1px solid #2e2310;
 }
 
 #gameOverSubtitle {
     font-family: 'IM Fell English', serif;
-    font-size: 13px;
-    color: #8a6c2a;
+    font-size: 18px;
+    color: #c8a96e;
     text-align: center;
     font-style: italic;
-    margin-bottom: 0.5rem;
+    margin-bottom: 1rem;
 }
 
 /* -------------------------------------------- */
 /*                    Score                     */
 /* -------------------------------------------- */
 
-.score-row {
+#scoresContainer {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    gap: 8px;
+    max-height: 300px;
+    overflow-y: auto;
+    padding-right: 5px;
+}
+
+#scoresContainer::-webkit-scrollbar {
+    width: 6px;
+}
+#scoresContainer::-webkit-scrollbar-thumb {
+    background-color: #2e2310;
+    border-radius: 3px;
+}
+
+.score-row {
+    display: grid;
+    grid-template-columns: 100px repeat(4, 1fr) 110px; 
     align-items: center;
-    padding: 6px 10px;
+    padding: 10px 15px;
     border: 1px solid #2e2310;
     border-radius: 3px;
-    background-color: #0d0a07;
-    flex-wrap: wrap;
-    gap: 6px;
+    background-color: #1a1208;
+    gap: 10px;
+    transition: background-color 0.2s;
+}
+
+.score-row:hover {
+    background-color: #1e1408;
 }
 
 .score-row-latest {
-    border-color: #c8a96e;
-    background-color: #1e1408;
+    border-color: #ffd700;
+    background-color: #2a1a08;
 }
 
 .score-partie {
     font-family: 'Cinzel', serif;
-    font-size: 11px;
+    font-size: 13px;
     font-weight: 600;
-    color: #c8a96e;
-    text-transform: capitalize;
-    flex-shrink: 0;
+    color: #ffd700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
 }
 
 .score-stat {
     font-family: 'Cinzel', serif;
-    font-size: 10px;
-    color: #8a6c2a;
+    font-size: 12px;
+    color: #c8a96e;
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+    gap: 5px;
+}
+
+.score-date {
+    font-family: 'IM Fell English', serif;
+    font-size: 14px;
+    color: #c8a96e;
+    font-style: italic;
+    text-align: right;
 }
 
 .score-empty {
     font-family: 'IM Fell English', serif;
-    font-size: 13px;
+    font-size: 14px;
     color: #4a380e;
     text-align: center;
     font-style: italic;
+    padding: 2rem;
 }
 
 #gameOverRestartBtn {
     font-family: 'Cinzel', serif;
-    font-size: 11px;
+    font-size: 14px;
     font-weight: 600;
-    letter-spacing: 0.15em;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
-    padding: 0.7rem 1.5rem;
-    border: 1px solid #5c4a1e;
+    padding: 1rem 2.5rem;
+    border: 2px solid #8a6c2a;
     border-radius: 3px;
-    background: none;
-    color: #c8a96e;
+    background-color: #5c4a1e;
+    color: #1a1208;
     cursor: pointer;
-    transition: all 0.2s;
-    margin-top: 0.5rem;
+    transition: all 0.2s ease-in-out;
+    margin-top: 2rem;
     align-self: center;
 }
 
 #gameOverRestartBtn:hover {
-    background-color: #5c4a1e;
-    color: #f0d090;
+    background-color: #8a6c2a;
+    color: #ffd700;
+    transform: translateY(-2px);
 }
 
-
+#gameOverRestartBtn:active {
+    transform: translateY(1px);
+}
 
 
 /* -------------------------------------------- */
@@ -1080,6 +1121,22 @@ main {
     #fight-window {
         max-width: 95%;
         padding: 1.5rem 1rem;
+    }
+
+    .score-row {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        gap: 5px;
+        padding: 15px;
+    }
+    
+    .score-date {
+        text-align: center;
+        margin-top: 5px;
+        border-top: 1px solid #2e2310;
+        padding-top: 5px;
+        width: 100%;
     }
 }
 

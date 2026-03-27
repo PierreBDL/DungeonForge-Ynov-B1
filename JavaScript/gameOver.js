@@ -70,8 +70,9 @@ function hideGameOver() {
 
 function showScores() {
     const container = document.getElementById("scoresContainer");
-    console.log("Container trouvé :", container);
-    console.log("Scores :", scores);
+
+    // Vider les scores précédents
+    container.innerHTML = "";
 
     const keys = Object.keys(scores).reverse(); // Plus récent en premier
 
@@ -81,17 +82,18 @@ function showScores() {
     }
 
     keys.forEach((key, i) => {
-        const s = scores[key];
-        const el = document.createElement("div");
-        el.classList.add("score-row");
-        if (i === 0) el.classList.add("score-row-latest");
-        el.innerHTML = `
+        const score = scores[key];
+        const lignScore = document.createElement("div");
+        lignScore.classList.add("score-row");
+        if (i === 0) lignScore.classList.add("score-row-latest");
+        lignScore.innerHTML = `
             <span class="score-partie">${key.replace("_", " ")}</span>
-            <span class="score-stat">⚔ ${s.kills} kills</span>
-            <span class="score-stat">🚪 ${s.rooms} salles</span>
-            <span class="score-stat">📈 Niv. ${s.level}</span>
-            <span class="score-stat">💰 ${s.gold}G</span>
+            <span class="score-stat">${score.kills} kills</span>
+            <span class="score-stat">${score.rooms} salles</span>
+            <span class="score-stat">Niv. ${score.level}</span>
+            <span class="score-stat">${score.gold}G</span>
+            <span class="score-date">${new Date().toLocaleString()}</span>
         `;
-        container.appendChild(el);
+        container.appendChild(lignScore);
     });
 }
