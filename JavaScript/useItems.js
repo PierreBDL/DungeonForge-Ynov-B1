@@ -10,11 +10,6 @@ inventoryCases.addEventListener('click', (e) => {
 
     // Vérifier le nom de l'objet 
     if (altValue === 'Potion de vie') {
-        Player.inventory.splice(index, 1);
-        inventory();
-        printMessage(altValue + " consommé vous regagnez 50HP.")
-        Player.stats.hp += 50;
-    } else if (altValue === '') {
-
+        items.potion_vie.effect()
     }
 });

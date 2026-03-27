@@ -92,10 +92,12 @@ main {
 
 #map {
     display: grid;
-    border: 4px solid #333;
     width: fit-content;
     margin: 20px auto;
     background-color: #000;
+    max-width: 100vw; 
+    overflow: auto; 
+    -webkit-overflow-scrolling: touch; 
 }
 
 .cell {
@@ -105,9 +107,8 @@ main {
 }
 
 .wall {
-    background-image: url('../Images/wall.png');
+    background-image: url('../Images/wall.svg');
     background-size: cover;
-    box-shadow: inset 0 0 10px #000;
 }
 
 .floor {
@@ -173,4 +174,828 @@ main {
     background-image: url('../Images/player.svg');
     background-size: cover;
     background-repeat: no-repeat;
+}
+
+.merchant {
+    width: 99%;
+    height: 99%;
+    background-color: #5a5a60;
+    border: 1px solid #2d2d30;
+    background-image: url('../Images/merchant.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.merchant-door {
+    width: 99%;
+    height: 99%;
+    background-color: #5a5a60;
+    border: 1px solid #2d2d30;
+    background-image: url('../Images/merchant_door.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+/* -------------------------------------------- */
+/*                   Combats                    */
+/* -------------------------------------------- */
+
+
+#fight {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.85); 
+    z-index: 9999;
+}
+
+#fight-window {
+    position: relative;
+    border: 1px solid #5c4a1e;
+    border-radius: 4px;
+    padding: 2.5rem 2.2rem 2.5rem 2.2rem;
+    max-width: 480px;
+    width: 100%;
+    background-color: #1e1610;
+}
+
+#fight-header {
+    font-family: 'Cinzel', serif;
+    border-bottom: #5c4a1e 1px solid;
+    text-decoration: uppercase;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    text-align: center;
+    color: #d4706e;
+}
+
+#fight-fighters {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: #d4706e;
+}
+
+.fight-entities {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.fight-health-bg {
+    width: 100px;
+    height: 5px;
+    background-color: #3a2a2a;
+    margin-top: 0.5rem;
+}
+
+.fight-health {
+    width: 100%;
+    height: 5px;
+    background-color: #e05050;
+}
+
+.fight-health-text {
+    font-size: 13px;
+    color: #c8a96e;
+}
+
+#fight-actions {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: row;
+    gap: 0.6rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+#fight-actions button {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    padding: 0.6rem 1.2rem 0.6rem 1.2rem;
+    border: 1px solid #5c4a1e;
+    border-radius: 3px;
+    background: none;
+    color: #c8a96e;
+    cursor: pointer;
+    transition: all 0.2s, color 0.2s;
+}
+
+#fight-actions button:hover {
+    background-color: #5c4a1e;
+    color: #f0d090;
+}
+
+#fight-text {
+    font-family: 'Cinzel', serif;
+    border-top: #5c4a1e 1px solid;
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    text-align: center;
+    color: #d4706e;
+    max-height: 100px;
+    overflow-y: auto;
+}
+
+#fight-footer {
+    font-family: 'Cinzel', serif;
+    border-top: #5c4a1e 1px solid;
+    text-decoration: uppercase;
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    text-align: center;
+    color: #8a6c2a;
+}
+
+
+/* -------------------------------------------- */
+/*                   Marchand                   */
+/* -------------------------------------------- */
+
+#merchant {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.75);
+    z-index: 1000;
+}
+
+.merchant-close {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+}
+
+.merchant-close button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.merchant-close button img {
+    width: 20px;
+    height: 20px;
+    display: block;
+}
+
+.merchant-card {
+    background-color: #1a1208;
+    position: relative;
+    border: 1px solid #5c4a1e;
+    border-radius: 4px;
+    padding: 2.5rem 2.2rem 2.5rem 2.2rem;
+    max-width: 380px;
+    width: 100%;
+}
+
+.merchant-header {
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    color: #8a6c2a;
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 1.2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #2e2310;
+}
+
+.merchant-body {
+    font-family: 'IM Fell English', serif;
+    font-size: 15px;
+    line-height: 1.85;
+    color: #c8a96e;
+    text-align: center;
+    font-style: italic;
+}
+
+.merchant-footer {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: #4a380e;
+    text-align: center;
+    margin-top: 1.2rem;
+    text-transform: uppercase;
+    border-top: 1px solid #2e2310;
+    padding-top: 1rem;
+}
+
+/* -------------------------------------------- */
+/*              Articles Marchand               */
+/* -------------------------------------------- */
+
+.merchant-body {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 10px 5px 10px 5px;
+}
+
+.merchantProduct {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #2a1a08;
+    border: 1px solid #3d2f14;
+    padding: 8px 12px 8px 12px;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+.merchantProduct:hover {
+    border-color: #8a6c2a;
+    background-color: #352410;
+}
+
+.productName {
+    font-family: 'IM Fell English', serif;
+    font-size: 16px;
+    color: #c8a96e;
+    flex: 2;
+    text-align: left;
+}
+
+.productPrice {
+    font-family: 'Cinzel', serif;
+    font-size: 14px;
+    color: #ffd700;
+    flex: 1;
+    text-align: right;
+    margin-right: 15px;
+    font-weight: bold;
+}
+
+.merchantProduct button {
+    font-family: 'Cinzel', serif;
+    background-color: #5c4a1e;
+    color: #f0d090;
+    border: 1px solid #8a6c2a;
+    padding: 5px 10px 5px 10px;
+    font-size: 11px;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: all 0.15s;
+    border-radius: 2px;
+}
+
+.merchantProduct button:hover {
+    background-color: #8a6c2a;
+    color: #1a1208;
+}
+
+.merchantProduct button:active {
+    transform: scale(0.95);
+}
+
+/* -------------------------------------------- */
+/*         Boutons Profil et Inventaire         */
+/* -------------------------------------------- */
+
+#HUDBtns {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+
+#HUDBtns button {
+    max-width: 50px;
+    max-height: 50px;
+    background-color: #c8a96e;
+    border: #5c4a1e solid 1px;
+}
+
+#HUDBtns button img {
+    max-width: 100%;
+    aspect-ratio: 1/1;
+    background-color: #c8a96e;
+    border: #5c4a1e solid 1px;
+}
+
+/* -------------------------------------------- */
+/*                  Inventaire                  */
+/* -------------------------------------------- */
+
+#inventory {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.75);
+    z-index: 5000;
+}
+
+.inventory-close {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+}
+
+.inventory-close button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.inventory-close button img {
+    width: 20px;
+    height: 20px;
+    display: block;
+}
+
+.inventory-card {
+    background-color: #1a1208;
+    position: relative;
+    border: 1px solid #5c4a1e;
+    border-radius: 4px;
+    padding: 2.5rem 2.2rem;
+    max-width: 380px;
+    width: 100%;
+}
+
+.inventory-header {
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    color: #8a6c2a;
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 1.2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #2e2310;
+}
+
+.inventory-body {
+    font-family: 'IM Fell English', serif;
+    font-size: 15px;
+    line-height: 1.85;
+    color: #c8a96e;
+    text-align: center;
+    font-style: italic;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#inventoryLine {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.inventoryCase {
+    width: 48px;
+    height: 48px;
+    background-color: #2a1a08;
+    border: 1px solid #c8a96e;
+    border-radius: 3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.15s;
+}
+
+.inventoryCase img {
+    width: 80%;
+    height: 80%;
+    object-fit: contain;
+}
+
+.inventoryCase:hover {
+    background-color: #3a2a10;
+    cursor: pointer;
+}
+
+.inventory-footer {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: #4a380e;
+    text-align: center;
+    margin-top: 1.2rem;
+    text-transform: uppercase;
+    border-top: 1px solid #2e2310;
+    padding-top: 1rem;
+}
+
+/* -------------------------------------------- */
+/*                  Profile                     */
+/* -------------------------------------------- */
+
+#profile {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.75);
+    z-index: 9999;
+}
+
+.profile-close {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+}
+
+.profile-close button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.profile-close button img {
+    width: 20px;
+    height: 20px;
+    display: block;
+}
+
+.profile-card {
+    background-color: #1a1208;
+    position: relative;
+    border: 1px solid #5c4a1e;
+    border-radius: 4px;
+    padding: 2.5rem 2.2rem;
+    max-width: 380px;
+    width: 100%;
+}
+
+.profile-header {
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    color: #8a6c2a;
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 1.2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #2e2310;
+}
+
+.profile-body {
+    font-family: 'IM Fell English', serif;
+    font-size: 15px;
+    line-height: 1.85;
+    color: #c8a96e;
+    text-align: center;
+    font-style: italic;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.profile-footer {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: #4a380e;
+    text-align: center;
+    margin-top: 1.2rem;
+    text-transform: uppercase;
+    border-top: 1px solid #2e2310;
+    padding-top: 1rem;
+}
+
+/* Contenu */
+
+#profile-content-header {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #2e2310;
+}
+
+#profile-image {
+    width: 80px;
+    aspect-ratio: 1/1;
+    border: 1px solid #5c4a1e;
+    border-radius: 4px;
+    margin-bottom: 4px;
+}
+
+.profile-name {
+    font-family: 'Cinzel', serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: #c8a96e;
+    text-align: center;
+    letter-spacing: 0.1em;
+}
+
+.profile-level {
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    color: #8a6c2a;
+    text-align: center;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+}
+
+#pointsLevel {
+    font-family: 'IM Fell English', serif;
+    font-size: 13px;
+    color: #7c3aed;
+    font-style: italic;
+    margin-top: 2px;
+}
+
+#profile-content {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+}
+
+.profile-stat {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+}
+
+.profile-stat-label {
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    color: #8a6c2a;
+    width: 90px;
+    flex-shrink: 0;
+    text-align: right;
+}
+
+#profile-health {
+    height: 100%;
+    background-color: #e05050;
+    border-radius: 4px;
+}
+
+#profile-health-bg {
+    flex: 1;
+    height: 7px;
+    background-color: #2a1a08;
+    border: 1px solid #5c4a1e;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.profile-bar-health  { 
+    background-color: #e05050; 
+}
+
+.profile-stat-value {
+    font-family: 'Cinzel', serif;
+    font-size: 12px;
+    color: #c8a96e;
+    width: 60px;
+    flex-shrink: 0;
+}
+
+.profile-btn-update {
+    font-family: 'Cinzel', serif;
+    font-size: 14px;
+    width: 24px;
+    height: 24px;
+    background-color: #2a1a08;
+    color: #c8a96e;
+    border: 1px solid #5c4a1e;
+    border-radius: 50%;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: all 0.15s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-btn-update:hover {
+    background-color: #5c4a1e;
+    color: #f0d090;
+}
+
+/* -------------------------------------------- */
+/*                  Expérience                  */
+/* -------------------------------------------- */
+
+#experience-bar {
+    width: 100%;
+    height: 12px;
+    background-color: #2a1a4a;
+    position: relative;
+}
+
+#experience-bar-value {
+    width: 70%;
+    height: 12px;
+    background-color: #7c3aed;
+}
+
+#experience-bar-text {
+    display: flex;
+    justify-self: center;
+    align-self: center;
+    position: fixed;
+    font-size: 12px;
+    transform: translateY(-40%);
+}
+
+/* -------------------------------------------- */
+/*                 Paramètres                   */
+/* -------------------------------------------- */
+
+#settings {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.75);
+    z-index: 9999;
+}
+
+.settings-close {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+}
+
+.settings-close button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.settings-close button img {
+    width: 20px;
+    height: 20px;
+    display: block;
+}
+
+.settings-card {
+    background-color: #1a1208;
+    position: relative;
+    border: 1px solid #5c4a1e;
+    border-radius: 4px;
+    padding: 2.5rem 2.2rem;
+    max-width: 380px;
+    width: 100%;
+}
+
+.settings-header {
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    color: #8a6c2a;
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 1.2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #2e2310;
+}
+
+.settings-body {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.settings-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.settings-label {
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    color: #8a6c2a;
+    flex-shrink: 0;
+}
+
+.settings-control input[type="range"] {
+    accent-color: #c8a96e;
+    width: 120px;
+}
+
+.settings-control input[type="checkbox"] {
+    accent-color: #c8a96e;
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+}
+
+.settings-footer {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: #4a380e;
+    text-align: center;
+    margin-top: 1.2rem;
+    text-transform: uppercase;
+    border-top: 1px solid #2e2310;
+    padding-top: 1rem;
+}
+
+
+
+
+
+
+/* -------------------------------------------- */
+/*                  RESPONSIVE                  */
+/* -------------------------------------------- */
+
+@media screen and (max-width: 768px) {
+    .cell {
+        width: 30px;
+        height: 30px;
+    }
+
+    .wall, .floor, .ennemy, .player, .stairs-down, .chest, .door {
+        width: 100%;
+        height: 100%;
+    }
+
+    .message-card, .merchant-card, .inventory-card, .profile-card, .settings-card {
+        max-width: 90%;
+        padding: 1.5rem 1rem;
+    }
+
+    #fight-window {
+        max-width: 95%;
+        padding: 1.5rem 1rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .inventory-card, .profile-card, .message-card, .settings-card {
+        width: 95%;
+        max-width: none;
+        border-width: 2px;
+    }
+
+    #fight-actions {
+        flex-direction: column;
+    }
+    
+    #fight-actions button {
+        width: 100%;
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-height: 500px) and (orientation: landscape) {
+    .message-card, .inventory-card, .profile-card {
+        padding: 1rem;
+        overflow-y: auto;
+        max-height: 90vh;
+    }
+
+    .message-header, .inventory-header {
+        margin-bottom: 0.5rem;
+        padding-bottom: 0.5rem;
+    }
 }

@@ -6,8 +6,7 @@
     <title>DungeonForge</title>
     <link rel="stylesheet" href="./Css/headerFooter.css">
     <link rel="stylesheet" href="./Css/index.css">
-    <link rel="stylesheet" href="./Css/fight.css">
-    <link rel="stylesheet" href="./Css/profileInventoryHUD.css">
+    <link rel="icon" href="./Images/Icone/icone.png">
 </head>
 <body>
     <header>
@@ -17,6 +16,8 @@
         </div>
     </header>
 
+    <audio src="./Audio/Tzar Burden of The Crown Soundtrack (CD-Rip) - Track 1.mp3"></audio>
+
     <main>
 
         <!-- Message -->
@@ -24,9 +25,44 @@
         <span id="message">
             <div class="message-card">
                 <div class="message-close"><button id="closeMessageBtn"><img src="./Images/crux.png" alt="Fermer"></button></div>
-                <div class="message-header">⬥ Evénement ⬥</div>
+                <div class="message-header">Message</div>
                 <p class="message-body">Txt</p>
                 <div class="message-footer">DungeonForge</div>
+            </div>
+        </span>
+
+        <!-- Paramètres -->
+
+        <span id="settings">
+            <div class="settings-card">
+                <div class="settings-close"><button id="closeSettingsBtn"><img src="./Images/crux.png" alt="Fermer"></button></div>
+                <div class="settings-header">Paramètres</div>
+                <div class="settings-body">
+                    <div class="settings-row">
+                        <div class="settings-label">Volume de la musique</div>
+                        <div class="settings-control">
+                            <input type="range" id="settings-volume" min="0" max="100" value="50">
+                        </div>
+                    </div>
+                    <div class="settings-row">
+                        <div class="settings-label">Muet</div>
+                        <div class="settings-control">
+                            <input type="checkbox" id="settings-mute">
+                        </div>
+                    </div>
+                </div>
+                <div class="settings-footer">DungeonForge</div>
+            </div>
+        </span>
+
+        <!-- Marchand -->
+
+        <span id="merchant">
+            <div class="merchant-card">
+                <div class="merchant-close"><button id="closeMerchantBtn"><img src="./Images/crux.png" alt="Fermer"></button></div>
+                <div class="merchant-header">Marchand</div>
+                <p class="merchant-body">Txt</p>
+                <div class="merchant-footer">DungeonForge</div>
             </div>
         </span>
 
@@ -35,6 +71,8 @@
         <div id="HUDBtns">
             <button id="openCloseInventoryBtn"> <img src="./Images/bag.svg" alt="Inventaire"></button>
             <button id="openCloseProfileBtn"> <img src="./Images/profile.svg" alt="Profil"></button>
+            <button id="saveBtn"> <img src="./Images/save.png" alt="Sauvegarder"></button>
+            <button id="restoreBtn"> <img src="./Images/restore.png" alt="Restaurer"></button>
         </div>
 
         <!-- Inventaire -->
@@ -118,10 +156,11 @@
         </span>
     </main>
 
+    <!--
     <footer>
         <p><strong>DungeonForge</strong></p>
         <p>Projet Ynov Bachelor Informatique 1</p>
-    </footer>
+    </footer> -->
 
     <script src="./chargeJsFiles.js"></script>
 </body>
