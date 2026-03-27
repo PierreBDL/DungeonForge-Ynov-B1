@@ -39,6 +39,13 @@ function moveOnMap(x, y) {
 
     /* -------------------------------------------- */
 
+    // Vérifier si le joueur est mort
+    if (Player.stats.hp <= 0) {
+        return;
+    }
+
+    /* -------------------------------------------- */
+
     // Changer de carte si on est au niveau d'un escalier
     if (actualMap[y][x] === CELL_TYPES.STAIRS_DOWN) {
         if (inSpecialLevel) {
@@ -136,11 +143,16 @@ function moveOnMap(x, y) {
     // Dépacer joueur
     actualMap[y][x] = CELL_TYPES.PLAYER;
 
+    // Anciennes coordonnées du joueur avant déplacement
+    let x_ancien = Player.x;
+    let y_ancien = Player.y;
+
     // MAJ position du joueur
     Player.x = x;
     Player.y = y;
 
     // Afficher la carte mise à jour
-    loadMap();
+    updateCell(Player.x, Player.y); // nouvelle position
+    updateCell(x_ancien, y_ancien); // ancienne position
 }
 

@@ -150,3 +150,53 @@ function loadMap() {
 initPlayer(); // Chercher le joueur au premier chargement de la carte
 initEnnemies(); // Chercher les ennemies au chargement de la carte
 loadMap(); // Charger la carte au début
+
+/* -------------------------------------------- */
+/*              MAJ de la carte                 */
+/* -------------------------------------------- */
+
+function updateCell(x, y) {
+    const index = y * actualMap[0].length + x;
+    const cells = document.querySelectorAll('.cell');
+    const cell = cells[index];
+
+    if (!cell) {
+        return;
+    };
+
+    // Retirer toutes les classes de type
+    cell.className = 'cell';
+
+    switch (actualMap[y][x]) {
+        case CELL_TYPES.WALL:        
+            cell.classList.add('wall'); 
+            break;
+        case CELL_TYPES.FLOOR:       
+            cell.classList.add('floor'); 
+            break;
+        case CELL_TYPES.PLAYER:      
+            cell.classList.add('player'); 
+            break;
+        case CELL_TYPES.ENNEMY:      
+            cell.classList.add('ennemy'); 
+            break;
+        case CELL_TYPES.CHEST:       
+            cell.classList.add('chest'); 
+            break;
+        case CELL_TYPES.CHEST_OPEN:  
+            cell.classList.add('chest-open'); 
+            break;
+        case CELL_TYPES.STAIRS_DOWN: 
+            cell.classList.add('stairs-down'); 
+            break;
+        case CELL_TYPES.DOOR:        
+            cell.classList.add('door'); 
+            break;
+        case CELL_TYPES.MERCHANT:    
+            cell.classList.add('merchant'); 
+            break;
+        case CELL_TYPES.MERCHANT_DOOR: 
+            cell.classList.add('merchant-door'); 
+            break;
+    }
+}
