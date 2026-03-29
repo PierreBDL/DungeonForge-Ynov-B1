@@ -16,7 +16,8 @@ function gameOver() {
         rooms: numberOfRooms,
         kills: numberOfKills,
         level: level,
-        gold: Player.gold
+        gold: Player.gold,
+        date: new Date().getTime()
     };
 
     // Sauvegarder
@@ -74,25 +75,51 @@ function showScores() {
     // Vider les scores précédents
     container.innerHTML = "";
 
-    const keys = Object.keys(scores).reverse(); // Plus récent en premier
+    const keys = Object.keys(scores).reverse();
 
+    // Si aucun score n'est présent, afficher un message
     if (keys.length === 0) {
-        container.innerHTML = "<div class='score-empty'>Aucune partie jouée</div>";
+        container.innerHTML = "<div class='score-empty'>Aucune partie enregistrée.</div>";
         return;
     }
+
+    // Créer une ligne d'en-tête pour le tableau
+    const headerRow = document.createElement("div");
+    headerRow.classList.add("score-row", "score-header");
+
+    headerRow.innerHTML = `
+        <span class="score-partie">Parties</span>
+        <span class="score-stat">Kills</span>
+        <span class="score-stat">Salles</span>
+        <span class="score-stat">Niveau</span>
+        <span class="score-stat">Or</span>
+        <span class="score-date">Date</span>
+    `;
+    container.appendChild(headerRow);
 
     keys.forEach((key, i) => {
         const score = scores[key];
         const lignScore = document.createElement("div");
         lignScore.classList.add("score-row");
         if (i === 0) lignScore.classList.add("score-row-latest");
+
+        // Formater la date proprement
+        const dateObj = new Date(score.date);
+        const dateFormatted = dateObj.toLocaleDateString('fr-FR', {
+            day: '2-digit',
+            month: 'short'
+        }) + " " + dateObj.toLocaleTimeString('fr-FR', {
+            hour: '2-digit',
+            minute: '2-digit'
+        });
+
         lignScore.innerHTML = `
             <span class="score-partie">${key.replace("_", " ")}</span>
-            <span class="score-stat">${score.kills} kills</span>
-            <span class="score-stat">${score.rooms} salles</span>
+            <span class="score-stat">${score.kills}</span>
+            <span class="score-stat">${score.rooms}</span>
             <span class="score-stat">Niv. ${score.level}</span>
             <span class="score-stat">${score.gold}G</span>
-            <span class="score-date">${new Date().toLocaleString()}</span>
+            <span class="score-date">${dateFormatted}</span>
         `;
         container.appendChild(lignScore);
     });

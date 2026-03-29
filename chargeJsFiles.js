@@ -8,8 +8,9 @@ let scriptsFiles = [
     "giveItems.js",
     "fight.js",
     "Map/changeLevel.js",
-    "Ui/hud.js",
     "Ui/xp.js",
+    "Ui/hud.js",
+    "useItems.js",
     "Ui/inventory.js",
     "Ui/profile.js",
     "Entities/playerMovement.js",
@@ -17,7 +18,6 @@ let scriptsFiles = [
     "Entities/merchant.js",
     "audio.js",
     "Ui/settings.js",
-    "useItems.js",
     "gameOver.js"
 ];
 

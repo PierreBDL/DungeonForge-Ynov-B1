@@ -117,6 +117,7 @@ btnAttack.addEventListener("click", () => {
         // Regarder si on passe un niveau avec l'expérience
         nextLevel();
 
+        return;
     }
 
     // Ennemi attaque le joueur
@@ -206,6 +207,6 @@ function printHealth(targetObject, target) {
 
     // Gestion de la bare de vie
     const HpBar = document.getElementById(target + "-health");
-    let widthEnnemyHpBar = ((targetObject.stats.hp / targetObject.stats.maxHp) * 100);
-    HpBar.style.width = widthEnnemyHpBar + "px";
+    let widthEnnemyHpBar = Math.max(0, (targetObject.stats.hp / targetObject.stats.maxHp) * 100);
+    HpBar.style.width = widthEnnemyHpBar + "%";
 }

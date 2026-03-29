@@ -20,6 +20,7 @@ function changeLevel () {
         currentLevel++;
         numberOfRooms++; // Incréémenttation du nombre de salles visité
         actualMap = generateBSPMap(25, 18, 3);
+        nextLevelEnnemy(); // Augmenter le niveau des ennemis
     } else {
         actualMap = maps[currentLevel];
     }
@@ -34,11 +35,6 @@ function changeLevel () {
 
     // Afficher la carte
     loadMap();
-
-    // Augmenter le niveau des ennemis
-    if (!inSpecialLevel) {
-        nextLevelEnnemy()
-    };
 }
 
 /* -------------------------------------------- */

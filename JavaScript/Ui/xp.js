@@ -12,10 +12,10 @@ function nextLevel() {
 
         // Soigner le joueur
         Player.stats.hp = Player.stats.maxHp;
-
-        // MAJ UI
-        UpdateHUD ();
     }
+
+    // MAJ UI
+    UpdateHUD();
 }
 
 
@@ -45,7 +45,7 @@ function UpdatePointsUiProfile() {
 /*             Augmentation stats               */
 /* -------------------------------------------- */
 
-function updateStats (stat) {
+function updateStats(stat) {
     // Si on n'a pas de points -> partir
     if (pointsUpdate <= 0) {
         return;
@@ -53,15 +53,15 @@ function updateStats (stat) {
 
     // En fonction de la stat :
     switch (stat) {
-        case "hp" :
+        case "hp":
             Player.stats.maxHp += 5;
             pointsUpdate -= 1;
             break;
-        case "attack" :
+        case "attack":
             Player.stats.attack += 2;
             pointsUpdate -= 1;
             break;
-        case "defense" :
+        case "defense":
             Player.stats.defense += 2;
             pointsUpdate -= 1;
             break;
@@ -81,11 +81,16 @@ function updateStats (stat) {
 /* -------------------------------------------- */
 
 function nextLevelEnnemy() {
+
     Ennemy.stats.level++;
     Ennemy.stats.maxHp += 20;
+    Ennemy.stats.hp = Ennemy.stats.maxHp;
+    Ennemy.stats.attack += 3;
     Ennemy.stats.defense += 2;
 
     // Augmenter une attaque aléatoire
-    let attackEnnemyChooseIndex = Math.floor(Math.random() * attackTypes.length);
-    TypesAttack[attackEnnemyChooseIndex] += 2;
+    let attacks = Object.keys(Ennemy.attackTypes);
+    let randomName = attacks[Math.floor(Math.random() * attacks.length)];
+    Ennemy.attackTypes[randomName] += 2;
+
 }
