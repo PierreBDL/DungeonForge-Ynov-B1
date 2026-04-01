@@ -7,11 +7,13 @@ document.addEventListener('keyup', (e) => {
     let moveX = Player.x;
     let moveY = Player.y;
 
-    if (e.key === "w" || e.key === "ArrowUp") {
+    e.preventDefault(); // Empêcher le scroll avec les flèches
+
+    if (e.key === "w" || e.key === "ArrowUp" || e.key === "z") {
         moveY -= 1;
     } else if (e.key === "s" || e.key === "ArrowDown") {
         moveY += 1;
-    } else if (e.key === "a" || e.key === "ArrowLeft") {
+    } else if (e.key === "a" || e.key === "ArrowLeft" || e.key === "q") {
         moveX -= 1;
     } else if (e.key === "d" || e.key === "ArrowRight") {
         moveX += 1;
