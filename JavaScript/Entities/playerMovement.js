@@ -134,10 +134,10 @@ function moveOnMap(x, y) {
 
     // Afficher une notif si c'est un coffre via l'orverlay message
     if (nextTile === CELL_TYPES.CHEST) {
-        // Gagnés dans le coffre
-        giveItems("Vous êtes tombé sur un coffre ! Vous obtenez : <br>", { gold: 10, xp: 20, potion_vie: 1 });
         // Indiquer que le coffre a déjà été récupéré
         originTile = CELL_TYPES.CHEST_OPEN;
+        // Gagnés dans le coffre
+        giveItems("Vous êtes tombé sur un coffre ! Vous obtenez : <br>", { gold: 10, xp: 20, potion_vie: 1 });
     }
 
     /* -------------------------------------------- */
