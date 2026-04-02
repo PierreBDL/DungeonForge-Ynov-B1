@@ -938,6 +938,31 @@ main {
     cursor: pointer;
 }
 
+/* Bouton Quitter */
+
+#quitGameBtn {
+    background: transparent;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    color: #c8a96e;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    width: 100%;
+}
+
+#quitGameBtn:hover {
+    transform: translateY(-2px);
+}
+
+#quitGameBtn:active {
+    transform: translateY(0);
+}
+
+#quitGameBtn img {
+    max-width: 100%;
+    height: auto;
+}
+
 .settings-footer {
     font-family: 'Cinzel', serif;
     font-size: 10px;
