@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 56" width="340" height="56">
+  <defs>
+    <linearGradient id="btnGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#2a1e08"/>
+      <stop offset="50%" stop-color="#1a1206"/>
+      <stop offset="100%" stop-color="#0e0a04"/>
+    </linearGradient>
+  </defs>
+  <!-- Ombre -->
+  <rect x="4" y="6" width="332" height="46" fill="#000000" opacity="0.5" rx="3"/>
+  <!-- Corps bouton -->
+  <rect x="2" y="2" width="336" height="48" fill="#1a0e06" rx="4"/>
+  <rect x="4" y="4" width="332" height="44" fill="url(#btnGrad)" rx="3"/>
+  <!-- Bordure or -->
+  <rect x="2" y="2" width="336" height="48" fill="none" stroke="#8a6010" stroke-width="2" rx="4"/>
+  <rect x="4" y="4" width="332" height="44" fill="none" stroke="#c8902a" stroke-width="1" rx="3"/>
+  <!-- Coins dorés -->
+  <rect x="2" y="2" width="12" height="12" fill="#c8902a" rx="2"/>
+  <rect x="326" y="2" width="12" height="12" fill="#c8902a" rx="2"/>
+  <rect x="2" y="42" width="12" height="8" fill="#c8902a" rx="2"/>
+  <rect x="326" y="42" width="12" height="8" fill="#c8902a" rx="2"/>
+  <!-- Icône épée -->
+  <rect x="22" y="20" width="5" height="22" fill="#c8c8d8" rx="1" transform="rotate(-45,24,31)"/>
+  <rect x="16" y="27" width="16" height="4" fill="#c8902a" rx="1" transform="rotate(-45,24,31)"/>
+  <rect x="24" y="18" width="7" height="9" fill="#e0e0f0" rx="1" transform="rotate(-45,24,31)"/>
+  <!-- Texte -->
+  <text x="175" y="32" font-family="Georgia, serif" font-size="15" fill="#ffe080" text-anchor="middle" letter-spacing="3" font-weight="bold">NOUVELLE AVENTURE</text>
+  <text x="175" y="32" font-family="Georgia, serif" font-size="15" fill="#c8a050" text-anchor="middle" letter-spacing="3" font-weight="bold" opacity="0.3" dy="1">NOUVELLE AVENTURE</text>
+</svg>

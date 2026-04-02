@@ -4,53 +4,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DungeonForge</title>
-    <link rel="stylesheet" href="../Css/headerFooter.css">
-    <link rel="stylesheet" href="../Css/game.css">
-    <link rel="icon" href="../Images/Icone/icone.png">
+    <title>DungeonForge - Menu</title>
+    <link rel="stylesheet" href="./Css/headerFooter.css">
+    <link rel="stylesheet" href="./Css/index.css">
+    <link rel="icon" href="./Images/Icone/icone.png">
 </head>
 
-<body>
-    <header>
-        <div id="experience-bar">
-            <div id="experience-bar-value"></div>
-            <div id="experience-bar-text">20 / 100</div>
-        </div>
-    </header>
+<body class="menu-body">
 
-    <audio src="./Audio/Tzar Burden of The Crown Soundtrack (CD-Rip) - Track 1.mp3"></audio>
+    <audio id="menu-music" src="./Audio/Evoland 2 OST - Track 01 (Title Screen).mp3" loop></audio>
 
     <main>
-
-        <!-- Game Over -->
-
-        <div id="gameOverOverlay">
-            <div id="gameOverCard">
-                <div id="gameOverTitle"> Game Over </div>
-                <div id="gameOverSubtitle">Vous êtes mort...</div>
-                <!-- Scores -->
-                <div id="scoresContainer"></div>
-                <button id="gameOverRestartBtn" onclick="hideGameOver()">Recommencer</button>
-            </div>
-        </div>
-
-        <!-- Message -->
-
-        <span id="message">
-            <div class="message-card">
-                <div class="message-close"><button id="closeMessageBtn"><img src="./Images/crux.png"
-                            alt="Fermer"></button></div>
-                <div class="message-header">Message</div>
-                <p class="message-body">Txt</p>
-                <div class="message-footer">DungeonForge</div>
-            </div>
-        </span>
 
         <!-- Paramètres -->
 
         <span id="settings">
             <div class="settings-card">
-                <div class="settings-close"><button id="closeSettingsBtn"><img src="./Images/crux.png"
+                <div class="settings-close"><button id="closeSettingsBtn"><img src="../Images/crux.png"
                             alt="Fermer"></button></div>
                 <div class="settings-header">Paramètres</div>
                 <div class="settings-body">
@@ -71,117 +41,40 @@
             </div>
         </span>
 
-        <!-- Marchand -->
+        <div class="menu-container">
+            <section id="main-menu">
+                <div class="logo-wrapper">
+                    <img src="./Images/Icone/logo.svg" id="game-logo" alt="DOMgeonForge Logo">
+                </div>
 
-        <span id="merchant">
-            <div class="merchant-card">
-                <div class="merchant-close"><button id="closeMerchantBtn"><img src="./Images/crux.png"
-                            alt="Fermer"></button></div>
-                <div class="merchant-header">Marchand</div>
-                <p class="merchant-body">Txt</p>
-                <div class="merchant-footer">DungeonForge</div>
-            </div>
-        </span>
-
-        <!-- Boutons de profil et d'inventaire -->
-
-        <div id="HUDBtns">
-            <button id="openCloseInventoryBtn"> <img src="./Images/bag.svg" alt="Inventaire"></button>
-            <button id="openCloseProfileBtn"> <img src="./Images/profile.svg" alt="Profil"></button>
-            <button id="saveBtn"> <img src="./Images/save.png" alt="Sauvegarder"></button>
-            <button id="restoreBtn"> <img src="./Images/restore.png" alt="Restaurer"></button>
+                <nav id="menu-buttons" >
+                    <button class="menu-btn" id="new-game-btn">
+                        <img src="./Images/Icone/btn_nouvelle_aventure.svg" alt="Nouvelle Aventure" class="menu-btn">
+                    </button>
+                    <button class="menu-btn" id="resume-btn">
+                        <img src="./Images/Icone/btn_reprendre.svg" alt="Reprendre" class="menu-btn">
+                    </button>
+                    <button class="menu-btn" id="settings-btn">
+                        <img src="./Images/Icone/btn_configurer.svg" alt="Configurer" class="menu-btn">
+                    </button>
+                    <button class="menu-btn" id="quit-btn">
+                        <img src="./Images/Icone/btn_quitter.svg" alt="Quitter" class="menu-btn">
+                    </button>
+                </nav>
+            </section>
         </div>
-
-        <!-- Inventaire -->
-
-        <div id="inventory">
-            <div class="inventory-card">
-                <div class="inventory-close"><button id="closeInventoryBtn"><img src="./Images/crux.png"
-                            alt="Fermer"></button></div>
-                <div class="inventory-header">Inventaire</div>
-                <div class="inventory-body">
-                    <div id="inventoryLine">
-                        <div class="inventoryCase"></div>
-                        <div class="inventoryCase"></div>
-                        <div class="inventoryCase"></div>
-                        <div class="inventoryCase"></div>
-                        <div class="inventoryCase"></div>
-                        <div class="inventoryCase"></div>
-                        <div class="inventoryCase"></div>
-                        <div class="inventoryCase"></div>
-                        <div class="inventoryCase"></div>
-                        <div class="inventoryCase"></div>
-                    </div>
-                </div>
-                <div class="inventory-footer">DungeonForge</div>
-            </div>
-        </div>
-
-        <!-- Profile -->
-
-        <div id="profile">
-            <div class="profile-card">
-                <div class="profile-close"><button id="closeProfileyBtn"><img src="./Images/crux.png"
-                            alt="Fermer"></button></div>
-                <div class="profile-header">Profil</div>
-                <div class="profile-body">
-                    <p>profile</p>
-                </div>
-                <div class="inventory-footer">DungeonForge</div>
-            </div>
-        </div>
-
-        <!-- Carte -->
-
-        <div id="map"></div>
-
-        <!-- Combat -->
-
-        <span id="fight">
-            <div id="fight-window">
-                <div id="fight-header">Combat</div>
-                <div id="fight-fighters">
-
-                    <!-- Joueur -->
-                    <div class="fight-entities">
-                        <div class="fight-entity-name" id="name-player">Héros</div>
-                        <div class="fight-health-bg">
-                            <div class="fight-health" id="player-health" style="width: 100%"></div>
-                        </div>
-                        <div class="fight-health-text" id="player-health-text">100 / 100</div>
-                    </div>
-
-                    <div class="fight-vs">VS</div>
-
-                    <!-- Ennemie -->
-                    <div class="fight-entities">
-                        <div class="fight-entity-name" id="name-ennemy">Ennemi</div>
-                        <div class="fight-health-bg">
-                            <div class="fight-health" id="ennemy-health" style="width: 100%"></div>
-                        </div>
-                        <div class="fight-health-text" id="ennemy-health-text">30 / 30</div>
-                    </div>
-                </div>
-
-                <div id="fight-text">Combat en cours</div>
-
-                <div id="fight-actions">
-                    <button id="attack">Attaquer</button>
-                    <button id="giveUp">Quitter</button>
-                </div>
-
-                <div id="fight-footer">DungeonForge</div>
-            </div>
-        </span>
     </main>
 
-    <!--
     <footer>
         <p><strong>DungeonForge</strong></p>
         <p>Projet Ynov Bachelor Informatique 1</p>
-    </footer> -->
+    </footer>
 
-    <script src="./chargeJsFiles.js"></script>
+    <script src="./JavaScript/mainMenu.js" defer></script>
+    <script src="./JavaScript/Common/audio.js" defer></script>
+    <script src="./JavaScript/Common/settings.js" defer></script>
+    <script src="./JavaScript/Scripts/Ui/saveMenu.js" defer></script>
+
 </body>
 
 </html>

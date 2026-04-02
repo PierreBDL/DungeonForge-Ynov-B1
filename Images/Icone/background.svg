@@ -1,0 +1,178 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <defs>
+    <radialGradient id="glow1" cx="50%" cy="40%" r="50%">
+      <stop offset="0%" stop-color="#3a2a10" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#0a0806" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="torchGlow1" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ff9030" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#ff6010" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="torchGlow2" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ff9030" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#ff6010" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="blur1">
+      <feGaussianBlur stdDeviation="3"/>
+    </filter>
+    <filter id="blur2">
+      <feGaussianBlur stdDeviation="8"/>
+    </filter>
+    <filter id="blur3">
+      <feGaussianBlur stdDeviation="20"/>
+    </filter>
+  </defs>
+
+  <!-- Ciel nocturne profond -->
+  <rect width="1920" height="1080" fill="#06040a"/>
+  
+  <!-- Fond lointain - montagnes sombres -->
+  <polygon points="0,600 120,420 240,500 350,380 480,460 600,340 720,430 850,310 980,420 1100,360 1220,450 1350,330 1480,410 1600,350 1720,430 1920,380 1920,800 0,800" fill="#0e0c16"/>
+  <polygon points="0,650 100,500 200,560 320,460 440,530 560,420 680,500 800,440 920,510 1040,450 1160,520 1280,460 1400,530 1520,470 1640,540 1760,480 1920,540 1920,800 0,800" fill="#12101a"/>
+
+  <!-- Brume lointaine -->
+  <rect x="0" y="480" width="1920" height="200" fill="#1a1428" opacity="0.4"/>
+
+  <!-- Ruines en arrière-plan à gauche -->
+  <!-- Tour ruinée gauche -->
+  <rect x="80" y="280" width="120" height="500" fill="#1a1420" rx="4"/>
+  <rect x="60" y="260" width="160" height="40" fill="#1e1824" rx="2"/>
+  <rect x="60" y="240" width="30" height="50" fill="#1e1824" rx="2"/>
+  <rect x="110" y="230" width="30" height="60" fill="#1e1824" rx="2"/>
+  <rect x="160" y="245" width="30" height="55" fill="#1e1824" rx="2"/>
+  <!-- Briques gauche -->
+  <rect x="85" y="290" width="50" height="12" fill="#221e2a" rx="1"/><rect x="140" y="290" width="50" height="12" fill="#221e2a" rx="1"/>
+  <rect x="100" y="310" width="50" height="12" fill="#221e2a" rx="1"/><rect x="80" y="330" width="50" height="12" fill="#221e2a" rx="1"/>
+  <rect x="135" y="310" width="50" height="12" fill="#221e2a" rx="1"/>
+  <rect x="155" y="330" width="40" height="12" fill="#221e2a" rx="1"/>
+  <!-- Lierre sur la tour -->
+  <path d="M85 320 Q95 310 100 325 Q110 315 115 330 Q105 340 95 335 Z" fill="#1a2a10" opacity="0.8"/>
+  <path d="M150 360 Q160 350 165 365 Q175 355 180 370 Q170 380 160 375 Z" fill="#1a2a10" opacity="0.7"/>
+  <path d="M90 400 Q100 388 108 402 Q120 392 125 408 Q112 420 100 414 Z" fill="#1a2a10" opacity="0.6"/>
+
+  <!-- Mur de pierres arrière-plan gauche -->
+  <rect x="0" y="420" width="300" height="400" fill="#14121e"/>
+  <!-- Blocs de pierres -->
+  <rect x="5" y="425" width="80" height="25" fill="#18161e" rx="1"/><rect x="90" y="425" width="80" height="25" fill="#1a181e" rx="1"/><rect x="175" y="425" width="80" height="25" fill="#18161e" rx="1"/><rect x="260" y="425" width="40" height="25" fill="#1a181e" rx="1"/>
+  <rect x="0" y="455" width="60" height="25" fill="#1c1a22" rx="1"/><rect x="65" y="455" width="80" height="25" fill="#18161e" rx="1"/><rect x="150" y="455" width="80" height="25" fill="#1a181e" rx="1"/><rect x="235" y="455" width="65" height="25" fill="#1c1a22" rx="1"/>
+  <rect x="5" y="485" width="80" height="25" fill="#18161e" rx="1"/><rect x="90" y="485" width="80" height="25" fill="#1a181e" rx="1"/><rect x="175" y="485" width="80" height="25" fill="#1c1a22" rx="1"/>
+  <rect x="0" y="515" width="60" height="25" fill="#1a181e" rx="1"/><rect x="65" y="515" width="80" height="25" fill="#1c1a22" rx="1"/><rect x="150" y="515" width="80" height="25" fill="#18161e" rx="1"/>
+
+  <!-- Végétation gauche -->
+  <ellipse cx="40" cy="600" rx="60" ry="100" fill="#0e1a0a" opacity="0.9"/>
+  <ellipse cx="0" cy="620" rx="40" ry="80" fill="#0c1808" opacity="0.8"/>
+  <ellipse cx="100" cy="580" rx="50" ry="90" fill="#101c0c" opacity="0.7"/>
+
+  <!-- Torche gauche -->
+  <rect x="290" y="390" width="10" height="50" fill="#3a2a10"/>
+  <rect x="285" y="375" width="20" height="20" fill="#2a1e0c" rx="2"/>
+  <!-- Flamme gauche -->
+  <ellipse cx="295" cy="370" rx="12" ry="18" fill="#ff9030" opacity="0.9" filter="url(#blur1)"/>
+  <ellipse cx="295" cy="365" rx="8" ry="14" fill="#ffb040" opacity="0.95"/>
+  <ellipse cx="295" cy="358" rx="5" ry="10" fill="#ffe060" opacity="0.9"/>
+  <!-- Halo torche gauche -->
+  <ellipse cx="295" cy="370" rx="80" ry="80" fill="url(#torchGlow1)" filter="url(#blur3)"/>
+
+  <!-- Arche centrale en arrière-plan -->
+  <path d="M760 200 Q960 50 1160 200 L1160 650 L760 650 Z" fill="#0e0c16"/>
+  <path d="M780 215 Q960 75 1140 215 L1140 640 L780 640 Z" fill="#0a0810"/>
+  <!-- Pierres de l'arche -->
+  <path d="M760 200 Q960 50 1160 200" fill="none" stroke="#1e1c28" stroke-width="25"/>
+  <path d="M770 210 Q960 62 1150 210" fill="none" stroke="#201e2a" stroke-width="6" opacity="0.5"/>
+
+  <!-- Cascade au centre-gauche -->
+  <rect x="880" y="0" width="40" height="300" fill="#1a2a3a" opacity="0.6" rx="4"/>
+  <rect x="885" y="0" width="10" height="300" fill="#203040" opacity="0.8" rx="2"/>
+  <rect x="900" y="0" width="8" height="280" fill="#1e2e3e" opacity="0.7" rx="2"/>
+  <!-- Écume cascade -->
+  <ellipse cx="900" cy="295" rx="30" ry="15" fill="#2a3a4a" opacity="0.6" filter="url(#blur1)"/>
+  <ellipse cx="900" cy="300" rx="20" ry="10" fill="#304050" opacity="0.5" filter="url(#blur1)"/>
+
+  <!-- Sol en pierres - premier plan -->
+  <rect x="0" y="780" width="1920" height="300" fill="#0c0a14"/>
+  <!-- Dalles de sol -->
+  <rect x="0" y="785" width="200" height="60" fill="#100e18" rx="2"/><rect x="205" y="785" width="200" height="60" fill="#0e0c16" rx="2"/><rect x="410" y="785" width="200" height="60" fill="#120e1a" rx="2"/><rect x="615" y="785" width="200" height="60" fill="#0e0c16" rx="2"/><rect x="820" y="785" width="200" height="60" fill="#100e18" rx="2"/><rect x="1025" y="785" width="200" height="60" fill="#120e1a" rx="2"/><rect x="1230" y="785" width="200" height="60" fill="#0e0c16" rx="2"/><rect x="1435" y="785" width="200" height="60" fill="#100e18" rx="2"/><rect x="1640" y="785" width="200" height="60" fill="#120e1a" rx="2"/><rect x="1845" y="785" width="75" height="60" fill="#0e0c16" rx="2"/>
+  <rect x="100" y="850" width="200" height="60" fill="#120e1a" rx="2"/><rect x="305" y="850" width="200" height="60" fill="#0e0c16" rx="2"/><rect x="510" y="850" width="200" height="60" fill="#100e18" rx="2"/><rect x="715" y="850" width="200" height="60" fill="#120e1a" rx="2"/><rect x="920" y="850" width="200" height="60" fill="#0e0c16" rx="2"/><rect x="1125" y="850" width="200" height="60" fill="#100e18" rx="2"/><rect x="1330" y="850" width="200" height="60" fill="#0e0c16" rx="2"/><rect x="1535" y="850" width="200" height="60" fill="#120e1a" rx="2"/><rect x="1740" y="850" width="180" height="60" fill="#100e18" rx="2"/>
+
+  <!-- Mur droit avec pierres détaillées -->
+  <rect x="1550" y="200" width="370" height="700" fill="#12101c"/>
+  <!-- Blocs de pierres droits -->
+  <rect x="1555" y="205" width="100" height="30" fill="#16141e" rx="1"/><rect x="1660" y="205" width="100" height="30" fill="#18161e" rx="1"/><rect x="1765" y="205" width="100" height="30" fill="#16141e" rx="1"/><rect x="1870" y="205" width="50" height="30" fill="#18161e" rx="1"/>
+  <rect x="1555" y="240" width="80" height="30" fill="#1a181e" rx="1"/><rect x="1640" y="240" width="100" height="30" fill="#16141e" rx="1"/><rect x="1745" y="240" width="100" height="30" fill="#1a181e" rx="1"/><rect x="1850" y="240" width="70" height="30" fill="#16141e" rx="1"/>
+  <rect x="1555" y="275" width="100" height="30" fill="#16141e" rx="1"/><rect x="1660" y="275" width="100" height="30" fill="#1a181e" rx="1"/><rect x="1765" y="275" width="100" height="30" fill="#16141e" rx="1"/>
+  <rect x="1555" y="310" width="80" height="30" fill="#1a181e" rx="1"/><rect x="1640" y="310" width="100" height="30" fill="#16141e" rx="1"/><rect x="1745" y="310" width="100" height="30" fill="#1a181e" rx="1"/>
+  <rect x="1555" y="345" width="100" height="30" fill="#16141e" rx="1"/><rect x="1660" y="345" width="100" height="30" fill="#18161e" rx="1"/><rect x="1765" y="345" width="100" height="30" fill="#16141e" rx="1"/>
+  <rect x="1555" y="380" width="80" height="30" fill="#1a181e" rx="1"/><rect x="1640" y="380" width="100" height="30" fill="#16141e" rx="1"/><rect x="1745" y="380" width="100" height="30" fill="#1a181e" rx="1"/>
+  <!-- Lierre sur mur droit -->
+  <path d="M1600 300 Q1615 285 1625 305 Q1640 290 1648 310 Q1632 325 1618 318 Z" fill="#1a2a10" opacity="0.7"/>
+  <path d="M1700 380 Q1715 365 1725 385 Q1740 370 1748 390 Q1732 405 1718 398 Z" fill="#1a2a10" opacity="0.8"/>
+  <path d="M1580 440 Q1595 425 1605 445 Q1620 430 1628 450 Q1612 465 1598 458 Z" fill="#1a2a10" opacity="0.6"/>
+  <path d="M1660 480 Q1675 465 1685 485 Q1700 470 1708 490 Q1692 505 1678 498 Z" fill="#1a2a10" opacity="0.7"/>
+
+  <!-- Torche droite -->
+  <rect x="1550" y="320" width="10" height="50" fill="#3a2a10"/>
+  <rect x="1545" y="305" width="20" height="20" fill="#2a1e0c" rx="2"/>
+  <!-- Flamme droite -->
+  <ellipse cx="1555" cy="300" rx="12" ry="18" fill="#ff9030" opacity="0.9" filter="url(#blur1)"/>
+  <ellipse cx="1555" cy="295" rx="8" ry="14" fill="#ffb040" opacity="0.95"/>
+  <ellipse cx="1555" cy="288" rx="5" ry="10" fill="#ffe060" opacity="0.9"/>
+  <!-- Halo torche droite -->
+  <ellipse cx="1555" cy="300" rx="80" ry="80" fill="url(#torchGlow2)" filter="url(#blur3)"/>
+
+  <!-- Végétation droite -->
+  <ellipse cx="1880" cy="650" rx="70" ry="120" fill="#0c1808" opacity="0.9"/>
+  <ellipse cx="1920" cy="680" rx="50" ry="100" fill="#0e1a0a" opacity="0.8"/>
+
+  <!-- Objets au sol gauche - table avec parchemin, épée, potion -->
+  <!-- Table -->
+  <rect x="50" y="690" width="280" height="90" fill="#2a1e0c" rx="4"/>
+  <rect x="60" y="695" width="260" height="80" fill="#1e1508" rx="3"/>
+  <rect x="55" y="775" width="20" height="30" fill="#2a1e0c" rx="2"/>
+  <rect x="305" y="775" width="20" height="30" fill="#2a1e0c" rx="2"/>
+  <!-- Parchemin sur la table -->
+  <rect x="70" y="700" width="120" height="70" fill="#c8a878" rx="8" transform="rotate(-5,130,735)"/>
+  <rect x="80" y="710" width="100" height="50" fill="#d4b88a" rx="6" transform="rotate(-5,130,735)"/>
+  <line x1="90" y1="720" x2="170" y2="718" stroke="#8a6040" stroke-width="1.5" opacity="0.6" transform="rotate(-5,130,735)"/>
+  <line x1="90" y1="730" x2="165" y2="728" stroke="#8a6040" stroke-width="1.5" opacity="0.6" transform="rotate(-5,130,735)"/>
+  <line x1="90" y1="740" x2="168" y2="738" stroke="#8a6040" stroke-width="1.5" opacity="0.5" transform="rotate(-5,130,735)"/>
+  <!-- Épée -->
+  <rect x="170" y="695" width="8" height="75" fill="#8a8a9a" rx="2" transform="rotate(15,174,730)"/>
+  <rect x="158" y="720" width="35" height="8" fill="#c8902a" rx="2" transform="rotate(15,174,730)"/>
+  <rect x="174" y="693" width="12" height="18" fill="#c8c8d8" rx="2" transform="rotate(15,174,730)"/>
+  <!-- Potion -->
+  <ellipse cx="250" cy="745" rx="14" ry="20" fill="#8a2060" opacity="0.85"/>
+  <rect x="244" y="728" width="12" height="12" fill="#6a1840" rx="2"/>
+  <rect x="246" y="724" width="8" height="6" fill="#5a1030" rx="2"/>
+  <ellipse cx="250" cy="738" rx="8" ry="5" fill="#c03080" opacity="0.5"/>
+
+  <!-- Coffre au sol -->
+  <rect x="1050" y="720" width="130" height="90" fill="#5a3a10" rx="6"/>
+  <rect x="1050" y="720" width="130" height="45" fill="#6a4818" rx="6"/>
+  <rect x="1050" y="760" width="130" height="5" fill="#3a2008"/>
+  <rect x="1098" y="742" width="34" height="26" fill="#c8902a" rx="4"/>
+  <rect x="1108" y="748" width="14" height="14" fill="#8a6010" rx="7"/>
+  <circle cx="1115" cy="754" r="5" fill="#6a4808"/>
+  <!-- Cercles décoratifs coffre -->
+  <circle cx="1060" cy="736" r="5" fill="#c8902a"/>
+  <circle cx="1170" cy="736" r="5" fill="#c8902a"/>
+  <circle cx="1060" cy="770" r="5" fill="#c8902a"/>
+  <circle cx="1170" cy="770" r="5" fill="#c8902a"/>
+  <!-- Or qui déborde -->
+  <ellipse cx="1115" cy="718" rx="25" ry="6" fill="#c8902a" opacity="0.9"/>
+  <ellipse cx="1108" cy="716" rx="6" ry="4" fill="#e0a030" opacity="0.8"/>
+  <ellipse cx="1122" cy="715" rx="6" ry="4" fill="#e0a030" opacity="0.7"/>
+
+  <!-- Ambiance lumineuse centrale (pour le menu) -->
+  <ellipse cx="960" cy="600" rx="500" ry="400" fill="url(#glow1)"/>
+  
+  <!-- Brume au sol -->
+  <rect x="0" y="750" width="1920" height="100" fill="#0a0818" opacity="0.5" filter="url(#blur2)"/>
+  <rect x="0" y="780" width="1920" height="80" fill="#0c0a1a" opacity="0.4" filter="url(#blur2)"/>
+
+  <!-- Vignette générale -->
+  <rect x="0" y="0" width="1920" height="1080" fill="url(#glow1)" opacity="0.3"/>
+  <rect x="0" y="0" width="400" height="1080" fill="#06040a" opacity="0.4"/>
+  <rect x="1520" y="0" width="400" height="1080" fill="#06040a" opacity="0.4"/>
+  <rect x="0" y="0" width="1920" height="200" fill="#06040a" opacity="0.5"/>
+  <rect x="0" y="900" width="1920" height="180" fill="#06040a" opacity="0.6"/>
+</svg>
