@@ -27,7 +27,7 @@ function loadScript(index) {
     }
 
     const script = document.createElement('script');
-    script.src = './JavaScript/' + scriptsFiles[index];
+    script.src = '../JavaScript/Scripts/' + scriptsFiles[index];
     script.onload = () => loadScript(index + 1);
     document.body.appendChild(script);
 }

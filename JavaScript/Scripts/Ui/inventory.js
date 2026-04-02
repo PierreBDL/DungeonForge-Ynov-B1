@@ -48,7 +48,7 @@ function inventory () {
     // Boucler sur l'inventaire
     for (let i = 0; i < 10; i++) {
         if (Player.inventory[i] === "potion_vie") { // On remplis avec le sprite
-            inventoryDom.innerHTML += "<div class='inventoryCase'><img src='./Images/potion_vie.svg' alt='Potion de vie'></div>";
+            inventoryDom.innerHTML += "<div class='inventoryCase'><img src='../Images/potion_vie.svg' alt='Potion de vie'></div>";
         } else { // Sinon, on fait un élément vide
             inventoryDom.innerHTML += "<div class='inventoryCase'></div>";
         }
