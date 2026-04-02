@@ -127,4 +127,30 @@ const restoreBtn = document.getElementById("restoreBtn");
 
 restoreBtn.addEventListener("click", restore);
 
-areThereASave()
+/* -------------------------------------------- */
+/*      Charger la sauvegarde au démarrage      */
+/* -------------------------------------------- */
+
+areThereASave();
+
+// Si une sauvegarde existe, la charger automatiquement au chargement du jeu
+setTimeout(() => {
+    if (isSaveExist === true && typeof Player !== 'undefined' && actualMap && currentLevel !== undefined) {
+        restore();
+    } else if (isSaveExist === false && typeof Player !== 'undefined') {
+        // Sinon -> recommencer
+        currentLevel = 0;
+        level = 1;
+        pointsUpdate = 0;
+        numberOfRooms = 0;
+        numberOfKills = 0;
+        actualMap = maps[0];
+        originTile = CELL_TYPES.FLOOR;
+        initPlayer();
+        initEnnemies();
+        loadMap();
+        UpdateHUD();
+        completProfile();
+        inventory();
+    }
+}, 1000);
