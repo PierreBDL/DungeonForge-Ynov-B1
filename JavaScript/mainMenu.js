@@ -1,5 +1,30 @@
 /* -------------------------------------------- */
-/*                 Paramètres                   */
+/*              État du menu                    */
+/* -------------------------------------------- */
+
+let menuActive = false;
+
+// Fonction pour activer le menu
+function activateMenu() {
+    if (menuActive) return; // Éviter les appels multiples
+    
+    menuActive = true;
+    const mainMenu = document.getElementById("main-menu");
+    
+    // Retirer la classe initial et ajouter la classe active
+    mainMenu.classList.remove("menu-initial");
+    mainMenu.classList.add("menu-active");
+    
+    // Lancer la musique
+    readOst();
+}
+
+// Événements pour activer le menu
+document.addEventListener("click", activateMenu);
+document.addEventListener("keydown", activateMenu);
+
+/* -------------------------------------------- */
+/*                 Boutons Menu                 */
 /* -------------------------------------------- */
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -9,7 +34,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const quitBtn = document.getElementById("quit-btn");
 
     // Ouvrir les paramètres
-    settingsBtn.addEventListener("click", () => {
+    settingsBtn.addEventListener("click", (e) => {
+        e.stopPropagation(); // Empêcher la propagation
         openSettings();
     });
 
@@ -36,6 +62,8 @@ document.addEventListener("DOMContentLoaded", () => {
     quitBtn.addEventListener("click", () => {
         alert("On ne quitte pas DOMgeonForge !");
     });
-
-    readOst();
+    
+    // Initialiser le menu en état initial
+    const mainMenu = document.getElementById("main-menu");
+    mainMenu.classList.add("menu-initial");
 });

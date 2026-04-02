@@ -20,8 +20,11 @@ function gameOver() {
         date: new Date().getTime()
     };
 
-    // Sauvegarder
+    // Sauvegarder les scores
     localStorage.setItem("scores", JSON.stringify(scores));
+    
+    // Supprimer la sauvegarde pour éviter la triche
+    localStorage.removeItem("saveExists");
 
     // Réinitialiser les compteurs
     numberOfRooms = 0;
@@ -67,6 +70,9 @@ function showGameOver() {
 function hideGameOver() {
     const overlay = document.getElementById("gameOverOverlay");
     overlay.style.display = "none";
+    
+    // Rediriger vers le menu principal
+    window.location.href = "../../index.html";
 }
 
 function showScores() {

@@ -152,5 +152,8 @@ setTimeout(() => {
         UpdateHUD();
         completProfile();
         inventory();
+        
+        // Lancer la musique
+        playMusicType("fond");
     }
 }, 1000);

@@ -2,8 +2,10 @@
 const audio = document.querySelector("audio");
 
 let osts = [
-    "Tzar Burden of The Crown Soundtrack (CD-Rip) - Track 1.mp3",
-    "Evoland 2 OST - 01 - Main Theme.mp3",
+    { name: "Tzar Burden of The Crown Soundtrack (CD-Rip) - Track 1.mp3", type: "fond" },
+    { name: "Evoland 2 OST - Track 27 (Giros Lab).mp3", type: "pnj" },
+    { name: "Evoland 2 OST - Track 36 (Tactics Time).mp3", type: "combat" },
+    { name: "Evoland 2 OST - Track 01 (Title Screen).mp3", type: "menu"}
 ];
 
 let currentOstIndex = 0;
@@ -56,7 +58,36 @@ function changeMusic() {
     currentOstIndex = newOstIndex;
     
     // Changer l'audio
-    audio.src = "../Audio/" + osts[currentOstIndex];
+    audio.src = "../Audio/" + osts[currentOstIndex].name;
+    audio.play();
+    audio.loop = true;
+    audio.volume = audioLevel.value / 100;
+}
+
+/* -------------------------------------------- */
+/*     Jouer une musique d'un type spécifique   */
+/* -------------------------------------------- */
+
+function playMusicType(type) {
+    // Vérifier que l'audio existe
+    if (!audio) return;
+    
+    // Récupérer toutes les musiques du type demandé
+    const musicsOfType = osts.filter(ost => ost.type === type);
+    
+    if (musicsOfType.length === 0) {
+        return;
+    }
+    
+    // Sélectionner une musique aléatoire du type
+    const randomIndex = Math.floor(Math.random() * musicsOfType.length);
+    const selectedMusic = musicsOfType[randomIndex];
+    
+    // Mettre à jour l'index courant
+    currentOstIndex = osts.findIndex(ost => ost.name === selectedMusic.name);
+    
+    // Charger et jouer la musique
+    audio.src = "../Audio/" + selectedMusic.name;
     audio.play();
     audio.loop = true;
     audio.volume = audioLevel.value / 100;

@@ -20,6 +20,51 @@
     justify-content: center;
     align-items: center;
     gap: 30px;
+    transition: all 0.6s ease;
+}
+
+/* État initial - logo au centre en gros */
+#main-menu.menu-initial {
+    justify-content: center;
+    gap: 0;
+}
+
+/* État final - menu normal */
+#main-menu.menu-active {
+    justify-content: center;
+    gap: 30px;
+}
+
+.logo-wrapper {
+    transition: all 0.6s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+/* Logo initial */
+#main-menu.menu-initial .logo-wrapper {
+    order: 0;
+    flex: 1;
+}
+
+#main-menu.menu-initial #game-logo {
+    width: 65vw;
+    max-width: 700px;
+    animation: fadeIn 0.4s ease;
+}
+
+/* Logo final - petit en haut */
+#main-menu.menu-active .logo-wrapper {
+    order: -1;
+    flex: 0;
+    width: 100%;
+    margin-bottom: 10px; 
+}
+
+#main-menu.menu-active #game-logo {
+    width: 500px;
 }
 
 #menu-buttons {
@@ -27,6 +72,12 @@
     flex-direction: column;
     gap: 15px;
     z-index: 10;
+    opacity: 0;
+    transition: opacity 0.6s ease 0.3s;
+}
+
+#main-menu.menu-active #menu-buttons {
+    opacity: 1;
 }
 
 .menu-btn {
@@ -45,6 +96,17 @@
 .menu-btn:hover {
     transform: scale(1.1);
     filter: brightness(1.2);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
 /* -------------------------------------------- */
@@ -154,7 +216,36 @@
 /*                 Responsive                   */
 /* -------------------------------------------- */
 
+@media (max-width: 768px) {
+    .menu-btn img { 
+        width: 200px; 
+    }
+    
+    #main-menu.menu-initial #game-logo {
+        width: 50vw;
+        max-width: 400px;
+    }
+    
+    #main-menu.menu-active #game-logo {
+        width: 200px;
+    }
+}
+
 @media (max-width: 480px) {
-    .menu-btn img { width: 180px; }
-    #game-logo { width: 80%; }
+    .menu-btn img { 
+        width: 150px; 
+    }
+    
+    #menu-buttons {
+        gap: 10px;
+    }
+    
+    #main-menu.menu-initial #game-logo {
+        width: 70vw;
+        max-width: 300px;
+    }
+    
+    #main-menu.menu-active #game-logo {
+        width: 150px;
+    }
 }

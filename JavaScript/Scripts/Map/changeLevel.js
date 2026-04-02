@@ -37,7 +37,7 @@ function changeLevel () {
     loadMap();
 
     // Changer la musique
-    changeMusic();
+    playMusicType("fond");
 }
 
 /* -------------------------------------------- */
@@ -65,6 +65,9 @@ function changeSpecialLevel (targetLevel) {
     initPlayer(); // Repositionner joueur
     initEnnemies(); // Recharger ennemis
     loadMap(); // Recharger la carte
+    
+    // Changer la musique au type "pnj"
+    playMusicType("pnj");
 }
 
 function returnFromSpecialLevel() {
@@ -81,4 +84,7 @@ function returnFromSpecialLevel() {
 
     initEnnemies();
     loadMap();
+    
+    // Revenir à la musique de combat
+    playMusicType("combat");
 }

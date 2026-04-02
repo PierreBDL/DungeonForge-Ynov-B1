@@ -94,6 +94,10 @@ function moveOnMap(x, y) {
         let keyEnnemy = "ennemy_" + y + "_" + x; // Sélectionner l'ennemi devant le joueur
         currentEnnemy = ennemies[keyEnnemy]; // Créer un objet ennemi
         fight(currentEnnemy); // Lancer le combat
+        
+        // Lancer musique de combat
+        playMusicType("combat");
+
         return; // Ne pas bouger
     }
 
