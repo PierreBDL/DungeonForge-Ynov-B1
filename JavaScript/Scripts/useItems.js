@@ -5,10 +5,10 @@ function useItems () {
     // Parcourir toutes les cases de l'inventaire
     inventoryCases.forEach((item, index) => {
 
-        // On vérifie l'objet cliqué
-        item.addEventListener("click", () => {
+        // Créer une fonction pour gérer le clic
+        const handleItemClick = () => {
 
-            let altImage = item.querySelector('img').alt;
+            let altImage = item.querySelector('img')?.alt;
             if (!altImage) {
                 return;
             };
@@ -29,9 +29,72 @@ function useItems () {
                         Player.inventory.splice(index, 1); // Suppression dans l'inventaire
                         message = "Vous avez gagné 50 PVs";
 
-                        inventory(); // On redessine l'inventaire
+                        // Si on est en combat
+                        if (itemUsedInFight && isInFight && currentEnnemy) {
+                            const fightText = document.getElementById("fight-text");
+                            turnFight++;
+                            fightText.innerHTML = fightText.innerHTML + "<br> " + turnFight + ": " + Player.name + " utilise une potion de vie!";
+                            printHealth(Player, "player");
+                            fightText.scrollTop = fightText.scrollHeight;
+                            printMessage(message);
+
+                            // Fermer l'inventaire
+                            const inventoryOverlay = document.getElementById("inventory");
+                            inventoryOverlay.style.display = "none";
+                            inventoryIsOpen = false;
+                            itemUsedInFight = false;
+
+                            // Ennemi attaque le joueur
+                            attackPhase(currentEnnemy, Player);
+
+                            // Si le joueur n'a plus de PV
+                            if (Player.stats.hp <= 0) {
+                                Player.stats.hp = 0;
+                                turnFight = 0;
+                                isInFight = false;
+                            }
+                            return;
+                        }
+
+                        // Redessiner l'inventaire pour voir les changements immédiatement
+                        inventory();
                     } else {
                         message = "Vie déjà au maximum";
+                    }
+                    break;
+
+                case "Potion de poison":
+                    if (itemUsedInFight && isInFight && currentEnnemy) {
+                        // Utilisation en combat
+                        currentEnnemy.poisonTurnsLeft = 5;
+                        currentEnnemy.isPoisoned = true;
+                        Player.inventory.splice(index, 1); // Suppression dans l'inventaire
+                        message = "Vous avez empoisonné l'ennemi! Il subit 5 dégâts par tour pendant 5 tours.";
+                        
+                        const fightText = document.getElementById("fight-text");
+                        turnFight++;
+                        fightText.innerHTML = fightText.innerHTML + "<br> " + turnFight + ": " + Player.name + " utilise une potion de poison!";
+                        fightText.scrollTop = fightText.scrollHeight;
+                        printMessage(message);
+
+                        // Fermer l'inventaire
+                        const inventoryOverlay = document.getElementById("inventory");
+                        inventoryOverlay.style.display = "none";
+                        inventoryIsOpen = false;
+                        itemUsedInFight = false;
+
+                        // Ennemi attaque le joueur
+                        attackPhase(currentEnnemy, Player);
+
+                        // Si le joueur n'a plus de PV
+                        if (Player.stats.hp <= 0) {
+                            Player.stats.hp = 0;
+                            turnFight = 0;
+                            isInFight = false;
+                        }
+                        return;
+                    } else {
+                        message = "Vous ne pouvez utiliser le poison que pendant un combat!";
                     }
                     break;
 
@@ -43,7 +106,14 @@ function useItems () {
             if (message != "") {
                 printMessage(message);
             }
-        })
+        };
+
+        // Copier l'élément pour supprimer les anciens listeners
+        const newItem = item.cloneNode(true);
+        item.parentNode.replaceChild(newItem, item);
+        
+        // Ajouter le listener au nouvel élément
+        newItem.addEventListener("click", handleItemClick);
     })
 
 }

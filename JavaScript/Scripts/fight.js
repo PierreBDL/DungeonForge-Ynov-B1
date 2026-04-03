@@ -5,6 +5,12 @@ function fight(ennemy) {
     // Bloquer les mouvements
     isInFight = true;
 
+    // Réinitialiser les valeurs de défense
+    Player.isDefending = false;
+    currentEnnemy.isDefending = false;
+    currentEnnemy.poisonTurnsLeft = 0;
+    currentEnnemy.isPoisoned = false;
+
     /* -------------------------------------------- */
     /*                   Joueur                     */
     /* -------------------------------------------- */
@@ -48,6 +54,83 @@ btnGiveUp.addEventListener("click", () => {
 
 
 /* -------------------------------------------- */
+/*                   Défendre                   */
+/* -------------------------------------------- */
+
+const btnDefend = document.getElementById("defend");
+
+btnDefend.addEventListener("click", () => {
+
+    // Si on a plus de vie -> game over
+    if (Player.stats.hp <= 0) {
+        Player.stats.hp = 0;
+        printHealth(Player, "player");
+        gameOver();
+        return;
+    }
+
+    // Tour de combat
+    turnFight++;
+
+    // Joueur se met en défense
+    Player.isDefending = true;
+    const fightText = document.getElementById("fight-text");
+    fightText.innerHTML = fightText.innerHTML + "<br> " + turnFight + ": " + Player.name + " se met en défense!";
+    fightText.scrollTop = fightText.scrollHeight;
+
+    // Ennemi attaque le joueur (avec défense réduite)
+    attackPhase(currentEnnemy, Player);
+
+    // Réinitialiser la défense
+    Player.isDefending = false;
+
+    // Si le joueur n'a plus de PV
+    if (Player.stats.hp <= 0) {
+        // Game Over
+        if (Player.stats.hp <= 0) {
+            Player.stats.hp = 0;
+            // Mettre le tour de combat à zéro
+            turnFight = 0;
+            isInFight = false;
+        }
+    }
+});
+
+
+/* -------------------------------------------- */
+/*              Utiliser un objet               */
+/* -------------------------------------------- */
+
+const btnUseItem = document.getElementById("useItem");
+
+btnUseItem.addEventListener("click", () => {
+
+    // Si on a plus de vie -> game over
+    if (Player.stats.hp <= 0) {
+        Player.stats.hp = 0;
+        printHealth(Player, "player");
+        gameOver();
+        return;
+    }
+
+    // Vérifier qu'il y a des objets dans l'inventaire
+    if (Player.inventory.length === 0) {
+        printMessage("Votre inventaire est vide!");
+        return;
+    }
+
+    // Ouvrir l'inventaire
+    const inventoryOverlay = document.getElementById("inventory");
+    inventoryOverlay.style.display = "flex";
+    inventoryIsOpen = true;
+    inventory();
+
+    // Marquer que nous sommes en utilisation d'objet en combat
+    itemUsedInFight = true;
+});
+
+
+/* -------------------------------------------- */
 /*             Fermeture combat                 */
 /* -------------------------------------------- */
 
@@ -66,6 +149,7 @@ function closeFight() {
 
 let turnFight = 0;
 let isPlayerDead = false;
+let itemUsedInFight = false;
 
 const btnAttack = document.getElementById("attack");
 
@@ -157,6 +241,11 @@ function attackPhase(attacker, target) {
         // Calculer + infliger les dégats
         dammageAmount = (currentEnnemy.attackTypes[attackEnnemyChoose] - Player.stats.defense);
 
+        // Si le joueur se défend, réduire les dégâts de 50%
+        if (Player.isDefending) {
+            dammageAmount = Math.floor(dammageAmount * 0.5);
+        }
+
         // Si trop de défence, on fait 1 dégat
         if (dammageAmount <= 0) {
             dammageAmount = 1;
@@ -174,6 +263,12 @@ function attackPhase(attacker, target) {
 
         // Calculer + infliger les dégats
         dammageAmount = (Player.stats.attack - currentEnnemy.stats.defense);
+
+        // Si l'ennemi se défend, réduire les dégâts de 50%
+        if (currentEnnemy.isDefending) {
+            dammageAmount = Math.floor(dammageAmount * 0.5);
+        }
+
         currentEnnemy.stats.hp -= dammageAmount;
 
         // Arrondir les dégats
@@ -183,7 +278,7 @@ function attackPhase(attacker, target) {
         printHealth(currentEnnemy, "ennemy")
     }
 
-    // Si l'attaque est négative à cause de la défence -> attaqye de 1
+    // Si l'attaque est négative à cause de la défence -> attaque de 1
     if (dammageAmount <= 0) {
         dammageAmount = 1;
     }
@@ -191,6 +286,23 @@ function attackPhase(attacker, target) {
     // Texte
     const fightText = document.getElementById("fight-text");
     fightText.innerHTML = fightText.innerHTML + "<br> " + turnFight + ": " + attacker.name + " inflige " + dammageAmount + " dégats à " + target.name;
+
+    // Appliquer le poison de l'ennemi
+    if (currentEnnemy && currentEnnemy.isPoisoned && currentEnnemy.poisonTurnsLeft > 0) {
+        let poisonDamage = 5;
+        currentEnnemy.stats.hp -= poisonDamage;
+        currentEnnemy.poisonTurnsLeft--;
+        
+        fightText.innerHTML = fightText.innerHTML + "<br> L'ennemi subit " + poisonDamage + " dégâts du poison! (Tours restants: " + currentEnnemy.poisonTurnsLeft + ")";
+        
+        // Si l'ennemi n'a plus de poison
+        if (currentEnnemy.poisonTurnsLeft <= 0) {
+            currentEnnemy.isPoisoned = false;
+            fightText.innerHTML = fightText.innerHTML + "<br> Le poison s'est dissipé.";
+        }
+        
+        printHealth(currentEnnemy, "ennemy");
+    }
 
     // Scroller vers le bas
     fightText.scrollTop = fightText.scrollHeight;
