@@ -196,7 +196,7 @@ main {
     height: 99%;
     background-color: #5a5a60;
     border: 1px solid #2d2d30;
-    background-image: url('../Images/Tiles/merchant2.svg');
+    background-image: url('../Images/Tiles/merchant2.png');
     background-size: cover;
     background-repeat: no-repeat;
 }

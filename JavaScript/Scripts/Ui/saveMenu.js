@@ -78,18 +78,18 @@ function restore() {
     }
 
     /* Stats Joueur */
-    Player.stats.hp = Number(localStorage.getItem("hp"));
-    Player.stats.maxHp = Number(localStorage.getItem("maxHp"));
-    Player.stats.attack = Number(localStorage.getItem("attack"));
-    Player.stats.defense = Number(localStorage.getItem("defense"));
-    Player.stats.speed = Number(localStorage.getItem("speed"));
-    Player.stats.xp = Number(localStorage.getItem("xp"));
-    Player.stats.xpToNext = Number(localStorage.getItem("xpToNext"));
+    Player.stats.hp = Number(localStorage.getItem("hp")) || 150;
+    Player.stats.maxHp = Number(localStorage.getItem("maxHp")) || 150;
+    Player.stats.attack = Number(localStorage.getItem("attack")) || 20;
+    Player.stats.defense = Number(localStorage.getItem("defense")) || 8;
+    Player.stats.speed = Number(localStorage.getItem("speed")) || 1;
+    Player.stats.xp = Number(localStorage.getItem("xp")) || 0;
+    Player.stats.xpToNext = Number(localStorage.getItem("xpToNext")) || 100;
 
     /* Niveau et Or */
-    Player.gold = Number(localStorage.getItem("gold"));
-    level = Number(localStorage.getItem("level"));
-    pointsUpdate = Number(localStorage.getItem("pointsUpdate"));
+    Player.gold = Number(localStorage.getItem("gold")) || 50;
+    level = Number(localStorage.getItem("level")) || 1;
+    pointsUpdate = Number(localStorage.getItem("pointsUpdate")) || 0;
 
     /* Inventaire */
     Player.inventory = JSON.parse(localStorage.getItem("inventory")) || [];
