@@ -4,12 +4,12 @@ let Player = {
     name: 'Héros',
     x: 2, y: 2, // Position sur la grille
     stats: {
-        hp: 100, 
-        maxHp: 100,
-        attack: 15,
-        attackBase: 15,
-        defense: 5,
-        defenseBase: 5,
+        hp: 150, 
+        maxHp: 150,
+        attack: 20,
+        attackBase: 20,
+        defense: 8,
+        defenseBase: 8,
         speed: 1,
         level: 1,
         xp: 0,
@@ -21,7 +21,7 @@ let Player = {
         armor: null,
         accessory: null
     },
-    gold: 0
+    gold: 50
 };
 
 
@@ -31,10 +31,10 @@ let Ennemy = {
     name: 'Ennemy',
     x: 0, y: 0, // Position sur la grille
     stats: {
-        hp: 100, 
-        maxHp: 100,
-        attack: 15,
-        defense: 5,
+        hp: 40, 
+        maxHp: 40,
+        attack: 12,
+        defense: 3,
         level: 1
     },
     inventory: [],
@@ -44,8 +44,8 @@ let Ennemy = {
         accessory: null
     },
     attackTypes: {
-        "Coup de poing": 7,
-        "Coup de pied": 10,
-        "Griffe": 15
+        "Coup de poing": 5,
+        "Coup de pied": 8,
+        "Griffe": 12
     }
 };

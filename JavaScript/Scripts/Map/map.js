@@ -16,16 +16,16 @@ const CELL_TYPES = {
 /* -------------------------------------------- */
 
 maps = [
-    generateBSPMap(25, 18, 3), // Générer la carte
-    generateBSPMap(25, 18, 3), // Générer la carte
-    generateBSPMap(25, 18, 3), // Générer la carte
-    generateBSPMap(25, 18, 3), // Générer la carte
-    generateBSPMap(25, 18, 3), // Générer la carte
-    generateBSPMap(25, 18, 3), // Générer la carte
-    generateBSPMap(25, 18, 3), // Générer la carte
-    generateBSPMap(25, 18, 3), // Générer la carte
-    generateBSPMap(25, 18, 3), // Générer la carte
-    generateBSPMap(25, 18, 3), // Générer la carte
+    generateBSPMap(25, 18, 3, 0), // Générer la carte niveau 0
+    generateBSPMap(25, 18, 3, 1), // Générer la carte niveau 1
+    generateBSPMap(25, 18, 3, 2), // Générer la carte niveau 2
+    generateBSPMap(25, 18, 3, 3), // Générer la carte niveau 3
+    generateBSPMap(25, 18, 3, 4), // Générer la carte niveau 4
+    generateBSPMap(25, 18, 3, 5), // Générer la carte niveau 5
+    generateBSPMap(25, 18, 3, 6), // Générer la carte niveau 6
+    generateBSPMap(25, 18, 3, 7), // Générer la carte niveau 7
+    generateBSPMap(25, 18, 3, 8), // Générer la carte niveau 8
+    generateBSPMap(25, 18, 3, 9), // Générer la carte niveau 9
 ]
 
 let merchantMap = [

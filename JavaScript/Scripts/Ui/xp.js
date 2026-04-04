@@ -83,14 +83,21 @@ function updateStats(stat) {
 function nextLevelEnnemy() {
 
     Ennemy.stats.level++;
-    Ennemy.stats.maxHp += 20;
+    
+    // Vie
+    Ennemy.stats.maxHp = 40 + (Ennemy.stats.level * 15);
     Ennemy.stats.hp = Ennemy.stats.maxHp;
-    Ennemy.stats.attack += 3;
-    Ennemy.stats.defense += 2;
+    
+    // Attaque
+    Ennemy.stats.attack = 12 + (Ennemy.stats.level * 2);
+    
+    // Défence
+    Ennemy.stats.defense = 3 + (Ennemy.stats.level * 1);
 
-    // Augmenter une attaque aléatoire
+    // Augmenter les attaques aléatoires
     let attacks = Object.keys(Ennemy.attackTypes);
-    let randomName = attacks[Math.floor(Math.random() * attacks.length)];
-    Ennemy.attackTypes[randomName] += 2;
-
+    for (let attackName of attacks) {
+        // Augmentation de base selon le niveau
+        Ennemy.attackTypes[attackName] += (Ennemy.stats.level * 1.5);
+    }
 }

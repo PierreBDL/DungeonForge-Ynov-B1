@@ -185,7 +185,7 @@ function ensureConnectivity(grid, W, H) {
 /* Génération de la carte                       */
 /* -------------------------------------------- */
 
-function generateBSPMap(W = 25, H = 18, depth = 3) {
+function generateBSPMap(W = 25, H = 18, depth = 3, mapLevel = 0) {
 
     const grid = Array.from({ length: H }, () => Array(W).fill(CELL_TYPES.WALL));
 
@@ -214,6 +214,17 @@ function generateBSPMap(W = 25, H = 18, depth = 3) {
     /* Connectivité */
     ensureConnectivity(grid, W, H);
 
+    /* Placement aléatoire de la porte du marchand (30% de chance) */
+    if (Math.random() < 0.3) {
+        // Chercher une room aléatoire (pas la première ni la dernière)
+        const middleRooms = shuffled.slice(1, -1);
+        if (middleRooms.length > 0) {
+            const merchantRoom = middleRooms[Math.floor(Math.random() * middleRooms.length)];
+            const merchantDoorSpot = getSafeSpot(merchantRoom, grid);
+            grid[merchantDoorSpot.y][merchantDoorSpot.x] = CELL_TYPES.MERCHANT_DOOR;
+        }
+    }
+
     /* Spawn des entités APRÈS la connectivité */
     shuffled.slice(1, -1).forEach(room => {
 
@@ -225,15 +236,17 @@ function generateBSPMap(W = 25, H = 18, depth = 3) {
         positions.sort(() => Math.random() - 0.5);
         let idx = 0;
 
-        const nbEnnemies = 1 + Math.floor(Math.random() * 3);
+        // Augmenter le nombre d'ennemis selon le niveau (au minimum 1, au maximum 4)
+        const levelMultiplier = Math.min(4, 1 + Math.floor(mapLevel * 0.5));
+        const nbEnnemies = Math.min(levelMultiplier + Math.floor(Math.random() * 2), positions.length - 2);
         for (let i = 0; i < nbEnnemies && idx < positions.length; i++, idx++)
             grid[positions[idx].y][positions[idx].x] = CELL_TYPES.ENNEMY;
 
-        const nbChests = Math.floor(Math.random() * 3);
+        const nbChests = Math.min(Math.floor(Math.random() * 3) + 1, positions.length - idx);
         for (let i = 0; i < nbChests && idx < positions.length; i++, idx++)
             grid[positions[idx].y][positions[idx].x] = CELL_TYPES.CHEST;
 
-        if (Math.random() < 0.4 && idx < positions.length)
+        if (Math.random() < 0.3 && idx < positions.length)
             grid[positions[idx].y][positions[idx].x] = CELL_TYPES.DOOR;
     });
 
