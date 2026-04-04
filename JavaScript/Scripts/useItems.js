@@ -12,6 +12,15 @@ function useItems () {
             if (!altImage) {
                 return;
             };
+
+            // Si on n'est PAS en combat -> afficher les options au lieu d'utiliser
+            if (!isInFight) {
+                if (item.dataset.index !== undefined) {
+                    showItemOptions(parseInt(item.dataset.index), Player.inventory[parseInt(item.dataset.index)]);
+                }
+                return;
+            }
+
             let message = "";
 
 
