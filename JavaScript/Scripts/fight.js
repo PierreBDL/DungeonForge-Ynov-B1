@@ -62,12 +62,7 @@ const btnDefend = document.getElementById("defend");
 btnDefend.addEventListener("click", () => {
 
     // Si on a plus de vie -> game over
-    if (Player.stats.hp <= 0) {
-        Player.stats.hp = 0;
-        printHealth(Player, "player");
-        gameOver();
-        return;
-    }
+    checkPlayerDeath();
 
     // Tour de combat
     turnFight++;
@@ -85,15 +80,7 @@ btnDefend.addEventListener("click", () => {
     Player.isDefending = false;
 
     // Si le joueur n'a plus de PV
-    if (Player.stats.hp <= 0) {
-        // Game Over
-        if (Player.stats.hp <= 0) {
-            Player.stats.hp = 0;
-            // Mettre le tour de combat à zéro
-            turnFight = 0;
-            isInFight = false;
-        }
-    }
+    checkPlayerDeath();
 });
 
 
@@ -106,12 +93,7 @@ const btnUseItem = document.getElementById("useItem");
 btnUseItem.addEventListener("click", () => {
 
     // Si on a plus de vie -> game over
-    if (Player.stats.hp <= 0) {
-        Player.stats.hp = 0;
-        printHealth(Player, "player");
-        gameOver();
-        return;
-    }
+    checkPlayerDeath();
 
     // Vérifier qu'il y a des objets dans l'inventaire
     if (Player.inventory.length === 0) {
@@ -156,12 +138,7 @@ const btnAttack = document.getElementById("attack");
 btnAttack.addEventListener("click", () => {
 
     // Si on a plus de vie -> game over
-    if (Player.stats.hp <= 0) {
-        Player.stats.hp = 0;
-        printHealth(Player, "player");
-        gameOver();
-        return;
-    }
+    checkPlayerDeath();
 
     // Tour de combat
     turnFight++;
@@ -211,12 +188,7 @@ btnAttack.addEventListener("click", () => {
     if (Player.stats.hp <= 0) {
 
         // Game Over
-        if (Player.stats.hp <= 0) {
-            Player.stats.hp = 0;
-            // Mettre le tour de combat à zéro
-            turnFight = 0;
-            isInFight = false;
-        }
+        checkPlayerDeath();
     }
 });
 
@@ -287,20 +259,29 @@ function attackPhase(attacker, target) {
     const fightText = document.getElementById("fight-text");
     fightText.innerHTML = fightText.innerHTML + "<br> " + turnFight + ": " + attacker.name + " inflige " + dammageAmount + " dégats à " + target.name;
 
+
+    // Animation de l'attaque
+    const targetElement = document.getElementById(target === Player ? "player" : "ennemy");
+    targetElement.classList.add("damage-flash");
+
+    setTimeout(() => {
+        targetElement.classList.remove("damage-flash");
+    }, 400);
+
     // Appliquer le poison de l'ennemi
     if (currentEnnemy && currentEnnemy.isPoisoned && currentEnnemy.poisonTurnsLeft > 0) {
         let poisonDamage = 5;
         currentEnnemy.stats.hp -= poisonDamage;
         currentEnnemy.poisonTurnsLeft--;
-        
+
         fightText.innerHTML = fightText.innerHTML + "<br> L'ennemi subit " + poisonDamage + " dégâts du poison! (Tours restants: " + currentEnnemy.poisonTurnsLeft + ")";
-        
+
         // Si l'ennemi n'a plus de poison
         if (currentEnnemy.poisonTurnsLeft <= 0) {
             currentEnnemy.isPoisoned = false;
             fightText.innerHTML = fightText.innerHTML + "<br> Le poison s'est dissipé.";
         }
-        
+
         printHealth(currentEnnemy, "ennemy");
     }
 
@@ -321,4 +302,20 @@ function printHealth(targetObject, target) {
     const HpBar = document.getElementById(target + "-health");
     let widthEnnemyHpBar = Math.max(0, (targetObject.stats.hp / targetObject.stats.maxHp) * 100);
     HpBar.style.width = widthEnnemyHpBar + "%";
+}
+
+
+/* -------------------------------------------- */
+/*         Vérifier la vie du joueur            */
+/* -------------------------------------------- */
+
+function checkPlayerDeath() {
+    if (Player.stats.hp <= 0) {
+        Player.stats.hp = 0;
+        printHealth(Player, "player");
+        gameOver();
+        // Mettre le tour de combat à zéro
+        turnFight = 0;
+        isInFight = false;
+    }
 }
