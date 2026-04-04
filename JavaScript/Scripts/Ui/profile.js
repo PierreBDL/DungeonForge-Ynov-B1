@@ -102,6 +102,30 @@ function completProfile() {
 
     content += "</div>"; // Fin de la div content
 
+    // Équipement
+    content += `
+        <div id="profile-equipment">
+            <div class="profile-equipment-title">Équipement</div>
+            <div class="profile-equipment-grid">
+                <div class="equipment-slot">
+                    <div class="slot-label">Arme</div>
+                    <img id="equipment-weapon" src="../Images/Equipment/weapon-empty.png" alt="Arme" class="equipment-image">
+                    <div class="slot-name" id="equipment-weapon-name">${Player.equipment.weapon || 'Aucun'}</div>
+                </div>
+                <div class="equipment-slot">
+                    <div class="slot-label">Armure</div>
+                    <img id="equipment-armor" src="../Images/Equipment/armor-empty.png" alt="Armure" class="equipment-image">
+                    <div class="slot-name" id="equipment-armor-name">${Player.equipment.armor || 'Aucun'}</div>
+                </div>
+                <div class="equipment-slot">
+                    <div class="slot-label">Accessoire</div>
+                    <img id="equipment-accessory" src="../Images/Equipment/accessory-empty.png" alt="Accessoire" class="equipment-image">
+                    <div class="slot-name" id="equipment-accessory-name">${Player.equipment.accessory || 'Aucun'}</div>
+                </div>
+            </div>
+        </div>
+    `;
+
     // Mettre le contenu dans le profil
     profileBody.innerHTML = content;
 
