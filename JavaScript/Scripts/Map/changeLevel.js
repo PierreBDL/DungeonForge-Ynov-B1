@@ -89,6 +89,26 @@ function returnFromSpecialLevel() {
 
     originTile = savedOriginTile; // Restaurer la tuile sous le joueur
 
+    // Vérifier que la position sauvegardée est valide
+    if (savedPlayerX >= actualMap[0].length || savedPlayerY >= actualMap.length ||
+        actualMap[savedPlayerY][savedPlayerX] === CELL_TYPES.WALL) {
+        // Position invalide -> chercher une position de sol valide éloignée
+        let validSpot = null;
+        for (let y = 0; y < actualMap.length; y++) {
+            for (let x = 0; x < actualMap[y].length; x++) {
+                if (actualMap[y][x] === CELL_TYPES.FLOOR) {
+                    validSpot = { x, y };
+                    break;
+                }
+            }
+            if (validSpot) break;
+        }
+        if (validSpot) {
+            savedPlayerX = validSpot.x;
+            savedPlayerY = validSpot.y;
+        }
+    }
+
     // Reprendre où on était
     Player.x = savedPlayerX;
     Player.y = savedPlayerY;
@@ -97,6 +117,6 @@ function returnFromSpecialLevel() {
     initEnnemies();
     loadMap();
     
-    // Revenir à la musique de combat
+    // Revenir à la musique de fond
     playMusicType("fond");
 }
