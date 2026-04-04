@@ -154,8 +154,20 @@ btnAttack.addEventListener("click", () => {
     // Voir si l'ennemi n'a plus de PV
     if (currentEnnemy.stats.hp <= 0) {
 
-        // Donner le butin
-        giveItems("Vous avez vaincu un ennemi ! Vous obtenez : <br>", { gold: 10, xp: 20 });
+        // Donner le butin (récompenses selon le niveau de l'ennemi)
+        const goldReward = 15 + (currentEnnemy.stats.level * 10);
+        const xpReward = 30 + (currentEnnemy.stats.level * 15);
+        
+        // Construire les récompenses
+        const rewards = { gold: goldReward, xp: xpReward };
+        
+        // À partir du niveau 2, possibilité de recevoir de l'équipement de l'ennemi
+        if (currentEnnemy.stats.level >= 2 && Math.random() < (0.2 + currentEnnemy.stats.level * 0.1)) {
+            const equipment = getRandomEquipment(currentEnnemy.stats.level);
+            rewards.equipment = equipment;
+        }
+        
+        giveItems("Vous avez vaincu un ennemi ! Vous obtenez : <br>", rewards);
 
         // Supprimer ennemie de la carte
         actualMap[currentEnnemy.y][currentEnnemy.x] = CELL_TYPES.FLOOR;

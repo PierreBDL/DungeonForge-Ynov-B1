@@ -140,8 +140,9 @@ function moveOnMap(x, y) {
     if (nextTile === CELL_TYPES.CHEST) {
         // Indiquer que le coffre a déjà été récupéré
         originTile = CELL_TYPES.CHEST_OPEN;
-        // Gagnés dans le coffre
-        giveItems("Vous êtes tombé sur un coffre ! Vous obtenez : <br>", { gold: 10, xp: 20, potion_vie: 1 });
+        // Gagnés dans le coffre - système de loot selon le niveau
+        const loot = generateChestLoot(currentLevel);
+        giveItems("Vous êtes tombé sur un coffre ! Vous obtenez : <br>", loot);
     }
 
     /* -------------------------------------------- */
@@ -160,5 +161,58 @@ function moveOnMap(x, y) {
     // Afficher la carte mise à jour
     updateCell(Player.x, Player.y); // nouvelle position
     updateCell(x_ancien, y_ancien); // ancienne position
+}
+
+/* -------------------------------------------- */
+/*            Générateur de coffre              */
+/* -------------------------------------------- */
+
+function generateChestLoot(level) {
+    // Base: or, exp, et potions aléatoires
+    const loot = {
+        gold: 15 + (level * 5),           // Augmente avec le niveau
+        xp: 25 + (level * 10),            // Augmente avec le niveau
+    };
+
+    // 50% de chance d'avoir une potion
+    const potions = ["potion_vie", "potion_poison", "potion_force", "potion_armure"];
+    if (Math.random() < 0.5) {
+        const randomPotion = potions[Math.floor(Math.random() * potions.length)];
+        loot[randomPotion] = 1;
+    }
+
+    // À partir du niveau 3, possibilité de trouver un équipement rare
+    if (level >= 3 && Math.random() < 0.3) {
+        const equipment = getRandomEquipment(level);
+        loot.equipment = equipment;
+    }
+
+    return loot;
+}
+
+/* -------------------------------------------- */
+/*            Générateur d'équipement           */
+/* -------------------------------------------- */
+
+function getRandomEquipment(level) {
+    const weapons = [
+        { type: "weapon", name: "épée", bonus: 10 },
+        { type: "weapon", name: "épée_longue", bonus: 18 },
+        { type: "weapon", name: "hache", bonus: 15 },
+    ];
+
+    const armors = [
+        { type: "armor", name: "cuirasse", bonus: 6 },
+        { type: "armor", name: "armure_lourde", bonus: 12 },
+        { type: "armor", name: "robe_magique", bonus: 8, attackBonus: 5 },
+    ];
+
+    const accessories = [
+        { type: "accessory", name: "bague_force", attackBonus: 12 },
+        { type: "accessory", name: "amulette", defenseBonus: 10 },
+    ];
+
+    const allEquipment = [...weapons, ...armors, ...accessories];
+    return allEquipment[Math.floor(Math.random() * allEquipment.length)];
 }
 
