@@ -2,6 +2,7 @@
 
 let scriptsFiles = [
     "Scripts/Entities/mobs.js",
+    "Scripts/items.data.js",
     "Scripts/Map/generateMap.js",
     "Scripts/Map/map.js",
     "Scripts/Ui/message.js",
