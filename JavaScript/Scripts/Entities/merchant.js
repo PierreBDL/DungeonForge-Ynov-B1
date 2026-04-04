@@ -2,20 +2,37 @@
 /*                  Marchand                    */
 /* -------------------------------------------- */
 
-function merchant (articleToSell = [
-    { name: "Potion de vie", price: 20}, 
-    { name: "Potion de poison", price: 35}, 
-    { name: "Potion de force", price: 50}, 
-    { name: "Potion d'armure", price: 50},
-    { name: "Épée", price: 120},
-    { name: "Épée Longue", price: 200},
-    { name: "Hache", price: 180},
-    { name: "Cuirasse", price: 150},
-    { name: "Armure Lourde", price: 280},
-    { name: "Robe Magique", price: 200},
-    { name: "Bague de Force", price: 100},
-    { name: "Amulette de Défense", price: 100}
-]) {
+// Liste complète des articles disponibles
+const allMerchantItems = [
+    { name: "Potion de vie", price: 20, description: "Restaure 50 points de vie. À utiliser en cas de besoin urgent." }, 
+    { name: "Potion de poison", price: 35, description: "Empoisonne l'ennemi pendant 5 tours. Inflige 5 dégâts par tour." }, 
+    { name: "Potion de force", price: 50, description: "Augmente l'attaque de +10 pendant 30 secondes. Parfait pour fini un combat." }, 
+    { name: "Potion d\'armure", price: 50, description: "Augmente la défense de +8 pendant 30 secondes. Pour survivre plus longtemps." },
+    { name: "Épée", price: 120, description: "Arme basique en acier. +10 d'attaque. Idéale pour débuter." },
+    { name: "Épée Longue", price: 200, description: "Arme puissante et équilibrée. +18 d'attaque. L'une des meilleures armes." },
+    { name: "Hache", price: 180, description: "Arme lourde avec puissance modérée. +15 d'attaque. Bonne puissance." },
+    { name: "Cuirasse", price: 150, description: "Armure légère en cuivre. +6 de défense. Protection de base." },
+    { name: "Armure Lourde", price: 280, description: "Armure renforcée en acier. +12 de défense. Meilleure protection." },
+    { name: "Robe Magique", price: 200, description: "Armure mystique. +8 de défense et +5 d'attaque. Combat magique." },
+    { name: "Bague de Force", price: 100, description: "Accessoire ésotérique. +12 d'attaque. Pour augmenter la puissance brute." },
+    { name: "Amulette de Défense", price: 100, description: "Amulette protectrice. +10 de défense. Pour se protéger davantage." }
+];
+
+/* -------------------------------------------- */
+/*             Articles aléatoires              */
+/* -------------------------------------------- */
+function getRandomMerchantInventory() {
+    const shuffled = [...allMerchantItems].sort(() => Math.random() - 0.5);
+    const count = 4 + Math.floor(Math.random() * 3); 
+    return shuffled.slice(0, count);
+}
+
+function merchantFunction (articleToSell) {
+    // Si pas d'articles spécifiés, en sélectionner aléatoirement
+    if (!articleToSell) {
+        articleToSell = getRandomMerchantInventory();
+    }
+
     // Afficher le texte du marchand
     openMerchant();
 
@@ -40,13 +57,9 @@ function merchant (articleToSell = [
 /*              Fenêtre marchand                */
 /* -------------------------------------------- */
 
-const windowMerchant = document.getElementById("merchant");
-merchantIsOpen = false;
-
 // Ouvrir
 function openMerchant () {
-    merchantIsOpen = true;
-    windowMerchant.style.display = "flex";
+    document.getElementById("merchantWindow").style.display = "flex";
 }
 
 // Fermer
@@ -55,9 +68,39 @@ const closeMerchantBtn = document.getElementById("closeMerchantBtn");
 closeMerchantBtn.addEventListener("click", closeMerchant);
 
 function closeMerchant() {
+    const windowMerchant = document.getElementById("merchantWindow");
+
     windowMerchant.style.display = "none";
-    merchantIsOpen = false;
 }
+
+/* -------------------------------------------- */
+/*            Description d'article            */
+/* -------------------------------------------- */
+
+function showItemDetails(name, price, description) {
+    const overlay = document.getElementById("itemDetailsOverlay");
+    const itemName = document.getElementById("itemDetailsName");
+    const itemPrice = document.getElementById("itemDetailsPrice");
+    const itemDesc = document.getElementById("itemDetailsDescription");
+
+    itemName.textContent = name;
+    itemPrice.textContent = price + "G";
+    itemDesc.textContent = description;
+
+    overlay.style.display = "flex";
+}
+
+function closeItemDetails() {
+    document.getElementById("itemDetailsOverlay").style.display = "none";
+}
+
+// Fermer la description au clic en dehors
+document.addEventListener("click", (e) => {
+    const overlay = document.getElementById("itemDetailsOverlay");
+    if (e.target === overlay) {
+        closeItemDetails();
+    }
+});
 
 
 /* -------------------------------------------- */
@@ -67,9 +110,11 @@ function closeMerchant() {
 function addObjectMerchant (product) {
     let productContent = 
     `<div class="merchantProduct"> 
-        <div class="productName">` + product.name + `</div>
-        <div class="productPrice">` + product.price + `G</div>
-        <button type="button" onclick="buyItem('` + product.name + "'," + product.price + `)"> Acheter </button>
+        <div class="productName" onclick="showItemDetails('` + product.name.replace(/'/g, "\\'") + `', ` + product.price + `, '` + product.description.replace(/'/g, "\\'") + `')" style="cursor: pointer;"> 
+            ` + product.name + ` 
+        </div>
+        <div class="productPrice" onclick="showItemDetails('` + product.name.replace(/'/g, "\\'") + `', ` + product.price + `, '` + product.description.replace(/'/g, "\\'") + `')" style="cursor: pointer;">` + product.price + `G</div>
+        <button type="button" onclick="buyItem('` + product.name.replace(/'/g, "\\'") + "'," + product.price + `)"> Acheter </button>
     </div>
     `;
 

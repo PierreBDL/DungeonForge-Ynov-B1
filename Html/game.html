@@ -77,13 +77,27 @@
 
         <!-- Marchand -->
 
-        <span id="merchant">
+        <span id="merchantWindow">
             <div class="merchant-card">
                 <div class="merchant-close"><button id="closeMerchantBtn"><img src="../Images/UI/crux.png"
                             alt="Fermer"></button></div>
                 <div class="merchant-header">Marchand</div>
                 <p class="merchant-body">Txt</p>
                 <div class="merchant-footer">DungeonForge</div>
+            </div>
+        </span>
+
+        <!-- Overlay détails article -->
+
+        <span id="itemDetailsOverlay">
+            <div class="item-details-card">
+                <div class="item-details-close"><button onclick="closeItemDetails()"><img src="../Images/UI/crux.png" alt="Fermer"></button></div>
+                <div class="item-details-header">Détails</div>
+                <div class="item-details-body">
+                    <div class="item-details-name" id="itemDetailsName">Nom d'article</div>
+                    <div class="item-details-price" id="itemDetailsPrice">0G</div>
+                    <div class="item-details-description" id="itemDetailsDescription">Description de l'article</div>
+                </div>
             </div>
         </span>
 

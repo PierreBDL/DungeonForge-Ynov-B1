@@ -215,7 +215,7 @@ function generateBSPMap(W = 25, H = 18, depth = 3, mapLevel = 0) {
     ensureConnectivity(grid, W, H);
 
     /* Placement aléatoire de la porte du marchand (30% de chance) */
-    if (Math.random() < 0.3) {
+    if (Math.random() < 0.7) {
         // Chercher une room aléatoire (pas la première ni la dernière)
         const middleRooms = shuffled.slice(1, -1);
         if (middleRooms.length > 0) {

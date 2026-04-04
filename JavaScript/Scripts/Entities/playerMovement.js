@@ -60,6 +60,25 @@ function moveOnMap(x, y) {
 
     /* -------------------------------------------- */
 
+    // Marchand
+    if (actualMap[y][x] === CELL_TYPES.MERCHANT) {
+        merchantFunction();
+        return; // Eviter de marcher sur le marchand
+    }
+
+    // Porte du marchand
+    if (actualMap[y][x] === CELL_TYPES.MERCHANT_DOOR) {
+        changeSpecialLevel(merchantMap);
+        return;
+    }
+
+    // Ne pas bouger si le marchand est ouvert
+    if (document.getElementById("merchantWindow").style.display === "flex") {
+        return;
+    }
+
+    /* -------------------------------------------- */
+
     // Ne pas bouger si on a un message
     if (document.getElementById("message").style.display === "flex") {
         return;
@@ -106,20 +125,6 @@ function moveOnMap(x, y) {
 
     // S'arrêter si c'est un mur
     if (actualMap[y][x] === CELL_TYPES.WALL) {
-        return;
-    }
-
-    /* -------------------------------------------- */
-
-    // Marchand
-    if (actualMap[y][x] === CELL_TYPES.MERCHANT) {
-        merchant();
-        return; // Eviter de marcher sur le marchand
-    }
-
-    // Porte du marchand
-    if (actualMap[y][x] === CELL_TYPES.MERCHANT_DOOR) {
-        changeSpecialLevel(merchantMap);
         return;
     }
 
