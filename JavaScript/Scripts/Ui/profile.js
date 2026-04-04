@@ -52,7 +52,7 @@ function completProfile() {
     // Header avec photo
     content += `
         <div id='profile-content-header'>
-            <img src='./Images/hero_portrait.svg' id='profile-image' alt='Héros'>
+            <img src='../Images/UI/hero_portrait.svg' id='profile-image' alt='Héros'>
             <div class="profile-name">` + Player.name + `</div>
             <div class="profile-level">Niveau ` + level + `</div>
             <div id="pointsLevel"> Points disponibles : ` + pointsUpdate + ` </div>

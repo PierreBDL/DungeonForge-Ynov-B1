@@ -122,7 +122,7 @@ main {
 }
 
 .wall {
-    background-image: url('../Images/wall.svg');
+    background-image: url('../Images/Tiles/wall.svg');
     background-size: cover;
 }
 
@@ -136,7 +136,7 @@ main {
     height: 99%;
     background-color: #5a5a60;
     border: 1px solid #2d2d30;
-    background-image: url('../Images/door.svg');
+    background-image: url('../Images/Tiles/door.svg');
     background-size: cover;
     background-repeat: no-repeat;
 }
@@ -146,7 +146,7 @@ main {
     height: 99%;
     background-color: #5a5a60;
     border: 1px solid #2d2d30;
-    background-image: url('../Images/ennemy2.svg');
+    background-image: url('../Images/Tiles/ennemy2.svg');
     background-size: cover;
     background-repeat: no-repeat;
 }
@@ -156,7 +156,7 @@ main {
     height: 99%;
     background-color: #5a5a60;
     border: 1px solid #2d2d30;
-    background-image: url('../Images/stairs.svg');
+    background-image: url('../Images/Tiles/stairs.svg');
     background-size: cover;
     background-repeat: no-repeat;
 }
@@ -166,7 +166,7 @@ main {
     height: 99%;
     background-color: #5a5a60;
     border: 1px solid #2d2d30;
-    background-image: url('../Images/chest.svg');
+    background-image: url('../Images/Tiles/chest.svg');
     background-size: cover;
     background-repeat: no-repeat;
 }
@@ -176,7 +176,7 @@ main {
     height: 99%;
     background-color: #5a5a60;
     border: 1px solid #2d2d30;
-    background-image: url('../Images/chest_open.svg');
+    background-image: url('../Images/Tiles/chest_open.svg');
     background-size: cover;
     background-repeat: no-repeat;
 }
@@ -186,7 +186,7 @@ main {
     height: 99%;
     background-color: #5a5a60;
     border: 1px solid #2d2d30;
-    background-image: url('../Images/player2.svg');
+    background-image: url('../Images/Tiles/player2.svg');
     background-size: cover;
     background-repeat: no-repeat;
 }
@@ -196,7 +196,7 @@ main {
     height: 99%;
     background-color: #5a5a60;
     border: 1px solid #2d2d30;
-    background-image: url('../Images/merchant2.svg');
+    background-image: url('../Images/Tiles/merchant2.svg');
     background-size: cover;
     background-repeat: no-repeat;
 }
@@ -206,7 +206,7 @@ main {
     height: 99%;
     background-color: #5a5a60;
     border: 1px solid #2d2d30;
-    background-image: url('../Images/merchant_door.png');
+    background-image: url('../Images/Tiles/merchant_door.png');
     background-size: cover;
     background-repeat: no-repeat;
 }
