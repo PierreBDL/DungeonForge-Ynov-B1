@@ -60,7 +60,7 @@
     order: -1;
     flex: 0;
     width: 100%;
-    margin-bottom: 10px; 
+    margin-bottom: 10px;
 }
 
 #main-menu.menu-active #game-logo {
@@ -103,6 +103,7 @@
         opacity: 0;
         transform: scale(0.8);
     }
+
     to {
         opacity: 1;
         transform: scale(1);
@@ -217,35 +218,40 @@
 /* -------------------------------------------- */
 
 @media (max-width: 768px) {
-    .menu-btn img { 
-        width: 200px; 
+    .menu-btn img {
+        width: 200px;
     }
-    
+
     #main-menu.menu-initial #game-logo {
         width: 50vw;
         max-width: 400px;
     }
-    
+
     #main-menu.menu-active #game-logo {
-        width: 200px;
+        width: 300px;
+    }
+
+    .menu-btn img {
+        width: 250px;
+        display: block;
     }
 }
 
 @media (max-width: 480px) {
-    .menu-btn img { 
-        width: 150px; 
+    .menu-btn img {
+        width: 150px;
     }
-    
+
     #menu-buttons {
         gap: 10px;
     }
-    
+
     #main-menu.menu-initial #game-logo {
         width: 70vw;
         max-width: 300px;
     }
-    
+
     #main-menu.menu-active #game-logo {
-        width: 150px;
+        width: 300px;
     }
 }

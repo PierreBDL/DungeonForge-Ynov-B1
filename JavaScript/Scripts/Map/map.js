@@ -99,8 +99,8 @@ function loadMap() {
     carte.innerHTML = "";
 
     // Changer la taille de grid dans css
-    carte.style.gridTemplateColumns = 'repeat(' + actualMap[0].length + ', 50px)';
-    carte.style.gridTemplateRows = 'repeat(' + actualMap.length + ', 50px)';
+    carte.style.gridTemplateColumns = 'repeat(' + actualMap[0].length + ', 40px)';
+    carte.style.gridTemplateRows = 'repeat(' + actualMap.length + ', 40px)';
 
     // Parcours de toute la matrice
     for (let i = 0; i < actualMap.length; i++) {
