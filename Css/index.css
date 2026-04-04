@@ -14,7 +14,7 @@
 
 #main-menu {
     height: 100vh;
-    background: url('../Images/Icone/background.svg') no-repeat center center/cover;
+    background: url('../Images/MainMenu/background.svg') no-repeat center center/cover;
     display: flex;
     flex-direction: column;
     justify-content: center;
