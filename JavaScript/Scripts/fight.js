@@ -154,9 +154,9 @@ btnAttack.addEventListener("click", () => {
     // Voir si l'ennemi n'a plus de PV
     if (currentEnnemy.stats.hp <= 0) {
 
-        // Donner le butin (récompenses selon le niveau de l'ennemi)
-        const goldReward = 15 + (currentEnnemy.stats.level * 10);
-        const xpReward = 30 + (currentEnnemy.stats.level * 15);
+        // Buttin
+        const goldReward = 15 + (Ennemy.stats.level * 10);
+        const xpReward = 30 + (Ennemy.stats.level * 15);
         
         // Construire les récompenses
         const rewards = { gold: goldReward, xp: xpReward };

@@ -7,8 +7,8 @@ function giveItems(messageToPrint, contentChest) {
     for (let i = 0; i < keys_items.length; i++) {
         switch (keys_items[i][0]) {
             case "gold":
-                Player.gold += keys_items[i][1];
-                message += (keys_items[i][1] + " Pièces d'or");
+                Player.gold += Number(keys_items[i][1]);
+                message += (Number(keys_items[i][1]) + " Pièces d'or");
                 break;
             case "xp":
                 Player.stats.xp += keys_items[i][1];
