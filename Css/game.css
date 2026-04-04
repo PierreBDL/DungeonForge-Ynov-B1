@@ -17,6 +17,7 @@ main {
     justify-content: center;
     overflow: hidden;
     position: relative;
+    touch-action: none;
 }
 
 /* -------------------------------------------- */
@@ -389,9 +390,17 @@ main {
 /* Animation dégâts */
 
 @keyframes flashRed {
-    0% { filter: brightness(1); }
-    50% { filter: brightness(2) sepia(1) hue-rotate(-50deg) saturate(5); }
-    100% { filter: brightness(1); }
+    0% {
+        filter: brightness(1);
+    }
+
+    50% {
+        filter: brightness(2) sepia(1) hue-rotate(-50deg) saturate(5);
+    }
+
+    100% {
+        filter: brightness(1);
+    }
 }
 
 .damage-flash {
@@ -1453,3 +1462,116 @@ main {
 /* -------------------------------------------- */
 /*                  RESPONSIVE                  */
 /* -------------------------------------------- */
+
+.responsiveControls {
+    display: none;
+}
+
+@media (max-width: 1024px) {
+    .responsiveControls {
+        display: flex;
+    }
+}
+
+@media (max-width: 768px) {
+    .message-card, .merchant-card, #fight-card {
+        width: 95% !important;
+        max-height: 90vh;
+        padding: 15px !important;
+        margin: 10px;
+        overflow-y: auto;
+    }
+
+    /* Ajustement du titre pour ne pas prendre 3 lignes */
+    .message-title, .merchant-title, #fight-text {
+        font-size: 1.2rem !important;
+        margin-bottom: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+
+    #message {
+        max-width: 400px;
+    }
+
+    #map {
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        touch-action: pan-x pan-y;
+    }
+
+    #fight-window {
+        padding: 1.5rem 1rem;
+    }
+
+    .image-fighters {
+        width: 80px;
+        height: 80px;
+    }
+
+    .imgVersus img {
+        max-width: 60px;
+    }
+
+    #fight-actions button {
+        padding: 0.4rem 0.8rem;
+        font-size: 9px;
+    }
+
+    #gameOverCard {
+        padding: 2rem 1.5rem;
+    }
+
+    #gameOverTitle {
+        font-size: 24px;
+        letter-spacing: 0.2em;
+    }
+
+    #gameOverSubtitle {
+        font-size: 14px;
+    }
+
+
+    /* -------------------------------------------- */
+    /*           Flèches directionnelles            */
+    /* -------------------------------------------- */
+
+    .responsiveControls {
+        position: fixed;
+        bottom: 30px;
+        right: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 5px;
+        z-index: 2000;
+    }
+
+    .responsiveControls div {
+        display: flex;
+        gap: 45px;
+    }
+
+    .responsiveControls button {
+        width: 40px;
+        height: 40px;
+        background: none;
+        border: none;
+        padding: 0;
+        cursor: pointer;
+        transition: transform 0.1s active;
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    .responsiveControls button img {
+        width: 100%;
+        height: 100%;
+        display: block;
+    }
+
+    .responsiveControls button:active {
+        transform: scale(0.9);
+    }
+}

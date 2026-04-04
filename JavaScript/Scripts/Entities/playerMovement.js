@@ -25,6 +25,33 @@ document.addEventListener('keyup', (e) => {
 });
 
 /* -------------------------------------------- */
+/*            Mouvement sur mobile              */
+/* -------------------------------------------- */
+
+function initMobileDPad() {
+    const directions = {
+        'moveUp':    { x: 0,  y: -1 },
+        'moveDown':  { x: 0,  y: 1  },
+        'moveLeft':  { x: -1, y: 0  },
+        'moveRight': { x: 1,  y: 0  }
+    };
+
+    Object.keys(directions).forEach(id => {
+        const btn = document.getElementById(id);
+        if (btn) {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                const nextX = Player.x + directions[id].x;
+                const nextY = Player.y + directions[id].y;
+                moveOnMap(nextX, nextY);
+            });
+        }
+    });
+}
+
+window.addEventListener('load', initMobileDPad);
+
+/* -------------------------------------------- */
 /*            Bouger sur la carte               */
 /* -------------------------------------------- */
 
