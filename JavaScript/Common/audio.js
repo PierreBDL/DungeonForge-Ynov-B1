@@ -4,8 +4,9 @@ const audio = document.querySelector("audio");
 let osts = [
     { name: "Tzar Burden of The Crown Soundtrack (CD-Rip) - Track 1.mp3", type: "fond" },
     { name: "Evoland 2 OST - Track 27 (Giros Lab).mp3", type: "pnj" },
-    { name: "Evoland 2 OST - Track 36 (Tactics Time).mp3", type: "combat" },
-    { name: "Evoland 2 OST - Track 01 (Title Screen).mp3", type: "menu"}
+    { name: "Evoland 2 OST - Track 36 (Tactics Time).mp3", type: "fond" },
+    { name: "Evoland 2 OST - Track 01 (Title Screen).mp3", type: "menu" },
+    { name: "battleThemeA.mp3", type: "combat" }
 ];
 
 let currentOstIndex = 0;

@@ -190,6 +190,9 @@ btnAttack.addEventListener("click", () => {
         // Regarder si on passe un niveau avec l'expérience
         nextLevel();
 
+        // Remettre la musique de fond
+        playMusicType("fond")
+
         return;
     }
 
