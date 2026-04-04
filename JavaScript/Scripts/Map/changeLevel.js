@@ -50,6 +50,7 @@ let inSpecialLevel = false; // Si on est dans un niveau spécial, cette variable
 let savedLevel = 0;
 let savedPlayerX = 0;
 let savedPlayerY = 0;
+let savedOriginTile = CELL_TYPES.FLOOR;
 
 function changeSpecialLevel (targetLevel) {
 
@@ -57,6 +58,7 @@ function changeSpecialLevel (targetLevel) {
     savedLevel = currentLevel;
     savedPlayerX = Player.x;
     savedPlayerY = Player.y;
+    savedOriginTile = originTile; // Sauvegarder la tuile sous le joueur
 
     inSpecialLevel = true;
     actualMap = targetLevel;
@@ -75,7 +77,17 @@ function returnFromSpecialLevel() {
     currentLevel = savedLevel;
     actualMap = maps[currentLevel];
 
-    originTile = CELL_TYPES.FLOOR;
+    // Supprimer l'ancien emplacement du joueur
+    for (let y = 0; y < actualMap.length; y++) {
+        for (let x = 0; x < actualMap[y].length; x++) {
+            if (actualMap[y][x] === CELL_TYPES.PLAYER) {
+                actualMap[y][x] = CELL_TYPES.FLOOR;
+                break;
+            }
+        }
+    }
+
+    originTile = savedOriginTile; // Restaurer la tuile sous le joueur
 
     // Reprendre où on était
     Player.x = savedPlayerX;
@@ -86,5 +98,5 @@ function returnFromSpecialLevel() {
     loadMap();
     
     // Revenir à la musique de combat
-    playMusicType("combat");
+    playMusicType("fond");
 }
