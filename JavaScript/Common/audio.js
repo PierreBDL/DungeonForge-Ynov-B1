@@ -1,6 +1,9 @@
 // Audio du html
 const audio = document.querySelector("audio");
 
+// Volume normalisé pour toutes les pistes
+const NORMALIZED_VOLUME = 0.5;
+
 let osts = [
     { name: "Tzar Burden of The Crown Soundtrack (CD-Rip) - Track 1.mp3", type: "fond" },
     { name: "Evoland 2 OST - Track 27 (Giros Lab).mp3", type: "pnj" },
@@ -22,7 +25,7 @@ function readOst () {
     // Lancement de l'audio en boucle
     audio.play()
     audio.loop = true;
-    audio.volume = 0.4;
+    audio.volume = NORMALIZED_VOLUME;
 
     // MAJ du slider de volume
     if (audioLevel) audioLevel.value = audio.volume * 100;
@@ -62,7 +65,7 @@ function changeMusic() {
     audio.src = "../Audio/" + osts[currentOstIndex].name;
     audio.play();
     audio.loop = true;
-    audio.volume = audioLevel.value / 100;
+    audio.volume = Math.max(NORMALIZED_VOLUME, (audioLevel?.value || 50) / 100);
 }
 
 /* -------------------------------------------- */
@@ -87,11 +90,11 @@ function playMusicType(type) {
     // Mettre à jour l'index courant
     currentOstIndex = osts.findIndex(ost => ost.name === selectedMusic.name);
     
-    // Charger et jouer la musique
+    // Charger et jouer la musique avec volume normalisé
     audio.src = "../Audio/" + selectedMusic.name;
     audio.play();
     audio.loop = true;
-    audio.volume = audioLevel.value / 100;
+    audio.volume = Math.max(NORMALIZED_VOLUME, (audioLevel?.value || 50) / 100);
 }
 
 /* -------------------------------------------- */
